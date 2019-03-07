@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
                        "using the BibliographicItem model"
   spec.description   = "ItuBib: retrieve ITU Standards for bibliographic use "\
                        "using the BibliographicItem model"
-  spec.homepage      = "https://github.com/riboseinc/itubib"
+  spec.homepage      = "https://github.com/metanorma/itubib"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
