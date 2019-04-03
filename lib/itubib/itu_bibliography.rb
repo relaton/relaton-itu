@@ -24,7 +24,15 @@ module ItuBib
       # @param year [String] the year the standard was published (optional)
       # @param opts [Hash] options; restricted to :all_parts if all-parts reference is required
       # @return [String] Relaton XML serialisation of reference
-      def get(code, year, opts)
+      def get(code, year = nil, opts = {})
+        if year.nil?
+          /^(?<code1>[^\s]+\s[^\s]+)\s\(\d{2}\/(?<year1>\d+)\)$/ =~ code
+          unless code1.nil?
+            code = code1
+            year = year1
+          end
+        end
+
         code += '-1' if opts[:all_parts]
         ret = itubib_get1(code, year, opts)
         return nil if ret.nil?

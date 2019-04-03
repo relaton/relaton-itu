@@ -20,6 +20,13 @@ RSpec.describe ItuBib do
     end
   end
 
+  it 'gets a referece with an year in a code' do
+    VCR.use_cassette 'year_in_code' do
+      result = ItuBib::ItuBibliography.get('ITU-T L.163 (11/2018)').to_xml
+      expect(result).to include %(<on>2018</on>)
+    end
+  end
+
   it 'warns when year is wrong' do
     VCR.use_cassette 'wrong_year' do
       expect { ItuBib::ItuBibliography.get('ITU-T L.163', '1018', {}) }.to output(
