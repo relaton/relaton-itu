@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/vcr/vcr.git
+  revision: a0bb140184e8518baad640a705e04155911bf31f
+  ref: a0bb140184e8518baad640a705e04155911bf31f
+  specs:
+    vcr (4.0.0)
+
 PATH
   remote: .
   specs:
@@ -61,7 +68,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    vcr (4.0.0)
     webmock (3.5.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -80,7 +86,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   ruby-debug-ide
   simplecov
-  vcr
+  vcr!
   webmock
 
 BUNDLED WITH
