@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 # require 'isobib/iso_bibliographic_item'
-require 'itubib/scrapper'
-require 'itubib/hit_collection'
+require 'relaton_itu/scrapper'
+require 'relaton_itu/hit_collection'
 require "date"
 
-module ItuBib
+module RelatonItu
   # Class methods for search ISO standards.
   class ItuBibliography
     class << self
       # @param text [String]
-      # @return [ItuBib::HitCollection]
+      # @return [RelatonItu::HitCollection]
       def search(text, year = nil)
         begin
           HitCollection.new text, year

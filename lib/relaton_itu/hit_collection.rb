@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'itubib/hit'
+require 'relaton_itu/hit'
 require "addressable/uri"
 require 'net/http'
 
-module ItuBib
+module RelatonItu
   # Page of hit collection.
   class HitCollection < Array
 
-    DOMAIN = 'https://www.itu.int'
+    DOMAIN = 'https://www.itu.int'.freeze
 
     # @return [TrueClass, FalseClass]
     attr_reader :fetched
@@ -68,7 +68,7 @@ module ItuBib
       @fetched = false
     end
 
-    # @return [ItuBib::HitCollection]
+    # @return [RelatonItu::HitCollection]
     def fetch
       workers = WorkersPool.new 4
       workers.worker(&:fetch)
