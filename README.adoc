@@ -1,10 +1,10 @@
-= ItuBib: retrieve ITU Standards for bibliographic use using the BibliographicItem model
+= RelatonItu: retrieve ITU Standards for bibliographic use using the BibliographicItem model
 
-image:https://img.shields.io/gem/v/ituBib.svg["Gem Version", link="https://rubygems.org/gems/ituBib"]
-image:https://travis-ci.com/metanorma/itubib.svg?branch=master["Build Status", link="https://travis-ci.com/metanorma/itubib"]
-image:https://ci.appveyor.com/api/projects/status/fd39m2762jo8ve04?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/ribose/itubib"]
+image:https://img.shields.io/gem/v/relaton_bib.svg["Gem Version", link="https://rubygems.org/gems/relaton_bib"]
+image:https://travis-ci.com/metanorma/relaton_bib.svg?branch=master["Build Status", link="https://travis-ci.com/metanorma/relaton_bib"]
+image:https://ci.appveyor.com/api/projects/status/fd39m2762jo8ve04?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/ribose/relaton_bib"]
 
-ItuBib is a Ruby gem that implements the https://github.com/metanorma/metanorma-model-iso#iso-bibliographic-item[IsoBibliographicItem model].
+RelatonItu is a Ruby gem that implements the https://github.com/metanorma/metanorma-model-iso#iso-bibliographic-item[IsoBibliographicItem model].
 
 == Installation
 
@@ -12,7 +12,7 @@ Add this line to your application's Gemfile:
 
 [source,ruby]
 ----
-gem 'itubib'
+gem 'relaton_bib'
 ----
 
 And then execute:
@@ -21,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install itubib
+    $ gem install relaton_bib
 
 == Usage
 
@@ -29,11 +29,11 @@ Or install it yourself as:
 
 [source,ruby]
 ----
-require 'itubib'
+require 'relaton_bib'
 
-hit_collection = ItuBib::ItuBibliography.search("ITU-T L.163")
-=> [<ItuBib::Hit:0x007f92b5d693c8 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T L.163 (11/2018)">,
- <ItuBib::Hit:0x007f92b5d69350 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T Z.161 (10/2018)">]
+hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
+=> [<RelatonItu::Hit:0x007f92b5d693c8 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T L.163 (11/2018)">,
+ <RelatonItu::Hit:0x007f92b5d69350 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T Z.161 (10/2018)">]
  ...
 
  item = hit_collection[1].fetch
@@ -57,7 +57,7 @@ item.to_xml
 === Get code, and year
 [source,ruby]
 ----
-ItuBib::ItuBibliography.get("ITU-T L.163", "2018", {})
+RelatonItu::ItuBibliography.get("ITU-T L.163", "2018", {})
 fetching ITU-T L.163...
 => #<IsoBibItem::IsoBibliographicItem:0x007f92b5d8bc20
 ...
@@ -71,7 +71,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 == Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/metanorma/itubib.
+Bug reports and pull requests are welcome on GitHub at https://github.com/metanorma/relaton_bib.
 
 == License
 

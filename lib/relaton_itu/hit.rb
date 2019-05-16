@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ItuBib
+module RelatonItu
   # Hit.
   class Hit
     # @return [Isobib::HitCollection]

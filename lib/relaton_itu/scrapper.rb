@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 require 'iso_bib_item'
-require 'itubib/hit'
+require 'relaton_itu/hit'
 require 'nokogiri'
 require 'net/http'
-require 'itubib/workers_pool'
+require 'relaton_itu/workers_pool'
 
 # Capybara.request_driver :poltergeist do |app|
 #   Capybara::Poltergeist::Driver.new app, js_errors: false
 # end
 # Capybara.default_driver = :poltergeist
 
-module ItuBib
+module RelatonItu
   # Scrapper.
   # rubocop:disable Metrics/ModuleLength
   module Scrapper

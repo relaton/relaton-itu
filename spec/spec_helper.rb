@@ -8,7 +8,7 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
-require "itubib"
+require "relaton_itu"
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/vcr_cassettes'
