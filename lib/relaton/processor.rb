@@ -16,7 +16,7 @@ module Relaton
       end
 
       def from_xml(xml)
-        IsoBibItem::XMLParser.from_xml xml
+        RelatonItu::XMLParser.from_xml xml
       end
     end
   end

@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
-# require 'isobib/iso_bibliographic_item'
-require 'relaton_itu/scrapper'
-require 'relaton_itu/hit_collection'
+require "relaton_iso_bib"
+require "relaton_itu/itu_bibliographic_item"
+require "relaton_itu/editorial_group"
+require "relaton_itu/itu_group"
+require "relaton_itu/scrapper"
+require "relaton_itu/hit_collection"
+require "relaton_itu/hit"
+require "relaton_itu/xml_parser"
 require "date"
 
 module RelatonItu
@@ -12,12 +17,10 @@ module RelatonItu
       # @param text [String]
       # @return [RelatonItu::HitCollection]
       def search(text, year = nil)
-        begin
-          HitCollection.new text, year
-        rescue
-          warn "Could not access http://www.itu.int"
-          []
-        end
+        HitCollection.new text, year
+      rescue
+        warn "Could not access http://www.itu.int"
+        []
       end
 
       # @param code [String] the ISO standard Code to look up (e..g "ISO 9000")
@@ -33,9 +36,10 @@ module RelatonItu
           end
         end
 
-        code += '-1' if opts[:all_parts]
+        code += "-1" if opts[:all_parts]
         ret = itubib_get1(code, year, opts)
         return nil if ret.nil?
+
         ret.to_most_recent_reference unless year || opts[:keep_year]
         ret.to_all_parts if opts[:all_parts]
         ret
@@ -61,7 +65,7 @@ module RelatonItu
       end
 
       def fetch_pages(s, n)
-        workers = WorkersPool.new n
+        workers = RelatonBib::WorkersPool.new n
         workers.worker { |w| { i: w[:i], hit: w[:hit].fetch } }
         s.each_with_index { |hit, i| workers << { i: i, hit: hit } }
         workers.end
@@ -89,8 +93,10 @@ module RelatonItu
         result.each_slice(3) do |s| # ISO website only allows 3 connections
           fetch_pages(s, 3).each_with_index do |r, i|
             return { ret: r } if !year
+
             r.dates.select { |d| d.type == "published" }.each do |d|
               return { ret: r } if year.to_i == d.on.year
+
               missed_years << d.on.year
             end
           end
@@ -102,6 +108,7 @@ module RelatonItu
         result = search_filter(code) or return nil
         ret = isobib_results_filter(result, year)
         return ret[:ret] if ret[:ret]
+
         fetch_ref_err(code, year, ret[:years])
       end
     end

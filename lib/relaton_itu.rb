@@ -1,8 +1,8 @@
 require "relaton_itu/version"
-require 'relaton_itu/itu_bibliography'
+require "relaton_itu/itu_bibliography"
 
 if defined? Relaton
-  require_relative 'relaton/processor'
+  require_relative "relaton/processor"
   Relaton::Registry.instance.register(Relaton::RelatonItu::Processor)
 end
 

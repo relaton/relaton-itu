@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-require 'iso_bib_item'
-require 'relaton_itu/hit'
-require 'nokogiri'
-require 'net/http'
-require 'relaton_itu/workers_pool'
+require "nokogiri"
+require "net/http"
 
 # Capybara.request_driver :poltergeist do |app|
 #   Capybara::Poltergeist::Driver.new app, js_errors: false
@@ -15,21 +12,21 @@ module RelatonItu
   # Scrapper.
   # rubocop:disable Metrics/ModuleLength
   module Scrapper
-    DOMAIN = 'https://www.itu.int'
+    DOMAIN = "https://www.itu.int"
 
     TYPES = {
-      'ISO'   => 'international-standard',
-      'TS'    => 'technicalSpecification',
-      'TR'    => 'technicalReport',
-      'PAS'   => 'publiclyAvailableSpecification',
-      'AWI'   => 'appruvedWorkItem',
-      'CD'    => 'committeeDraft',
-      'FDIS'  => 'finalDraftInternationalStandard',
-      'NP'    => 'newProposal',
-      'DIS'   => 'draftInternationalStandard',
-      'WD'    => 'workingDraft',
-      'R'     => 'recommendation',
-      'Guide' => 'guide'
+      "ISO" => "international-standard",
+      "TS" => "technicalSpecification",
+      "TR" => "technicalReport",
+      "PAS" => "publiclyAvailableSpecification",
+      "AWI" => "appruvedWorkItem",
+      "CD" => "committeeDraft",
+      "FDIS" => "finalDraftInternationalStandard",
+      "NP" => "newProposal",
+      "DIS" => "draftInternationalStandard",
+      "WD" => "workingDraft",
+      "R" => "recommendation",
+      "Guide" => "guide",
     }.freeze
 
     class << self
@@ -55,22 +52,23 @@ module RelatonItu
         # Fetch edition.
         edition = doc.at("//table/tr/td/span[contains(@id, 'Label8')]/b").text
 
-        IsoBibItem::IsoBibliographicItem.new(
-          docid:        fetch_docid(hit_data[:code]),
-          edition:      edition,
-          language:     ['en'],
-          script:       ['Latn'],
-          titles:       fetch_titles(hit_data),
-          type:         fetch_type(doc),
-          docstatus:    fetch_status(doc),
-          ics:          [], # fetch_ics(doc),
-          dates:        fetch_dates(doc),
+        ItuBibliographicItem.new(
+          fetched: Date.today.to_s,
+          docid: fetch_docid(hit_data[:code]),
+          edition: edition,
+          language: ["en"],
+          script: ["Latn"],
+          titles: fetch_titles(hit_data),
+          type: fetch_type(doc),
+          docstatus: fetch_status(doc),
+          ics: [], # fetch_ics(doc),
+          dates: fetch_dates(doc),
           contributors: fetch_contributors(hit_data[:code]),
-          workgroup:    fetch_workgroup(doc),
-          abstract:     fetch_abstract(doc),
-          copyright:    fetch_copyright(hit_data[:code], doc),
-          link:         fetch_link(doc, hit_data[:url]),
-          relations:    fetch_relations(doc)
+          editorialgroup: fetch_workgroup(doc),
+          abstract: fetch_abstract(doc),
+          copyright: fetch_copyright(hit_data[:code], doc),
+          link: fetch_link(doc, hit_data[:url]),
+          relations: fetch_relations(doc),
         )
       end
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
@@ -86,13 +84,13 @@ module RelatonItu
 
         url = abstract_url[:onclick].match(/https?[^']+/).to_s
         d = Nokogiri::HTML Net::HTTP.get(URI(url))
-        abstract_content = d.css('p.MsoNormal').text.gsub(/\r\n/, '')
-          .gsub(/\s{2,}/, ' ').gsub(/\u00a0/, '')
+        abstract_content = d.css("p.MsoNormal").text.gsub(/\r\n/, "")
+          .gsub(/\s{2,}/, " ").gsub(/\u00a0/, "")
 
         [{
-          content:  abstract_content,
-          language: 'en',
-          script:   'Latn'
+          content: abstract_content,
+          language: "en",
+          script: "Latn",
         }]
       end
 
@@ -115,10 +113,10 @@ module RelatonItu
       # @return [Array<Nokogiri::HTML::Document, String>]
       def get_page(url)
         uri = URI url
-        resp = Net::HTTP.get_response(uri)#.encode("UTF-8")
-        while resp.code == '301' || resp.code == '302' || resp.code == '303'
-          uri = URI resp['location']
-          resp = Net::HTTP.get_response(uri)#.encode("UTF-8")
+        resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
+        while resp.code == "301" || resp.code == "302" || resp.code == "303"
+          uri = URI resp["location"]
+          resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
         end
         Nokogiri::HTML(resp.body)
       end
@@ -128,15 +126,11 @@ module RelatonItu
       # @param doc [Nokogiri::HTML::Document]
       # @return [Hash]
       def fetch_docid(code)
-        m = code.match(/(?<=\s)(?<project>[^\s]+)-?(?<part>(?<=-)\d+|)-?(?<subpart>(?<=-)\d+|)/)
-        {
-          project_number: m[:project],
-          part_number: m[:part],
-          subpart_number: m[:subpart],
-          prefix: nil,
-          type: 'ITU',
-          id: code
-        }
+        # m = code.match(/(?<=\s)(?<project>[^\s]+)-?(?<part>(?<=-)\d+|)-?(?<subpart>(?<=-)\d+|)/)
+        # project_number: m[:project],
+        # part_number: m[:part],
+        # subpart_number: m[:subpart],
+        [RelatonBib::DocumentIdentifier.new(type: "ITU", id: code)]
       end
 
       # Fetch status.
@@ -145,62 +139,82 @@ module RelatonItu
       # @return [Hash]
       def fetch_status(doc)
         s = doc.at("//table/tr/td/span[contains(@id, 'Label7')]").text
-        if s == 'In force'
-          status   = 'Published'
-          stage    = '60'
-          substage = '60'
+        if s == "In force"
+          status   = "Published"
+          # stage    = "60"
+          # substage = "60"
         else
-          status   = 'Withdrawal'
-          stage    = '95'
-          substage = '99'
+          status   = "Withdrawal"
+          # stage    = "95"
+          # substage = "99"
         end
-        { status: status, stage: stage, substage: substage }
+        RelatonBib::DocumentStatus.new(stage: status)
       end
 
       # Fetch workgroup.
       # @param doc [Nokogiri::HTML::Document]
-      # @return [Hash]
+      # @return [RelatonItu::EditorialGroup]
       def fetch_workgroup(doc)
         wg = doc.at('//table/tr/td/span[contains(@id, "Label8")]/a').text
-        { name:                'International Telecommunication Union',
-          abbreviation:        'ITU',
-          url:                 'www.itu.int',
-          technical_committee: {
-            name:   wg,
-            type:   'technicalCommittee',
-            number: wg.match(/\d+/)&.to_s&.to_i
-          } }
+        EditorialGroup.new(
+          bureau: wg.match(/(?<=-)./).to_s,
+          group: itugroup(wg),
+          # name: "International Telecommunication Union",
+          # abbreviation: "ITU",
+          # url: "www.itu.int",
+          # technical_committee: tc,
+        )
       end
+
+      # @param name [String]
+      # @return [RelatonItu::ItuGroup]
+      def itugroup(name)
+        if name.include? "Study Group"
+          type = "study-group"
+          acronym = "SG"
+        elsif name.include? "Telecommunication Standardization Advisory Group"
+          type = "tsag"
+          acronym = "TSAG"
+        else
+          type = "work-group"
+          acronym = "WG"
+        end
+        ItuGroup.new name: name, type: type, acronym: acronym
+      end
+
+      # rubocop:disable Metrics/MethodLength
 
       # Fetch relations.
       # @param doc [Nokogiri::HTML::Document]
       # @return [Array<Hash>]
-      # rubocop:disable Metrics/MethodLength
       def fetch_relations(doc)
         doc.xpath('//div[contains(@id, "tab_sup")]//table/tr[position()>2]').map do |r|
           r_type = r.at('./td/span[contains(@id, "Label4")]/nobr').text.downcase
           type = case r_type
-                 when 'in force' then 'published'
+                 when "in force" then "published"
                  else r_type
                  end
           ref = r.at('./td/span[contains(@id, "title_e")]/nobr/a')
-          url = DOMAIN + ref[:href].sub(/^\./, '/ITU-T/recommendations')
-          { type: type, identifier: ref.text, url: url }
+          # url = DOMAIN + ref[:href].sub(/^\./, "/ITU-T/recommendations")
+          fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en", script: "Latn")
+          bibitem = RelatonIsoBib::IsoBibliographicItem.new(formattedref: fref)
+          { type: type, bibitem: bibitem }
         end
       end
+      # rubocop:enable Metrics/MethodLength
 
       # Fetch type.
       # @param doc [Nokogiri::HTML::Document]
       # @return [String]
-      def fetch_type(doc)
-        'international-standard'
+      def fetch_type(_doc)
+        "recommendation"
       end
 
       # Fetch titles.
       # @param hit_data [Hash]
       # @return [Array<Hash>]
       def fetch_titles(hit_data)
-        titles = hit_data[:title].split ' - '
+        titles = hit_data[:title].split " - "
         case titles.size
         when 0
           intro, main, part = nil, "", nil
@@ -219,10 +233,10 @@ module RelatonItu
         end
         [{
           title_intro: intro,
-          title_main:  main,
-          title_part:  part,
-          language:    'en',
-          script:      'Latn'
+          title_main: main,
+          title_part: part,
+          language: "en",
+          script: "Latn",
         }]
       end
 
@@ -233,7 +247,7 @@ module RelatonItu
         dates = []
         publish_date = doc.at("//table/tr/td/span[contains(@id, 'Label5')]").text
         unless publish_date.empty?
-          dates << { type: 'published', on: publish_date }
+          dates << { type: "published", on: publish_date }
         end
         dates
       end
@@ -242,13 +256,13 @@ module RelatonItu
       # @param doc [Nokogiri::HTML::Document]
       # @return [Array<Hash>]
       def fetch_contributors(code)
-        abbrev = code.sub(/-\w\s.*/, '')
+        abbrev = code.sub(/-\w\s.*/, "")
         case abbrev
-        when 'ITU'
-          name = 'International Telecommunication Union'
-          url = 'www.itu.int'
+        when "ITU"
+          name = "International Telecommunication Union"
+          url = "www.itu.int"
         end
-        [{ entity: { name: name, url: url, abbreviation: abbrev }, roles: ['publisher'] }]
+        [{ entity: { name: name, url: url, abbreviation: abbrev }, roles: ["publisher"] }]
       end
 
       # Fetch ICS.
@@ -266,9 +280,9 @@ module RelatonItu
       # @param url [String]
       # @return [Array<Hash>]
       def fetch_link(doc, url)
-        links = [{ type: 'src', content: url }]
+        links = [{ type: "src", content: url }]
         obp_elms = doc.at('//table/tr/td/span[contains(@id, "Label4")]/a')
-        links << { type: 'obp', content: DOMAIN + obp_elms[:href] } if obp_elms
+        links << { type: "obp", content: DOMAIN + obp_elms[:href] } if obp_elms
         links
       end
 
@@ -279,9 +293,9 @@ module RelatonItu
       def fetch_copyright(code, doc)
         abbreviation = code.match(/^[^-]+/).to_s
         case abbreviation
-        when 'ITU'
-          name = 'International Telecommunication Union'
-          url = 'www.itu.int'
+        when "ITU"
+          name = "International Telecommunication Union"
+          url = "www.itu.int"
         end
         from = doc.at("//table/tr/td/span[contains(@id, 'Label5')]").text
         { owner: { name: name, abbreviation: abbreviation, url: url }, from: from }
