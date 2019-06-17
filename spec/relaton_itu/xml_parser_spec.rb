@@ -7,7 +7,7 @@ RSpec.describe RelatonItu::XMLParser do
 
   it "parse ITU group period" do
     xml = <<~END_XML
-      <bibdata>
+      <bibdata type="standard">
         <ext>
           <editorialgroup>
             <bureau>T</bureau>
