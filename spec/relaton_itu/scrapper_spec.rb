@@ -53,4 +53,11 @@ RSpec.describe RelatonItu::Scrapper do
       expect(title[0][:title_part]).to eq "Part 1: -- Exra"
     end
   end
+
+  it "raises an access error" do
+    expect(Net::HTTP).to receive(:get_response).and_raise SocketError
+    expect do
+      RelatonItu::Scrapper.parse_page url: "https://www.itu.int"
+    end.to raise_error RelatonBib::RequestError
+  end
 end

@@ -75,7 +75,10 @@ RSpec.describe RelatonItu do
   end
 
   it "could not access site" do
-    expect(Net::HTTP).to receive(:post).with(kind_of(URI), kind_of(String), kind_of(Hash)).and_throw(:msg)
-    expect { RelatonItu::ItuBibliography.search "ITU-T L.163" }.to output("Could not access http://www.itu.int\n").to_stderr
+    expect(Net::HTTP).to receive(:post).with(
+      kind_of(URI), kind_of(String), kind_of(Hash)
+    ).and_raise SocketError
+    expect { RelatonItu::ItuBibliography.search "ITU-T L.163" }.
+      to raise_error RelatonBib::RequestError
   end
 end

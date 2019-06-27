@@ -18,9 +18,9 @@ module RelatonItu
       # @return [RelatonItu::HitCollection]
       def search(text, year = nil)
         HitCollection.new text, year
-      rescue
-        warn "Could not access http://www.itu.int"
-        []
+      rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
+             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
+        raise RelatonBib::RequestError, "Could not access http://www.itu.int"
       end
 
       # @param code [String] the ISO standard Code to look up (e..g "ISO 9000")

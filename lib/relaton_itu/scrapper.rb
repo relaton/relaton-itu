@@ -119,6 +119,9 @@ module RelatonItu
           resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
         end
         Nokogiri::HTML(resp.body)
+      rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
+             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
+        raise RelatonBib::RequestError, "Could not access #{url}"
       end
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
