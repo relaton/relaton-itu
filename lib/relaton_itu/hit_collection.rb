@@ -30,7 +30,7 @@ module RelatonItu
       # end
       url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
       params = {
-        "Input" => "163",
+        "Input" => ref_nbr,
         "Start" => 0,
         "Rows" => 10,
         "SortBy" => "RELEVANCE",
