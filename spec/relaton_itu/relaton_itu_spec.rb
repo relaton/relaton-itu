@@ -27,6 +27,13 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "gets Operational Bulletin" do
+    VCR.use_cassette "operational_bulletin" do
+      result = RelatonItu::ItuBibliography.get "ITU OB.1096 - 15.III.2016"
+      expect(result).to be_instance_of RelatonItu::ItuBibliographicItem
+    end
+  end
+
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
       expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }.to output(

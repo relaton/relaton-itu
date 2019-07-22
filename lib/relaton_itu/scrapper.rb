@@ -13,6 +13,7 @@ module RelatonItu
   # rubocop:disable Metrics/ModuleLength
   module Scrapper
     DOMAIN = "https://www.itu.int"
+    ROMAN_MONTHS = %w[I II III IV V VI VII VIII IX X XI XII].freeze
 
     TYPES = {
       "ISO" => "international-standard",
@@ -50,7 +51,7 @@ module RelatonItu
         doc = get_page hit_data[:url]
 
         # Fetch edition.
-        edition = doc.at("//table/tr/td/span[contains(@id, 'Label8')]/b").text
+        edition = doc.at("//table/tr/td/span[contains(@id, 'Label8')]/b")&.text
 
         ItuBibliographicItem.new(
           fetched: Date.today.to_s,
@@ -59,7 +60,7 @@ module RelatonItu
           language: ["en"],
           script: ["Latn"],
           titles: fetch_titles(hit_data),
-          type: fetch_type(doc),
+          type: hit_data[:type],
           docstatus: fetch_status(doc),
           ics: [], # fetch_ics(doc),
           dates: fetch_dates(doc),
@@ -138,34 +139,26 @@ module RelatonItu
 
       # Fetch status.
       # @param doc [Nokogiri::HTML::Document]
-      # @param status [String]
-      # @return [Hash]
+      # @return [RelatonBib::DocumentStatus, NilClass]
       def fetch_status(doc)
-        s = doc.at("//table/tr/td/span[contains(@id, 'Label7')]").text
-        if s == "In force"
-          status   = "Published"
-          # stage    = "60"
-          # substage = "60"
-        else
-          status   = "Withdrawal"
-          # stage    = "95"
-          # substage = "99"
-        end
+        s = doc.at("//table/tr/td/span[contains(@id, 'Label7')]")
+        return unless s
+
+        status = s.text == "In force" ? "Published" : "Withdrawal"
         RelatonBib::DocumentStatus.new(stage: status)
       end
 
       # Fetch workgroup.
       # @param doc [Nokogiri::HTML::Document]
-      # @return [RelatonItu::EditorialGroup]
+      # @return [RelatonItu::EditorialGroup, NilClass]
       def fetch_workgroup(doc)
-        wg = doc.at('//table/tr/td/span[contains(@id, "Label8")]/a').text
+        wg = doc.at('//table/tr/td/span[contains(@id, "Label8")]/a')
+        return unless wg
+
+        workgroup = wg.text
         EditorialGroup.new(
-          bureau: wg.match(/(?<=-)./).to_s,
-          group: itugroup(wg),
-          # name: "International Telecommunication Union",
-          # abbreviation: "ITU",
-          # url: "www.itu.int",
-          # technical_committee: tc,
+          bureau: workgroup.match(/(?<=-)./).to_s,
+          group: itugroup(workgroup),
         )
       end
 
@@ -209,9 +202,9 @@ module RelatonItu
       # Fetch type.
       # @param doc [Nokogiri::HTML::Document]
       # @return [String]
-      def fetch_type(_doc)
-        "recommendation"
-      end
+      # def fetch_type(_doc)
+      #   "recommendation"
+      # end
 
       # Fetch titles.
       # @param hit_data [Hash]
@@ -248,11 +241,31 @@ module RelatonItu
       # @return [Array<Hash>]
       def fetch_dates(doc)
         dates = []
-        publish_date = doc.at("//table/tr/td/span[contains(@id, 'Label5')]").text
+        pdate = doc.at("//table/tr/td/span[contains(@id, 'Label5')]")
+        publish_date = pdate&.text || ob_date(doc)
         unless publish_date.empty?
           dates << { type: "published", on: publish_date }
         end
         dates
+      end
+
+      # Scrape Operational Bulletin date.
+      # @param doc [Nokogiri::HTML::Document]
+      # @return [String]
+      def ob_date(doc)
+        pdate = doc.at('//table/tbody/tr/td[contains(text(), "Year:")]')
+        return unless pdate
+
+        roman_to_arabic pdate.text.match(%r{(?<=Year: )\d{2}.\w+.\d{4}}).to_s
+      end
+
+      # Convert roman month number in string date to arabic number
+      # @param date [String]
+      # @return [String]
+      def roman_to_arabic(date)
+        %r{(?<rmonth>[IVX]+)} =~ date
+        month = ROMAN_MONTHS.index(rmonth) + 1
+        Date.parse(date.sub(%r{[IVX]+}, month.to_s)).to_s
       end
 
       # Fetch contributors
@@ -300,7 +313,8 @@ module RelatonItu
           name = "International Telecommunication Union"
           url = "www.itu.int"
         end
-        from = doc.at("//table/tr/td/span[contains(@id, 'Label5')]").text
+        fdate = doc.at("//table/tr/td/span[contains(@id, 'Label5')]")
+        from = fdate&.text || ob_date(doc)
         { owner: { name: name, abbreviation: abbreviation, url: url }, from: from }
       end
     end

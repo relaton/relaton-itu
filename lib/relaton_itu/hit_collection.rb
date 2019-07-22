@@ -28,6 +28,7 @@ module RelatonItu
       #   from = Date.strptime year, "%Y"
       #   to   = from.next_year.prev_day
       # end
+      group = %r{(OB|Operational Bulletin) No} =~ text ? "Publications" : "Recommendations"
       url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
       params = {
         "Input" => ref_nbr,
@@ -36,7 +37,7 @@ module RelatonItu
         "SortBy" => "RELEVANCE",
         "ExactPhrase" => false,
         "CollectionName" => "General",
-        "CollectionGroup" => "Recommendations",
+        "CollectionGroup" => group,
         "Sector" => "t",
         "Criterias" => [{
           "Name" => "Search in",
@@ -82,7 +83,8 @@ module RelatonItu
         code  = h["Media"]["Name"]
         title = h["Title"]
         url   = h["Redirection"]
-        Hit.new({ code: code, title: title, url: url }, self)
+        type  = group.downcase[0...-1]
+        Hit.new({ code: code, title: title, url: url, type: type }, self)
       end
       concat hits
       @fetched = false

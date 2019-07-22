@@ -73,12 +73,13 @@ module RelatonItu
       end
 
       def search_filter(code)
-        docidrx = %r{^ITU-T\s[^\s]+}
+        docidrx = %r{\w+.\d+} # %r{^ITU-T\s[^\s]+}
+        c = code.match(docidrx).to_s
         warn "fetching #{code}..."
         result = search(code)
         result.select do |i|
           i.hit[:code] &&
-            i.hit[:code].match(docidrx).to_s == code
+            i.hit[:code].match(docidrx).to_s == c
         end
       end
 

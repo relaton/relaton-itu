@@ -11,13 +11,13 @@ RSpec.describe RelatonItu::Scrapper do
     expect(group.type).to eq "work-group"
   end
 
-  it "returs relation type other" do
+  it "returns relation type other" do
     doc = Nokogiri::HTML File.read "spec/examples/relation_type_other.html"
     relations = RelatonItu::Scrapper.send :fetch_relations, doc
     expect(relations[0][:type]).to eq "other"
   end
 
-  context "returs title" do
+  context "returns title" do
     it "empty" do
       title = RelatonItu::Scrapper.send :fetch_titles, title: ""
       expect(title[0][:title_intro]).to be_nil
