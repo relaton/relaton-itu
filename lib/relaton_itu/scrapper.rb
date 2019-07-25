@@ -59,17 +59,17 @@ module RelatonItu
           edition: edition,
           language: ["en"],
           script: ["Latn"],
-          titles: fetch_titles(hit_data),
+          title: fetch_titles(hit_data),
           type: hit_data[:type],
           docstatus: fetch_status(doc),
           ics: [], # fetch_ics(doc),
-          dates: fetch_dates(doc),
-          contributors: fetch_contributors(hit_data[:code]),
+          date: fetch_dates(doc),
+          contributor: fetch_contributors(hit_data[:code]),
           editorialgroup: fetch_workgroup(doc),
           abstract: fetch_abstract(doc),
           copyright: fetch_copyright(hit_data[:code], doc),
           link: fetch_link(doc, hit_data[:url]),
-          relations: fetch_relations(doc),
+          relation: fetch_relations(doc),
         )
       end
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
@@ -278,7 +278,7 @@ module RelatonItu
           name = "International Telecommunication Union"
           url = "www.itu.int"
         end
-        [{ entity: { name: name, url: url, abbreviation: abbrev }, roles: ["publisher"] }]
+        [{ entity: { name: name, url: url, abbreviation: abbrev }, role: ["publisher"] }]
       end
 
       # Fetch ICS.
