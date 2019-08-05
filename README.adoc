@@ -143,6 +143,22 @@ fetching ITU-T L.163...
 ...
 ----
 
+=== Create bibliographic item form YAML
+[source,ruby]
+----
+hash = YAML.load_file 'spec/examples/itu_bib_item.yml'
+=> {"id"=>"ITU-T L.163 (11/2018)",
+...
+
+bib_hash = RelatonItu::HashConverter.hash_to_bib hash
+=> {:id=>"ITU-T L.163 (11/2018)",
+...
+
+RelatonItu::ItuBibliographicItem.new bib_hash
+=> #<RelatonItu::ItuBibliographicItem:0x007fd88ac02aa0
+...
+----
+
 == Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

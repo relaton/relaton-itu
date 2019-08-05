@@ -278,7 +278,7 @@ module RelatonItu
           name = "International Telecommunication Union"
           url = "www.itu.int"
         end
-        [{ entity: { name: name, url: url, abbreviation: abbrev }, role: ["publisher"] }]
+        [{ entity: { name: name, url: url, abbreviation: abbrev }, role: [type: "publisher"] }]
       end
 
       # Fetch ICS.

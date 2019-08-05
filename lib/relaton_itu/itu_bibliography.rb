@@ -8,6 +8,7 @@ require "relaton_itu/scrapper"
 require "relaton_itu/hit_collection"
 require "relaton_itu/hit"
 require "relaton_itu/xml_parser"
+require "relaton_itu/hash_converter"
 require "date"
 
 module RelatonItu

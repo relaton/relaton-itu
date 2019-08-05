@@ -37,7 +37,7 @@ module RelatonItu
     # @param type [String, NilClass]
     # @param name [String]
     # @param acronym [String, NilClass]
-    # @param period [RelatonItu::ItuGroup::Period, NilClass]
+    # @param period [Hash, RelatonItu::ItuGroup::Period, NilClass]
     def initialize(type: nil, name:, acronym: nil, period: nil)
       if type && !TYPES.include?(type)
         raise ArgumentError, "invalid type: #{type}"
@@ -46,7 +46,7 @@ module RelatonItu
       @type = type
       @name = name
       @acronym = acronym
-      @period = period
+      @period = period.is_a?(Hash) ? Period.new(period) : period
     end
 
     # @param builder [Nokogiri::XML::Builder]

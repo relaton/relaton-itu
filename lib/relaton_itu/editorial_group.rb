@@ -12,16 +12,16 @@ module RelatonItu
     attr_reader :subgroup, :workgroup
 
     # @param bureau [String]
-    # @param group [RelatonItu::ItuGroup]
-    # @param subgroup [RelatonItu::ItuGroup, NilClass]
-    # @param workgroup [RelatonItu::ItuGroup, NilClass]
+    # @param group [Hash, RelatonItu::ItuGroup]
+    # @param subgroup [Hash, RelatonItu::ItuGroup, NilClass]
+    # @param workgroup [Hash, RelatonItu::ItuGroup, NilClass]
     def initialize(bureau:, group:, subgroup: nil, workgroup: nil)
       raise ArgumentError, "invalid bureau: #{bureau}" unless BUREAUS.include? bureau
 
       @bureau = bureau
-      @group = group
-      @subgroup = subgroup
-      @workgroup = workgroup
+      @group = group.is_a?(Hash) ? ItuGroup.new(group) : group
+      @subgroup = subgroup.is_a?(Hash) ? ItuGroup.new(subgroup) : subgroup
+      @workgroup = workgroup.is_a?(Hash) ? ItuGroup.new(workgroup) : workgroup
     end
 
     # @param builder [Nokogiri::XML::Builder]
