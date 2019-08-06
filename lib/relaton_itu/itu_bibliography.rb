@@ -20,7 +20,8 @@ module RelatonItu
       def search(text, year = nil)
         HitCollection.new text, year
       rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
-             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
+             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError,
+             OpenSSL::SSL::SSLError
         raise RelatonBib::RequestError, "Could not access http://www.itu.int"
       end
 

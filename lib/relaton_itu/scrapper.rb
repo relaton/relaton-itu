@@ -121,7 +121,8 @@ module RelatonItu
         end
         Nokogiri::HTML(resp.body)
       rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
-             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
+             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError,
+             OpenSSL::SSL::SSLError
         raise RelatonBib::RequestError, "Could not access #{url}"
       end
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
