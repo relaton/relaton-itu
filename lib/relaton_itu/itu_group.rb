@@ -21,6 +21,13 @@ module RelatonItu
           builder.end finish if finish
         end
       end
+
+      # @return [Hash]
+      def to_hash
+        hash = { "start" => start }
+        hash["finish"] = finish if finish
+        hash
+      end
     end
 
     TYPES = %w[tsag study-group work-group].freeze
@@ -55,6 +62,15 @@ module RelatonItu
       builder.name name
       builder.acronym acronym if acronym
       period&.to_xml builder
+    end
+
+    # @return [Hash]
+    def to_hash
+      hash = { "name" => name }
+      hash["type"] = type if type
+      hash["acronym"] = acronym if acronym
+      hash["period"] = period.to_hash if period
+      hash
     end
   end
 end

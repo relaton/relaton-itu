@@ -8,37 +8,34 @@ title:
 type: recommendation
 
 docid:
-  - id: L.163
-    type: ITU-T
+  id: L.163
+  type: ITU-T
 
 edition: "1"
 
-language:
-  - en
+language: en
 
-script:
-  - Latn
+script: Latn
 
 docstatus:
   stage: Published
 
 date:
-  - type: published
-    value: "2018"
+  type: published
+  value: "2018"
 
 abstract:
-  - content: Recommendation ITU-T L.163 describescriteria for the installation of optical fibre cables defined in [ITU-TL.110] in remote areas withlack of usual infrastructure for installation including the procedures ofcable-route planning, cable selection, cable-installation scheme selection,cable tension and temperature consideration, and the handling, bend protectionand river/lake closing of the cable together with pilot tests and training forinstallation.ThisRecommendation also describes how to mitigate the considerable risks and/orissues to which the optical fibre cable may be exposed when infrastructures areminimal during installation, maintenance and operation procedures.
-    language: en
-    script: Latn
-    format: text/plain
+  content: Recommendation ITU-T L.163 describescriteria for the installation of optical fibre cables defined in [ITU-TL.110] in remote areas withlack of usual infrastructure for installation including the procedures ofcable-route planning, cable selection, cable-installation scheme selection,cable tension and temperature consideration, and the handling, bend protectionand river/lake closing of the cable together with pilot tests and training forinstallation.ThisRecommendation also describes how to mitigate the considerable risks and/orissues to which the optical fibre cable may be exposed when infrastructures areminimal during installation, maintenance and operation procedures.
+  language: en
+  script: Latn
+  format: text/plain
 
 contributor:
-  - organization:
-      name: International Telecommunication Union
-      url: www.itu.int
-      abbreviation: ITU
-    role:
-      - publisher
+  organization:
+    name: International Telecommunication Union
+    url: www.itu.int
+    abbreviation: ITU
+  role: publisher
 
 copyright:
   owner:
@@ -69,3 +66,6 @@ editorialgroup:
     type: study-group
     name: ITU-T Study Group 15
     acronym: SG
+    period:
+      start: "2011"
+      finish: "2012"

@@ -15,13 +15,5 @@ module RelatonItu
 
       super
     end
-
-    def to_xml(builder = nil, **opts)
-      super builder, **opts do |b|
-        if opts[:bibdata]
-          # b.doctype doctype if doctype
-        end
-      end
-    end
   end
 end

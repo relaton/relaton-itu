@@ -33,5 +33,13 @@ module RelatonItu
         builder.workgroup { |b| group.to_xml b } if workgroup
       end
     end
+
+    # @return [Hash]
+    def to_hash
+      hash = { "bureau" => bureau, "group" => group.to_hash }
+      hash["subgroup"] = subgroup.to_hash if subgroup
+      hash["workgroup"] = workgroup.to_hash if workgroup
+      hash
+    end
   end
 end
