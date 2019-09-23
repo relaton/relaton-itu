@@ -12,7 +12,7 @@ RSpec.describe RelatonItu::Scrapper do
   end
 
   it "returns relation type other" do
-    doc = Nokogiri::HTML File.read "spec/examples/relation_type_other.html"
+    doc = Nokogiri::HTML File.read("spec/examples/relation_type_other.html", encoding: "utf-8")
     relations = RelatonItu::Scrapper.send :fetch_relations, doc
     expect(relations[0][:type]).to eq "other"
   end
