@@ -60,7 +60,7 @@ module RelatonItu
           language: ["en"],
           script: ["Latn"],
           title: fetch_titles(hit_data),
-          type: hit_data[:type],
+          doctype: hit_data[:type],
           docstatus: fetch_status(doc),
           ics: [], # fetch_ics(doc),
           date: fetch_dates(doc),

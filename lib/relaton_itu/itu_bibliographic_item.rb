@@ -8,9 +8,9 @@ module RelatonItu
     ].freeze
 
     def initialize(**args)
-      @doctype = args.delete :type
+      @doctype = args.delete :doctype
       if doctype && !TYPES.include?(doctype)
-        raise ArgumentError, "invalid type: #{doctype}"
+        raise ArgumentError, "invalid doctype: #{doctype}"
       end
 
       super
