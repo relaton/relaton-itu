@@ -48,7 +48,7 @@ module RelatonItu
       # @return [Hash]
       # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       def parse_page(hit_data)
-        doc = get_page hit_data[:url]
+        url, doc = get_page hit_data[:url]
 
         # Fetch edition.
         edition = doc.at("//table/tr/td/span[contains(@id, 'Label8')]/b")&.text
@@ -68,7 +68,7 @@ module RelatonItu
           editorialgroup: fetch_workgroup(doc),
           abstract: fetch_abstract(doc),
           copyright: fetch_copyright(hit_data[:code], doc),
-          link: fetch_link(doc, hit_data[:url]),
+          link: fetch_link(doc, url),
           relation: fetch_relations(doc),
         )
       end
@@ -119,7 +119,7 @@ module RelatonItu
           uri = URI resp["location"]
           resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
         end
-        Nokogiri::HTML(resp.body)
+        [uri.to_s, Nokogiri::HTML(resp.body)]
       rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
              Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError,
              OpenSSL::SSL::SSLError
@@ -211,7 +211,9 @@ module RelatonItu
       # @param hit_data [Hash]
       # @return [Array<Hash>]
       def fetch_titles(hit_data)
-        titles = hit_data[:title].split " - "
+        t = hit_data[:title].match(%r{(?<=\(\d{2}\/\d{4}\): ).*}).to_s
+        t = hit_data[:title] if t.empty?
+        titles = t.split " - "
         case titles.size
         when 0
           intro, main, part = nil, "", nil
@@ -298,8 +300,8 @@ module RelatonItu
       # @return [Array<Hash>]
       def fetch_link(doc, url)
         links = [{ type: "src", content: url }]
-        obp_elms = doc.at('//table/tr/td/span[contains(@id, "Label4")]/a')
-        links << { type: "obp", content: DOMAIN + obp_elms[:href] } if obp_elms
+        obp_elms = doc.at('//a[@title="Persistent link to download the PDF file"]')
+        links << { type: "obp", content: DOMAIN + obp_elms[:href].strip } if obp_elms
         links
       end
 
