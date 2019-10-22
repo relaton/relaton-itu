@@ -55,11 +55,11 @@ module RelatonItu
 
         ItuBibliographicItem.new(
           fetched: Date.today.to_s,
-          docid: fetch_docid(hit_data[:code]),
+          docid: fetch_docid(doc),
           edition: edition,
           language: ["en"],
           script: ["Latn"],
-          title: fetch_titles(hit_data),
+          title: fetch_titles(doc),
           doctype: hit_data[:type],
           docstatus: fetch_status(doc),
           ics: [], # fetch_ics(doc),
@@ -130,12 +130,13 @@ module RelatonItu
       # Fetch docid.
       # @param doc [Nokogiri::HTML::Document]
       # @return [Hash]
-      def fetch_docid(code)
-        # m = code.match(/(?<=\s)(?<project>[^\s]+)-?(?<part>(?<=-)\d+|)-?(?<subpart>(?<=-)\d+|)/)
-        # project_number: m[:project],
-        # part_number: m[:part],
-        # subpart_number: m[:subpart],
-        [RelatonBib::DocumentIdentifier.new(type: "ITU", id: code)]
+      def fetch_docid(doc)
+        doc.xpath("//span[@id='ctl00_content_main_uc_rec_main_info1_rpt_main_ctl00_lbl_rec']",
+          "//td[.='Identical standard:']/following-sibling::td").map do |code|
+            id = code.text.match(%r{^.*?(?= \()}).to_s.squeeze(' ')
+            type = id.match(%r{^\w+}).to_s
+            RelatonBib::DocumentIdentifier.new(type: type, id: id)
+        end
       end
 
       # Fetch status.
@@ -208,12 +209,14 @@ module RelatonItu
       # end
 
       # Fetch titles.
-      # @param hit_data [Hash]
+      # @param doc [Nokogiri::HTML::Document]
       # @return [Array<Hash>]
-      def fetch_titles(hit_data)
-        t = hit_data[:title].match(%r{(?<=\(\d{2}\/\d{4}\): ).*}).to_s
-        t = hit_data[:title] if t.empty?
-        titles = t.split " - "
+      def fetch_titles(doc)
+        # t = hit_data[:title].match(%r{(?<=\(\d{2}\/\d{4}\): ).*}).to_s
+        # t = hit_data[:title] if t.empty?
+        t = doc.at("//td[@class='title']")
+        return [] unless t
+        titles = t.text.split " - "
         case titles.size
         when 0
           intro, main, part = nil, "", nil

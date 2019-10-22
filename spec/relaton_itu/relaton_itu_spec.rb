@@ -6,10 +6,10 @@ RSpec.describe RelatonItu do
   it "gets a code" do
     VCR.use_cassette "code" do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
-      expect(results).to include %(<bibitem id="ITU-TL.163(11/2018)" type="standard">)
+      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard">)
       expect(results).to include %(<on>2018</on>)
       expect(results.gsub(/<relation.*<\/relation>/m, "")).not_to include %(<on>2018</on>)
-      expect(results).to include %(<docidentifier type="ITU">ITU-T L.163 (11/2018)</docidentifier>)
+      expect(results).to include %(<docidentifier type="ITU">ITU-T L.163</docidentifier>)
     end
   end
 
@@ -31,6 +31,16 @@ RSpec.describe RelatonItu do
     VCR.use_cassette "operational_bulletin" do
       result = RelatonItu::ItuBibliography.get "ITU OB.1096 - 15.III.2016"
       expect(result).to be_instance_of RelatonItu::ItuBibliographicItem
+    end
+  end
+
+  it "gets a documet with 2 identifier" do
+    VCR.use_cassette "itu_t_y_3500" do
+      result = RelatonItu::ItuBibliography.get "ITU-T Y.3500"
+      expect(result.docidentifier[0].id).to eq "ITU-T Y.3500"
+      expect(result.docidentifier[0].type).to eq "ITU"
+      expect(result.docidentifier[1].id).to eq "ISO/IEC 17788"
+      expect(result.docidentifier[1].type).to eq "ISO"
     end
   end
 
@@ -64,7 +74,7 @@ RSpec.describe RelatonItu do
       hits = RelatonItu::ItuBibliography.search("ITU-T L.163").fetch
       expect(hits.first.to_s).to eq "<RelatonItu::Hit:"\
         "#{format('%#.14x', hits.first.object_id << 1)} "\
-        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163(11/2018):2018" '\
+        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163:2018" '\
         '@title="ITU-T L.163 (11/2018)">'
     end
   end
