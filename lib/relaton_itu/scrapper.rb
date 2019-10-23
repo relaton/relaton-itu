@@ -131,11 +131,13 @@ module RelatonItu
       # @param doc [Nokogiri::HTML::Document]
       # @return [Hash]
       def fetch_docid(doc)
-        doc.xpath("//span[@id='ctl00_content_main_uc_rec_main_info1_rpt_main_ctl00_lbl_rec']",
-          "//td[.='Identical standard:']/following-sibling::td").map do |code|
-            id = code.text.match(%r{^.*?(?= \()}).to_s.squeeze(' ')
-            type = id.match(%r{^\w+}).to_s
-            RelatonBib::DocumentIdentifier.new(type: type, id: id)
+        doc.xpath(
+          "//span[@id='ctl00_content_main_uc_rec_main_info1_rpt_main_ctl00_lbl_rec']",
+          "//td[.='Identical standard:']/following-sibling::td",
+        ).map do |code|
+          id = code.text.match(%r{^.*?(?= \()}).to_s.squeeze(" ")
+          type = id.match(%r{^\w+}).to_s
+          RelatonBib::DocumentIdentifier.new(type: type, id: id)
         end
       end
 
@@ -187,16 +189,12 @@ module RelatonItu
       # @return [Array<Hash>]
       def fetch_relations(doc)
         doc.xpath('//div[contains(@id, "tab_sup")]//table/tr[position()>2]').map do |r|
-          r_type = r.at('./td/span[contains(@id, "Label4")]/nobr').text.downcase
-          type = case r_type
-                 when "in force" then "published"
-                 else r_type
-                 end
+          # r_type = r.at('./td/span[contains(@id, "Label4")]/nobr').text.downcase
           ref = r.at('./td/span[contains(@id, "title_e")]/nobr/a')
           # url = DOMAIN + ref[:href].sub(/^\./, "/ITU-T/recommendations")
           fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en", script: "Latn")
           bibitem = RelatonIsoBib::IsoBibliographicItem.new(formattedref: fref)
-          { type: type, bibitem: bibitem }
+          { type: "related", bibitem: bibitem }
         end
       end
       # rubocop:enable Metrics/MethodLength
