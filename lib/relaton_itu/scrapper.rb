@@ -194,7 +194,7 @@ module RelatonItu
           # url = DOMAIN + ref[:href].sub(/^\./, "/ITU-T/recommendations")
           fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en", script: "Latn")
           bibitem = RelatonIsoBib::IsoBibliographicItem.new(formattedref: fref)
-          { type: "related", bibitem: bibitem }
+          { type: "complements", bibitem: bibitem }
         end
       end
       # rubocop:enable Metrics/MethodLength
