@@ -65,7 +65,7 @@ module RelatonItu
           ics: [], # fetch_ics(doc),
           date: fetch_dates(doc),
           contributor: fetch_contributors(hit_data[:code]),
-          editorialgroup: fetch_workgroup(doc),
+          editorialgroup: fetch_workgroup(hit_data[:code], doc),
           abstract: fetch_abstract(doc),
           copyright: fetch_copyright(hit_data[:code], doc),
           link: fetch_link(doc, url),
@@ -153,16 +153,17 @@ module RelatonItu
       end
 
       # Fetch workgroup.
+      # @param code [String]
       # @param doc [Nokogiri::HTML::Document]
       # @return [RelatonItu::EditorialGroup, NilClass]
-      def fetch_workgroup(doc)
+      def fetch_workgroup(code, doc)
         wg = doc.at('//table/tr/td/span[contains(@id, "Label8")]/a')
-        return unless wg
+        # return unless wg
 
-        workgroup = wg.text
+        group = wg && itugroup(wg.text)
         EditorialGroup.new(
-          bureau: workgroup.match(/(?<=-)./).to_s,
-          group: itugroup(workgroup),
+          bureau: code.match(/(?<=-)./).to_s,
+          group: group,
         )
       end
 

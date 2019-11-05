@@ -44,6 +44,14 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "fetch bureau from code" do
+    VCR.use_cassette "itu_t_a_13" do
+      result = RelatonItu::ItuBibliography.get "ITU-T A.13"
+      expect(result.editorialgroup.bureau).to eq "T"
+      expect(result.editorialgroup.group.name).to eq "Telecommunication Standardization Advisory Group"
+    end
+  end
+
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
       expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }.to output(
