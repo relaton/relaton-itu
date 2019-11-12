@@ -52,6 +52,13 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "fetch supplements" do
+    VCR.use_cassette "itu_t_a_suppl_2" do
+      result = RelatonItu::ItuBibliography.get "ITU-T A Suppl. 2"
+      expect(result.docidentifier.first.id).to eq "ITU-T A Suppl. 2"
+    end
+  end
+
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
       expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }.to output(
