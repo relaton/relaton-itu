@@ -248,7 +248,7 @@ module RelatonItu
         dates = []
         pdate = doc.at("//table/tr/td/span[contains(@id, 'Label5')]")
         publish_date = pdate&.text || ob_date(doc)
-        unless publish_date.empty?
+        unless publish_date&.empty?
           dates << { type: "published", on: publish_date }
         end
         dates
