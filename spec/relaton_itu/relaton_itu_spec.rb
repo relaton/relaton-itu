@@ -62,11 +62,7 @@ RSpec.describe RelatonItu do
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
       expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }.to output(
-        "fetching ITU-T L.163...\n"\
-        "WARNING: no match found online for ITU-T L.163:1018. The code must be exactly like it is on the standards website.\n"\
-        "(There was no match for 1018, though there were matches found for 2018.)\n"\
-        "If you wanted to cite all document parts for the reference, use \"ITU-T L.163 (all parts)\".\n"\
-        "If the document is not a standard, use its document type abbreviation (TS, TR, PAS, Guide).\n",
+        %r{WARNING: no match found online for ITU-T L.163:1018.}
       ).to_stderr
     end
   end

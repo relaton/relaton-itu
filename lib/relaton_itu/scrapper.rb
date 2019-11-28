@@ -115,8 +115,8 @@ module RelatonItu
       def get_page(url)
         uri = URI url
         resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
-        while resp.code == "301" || resp.code == "302" || resp.code == "303"
-          uri = URI resp["location"]
+        until resp.code == "200"
+          uri = URI resp["location"] if resp.code =~ /^30/
           resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
         end
         [uri.to_s, Nokogiri::HTML(resp.body)]
