@@ -5,7 +5,7 @@ module RelatonItu
     def initialize
       @short = :relaton_itu
       @prefix = "ITU"
-      @defaultprefix = %r{^(ITU)}
+      @defaultprefix = %r{^ITU\s}
       @idtype = "ITU"
     end
 
