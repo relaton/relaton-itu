@@ -1,6 +1,14 @@
+require "jing"
+
 RSpec.describe RelatonItu do
   it "has a version number" do
     expect(RelatonItu::VERSION).not_to be nil
+  end
+
+  it "returs grammar hash" do
+    hash = RelatonItu.grammar_hash
+    expect(hash).to be_instance_of String
+    expect(hash.size).to eq 32
   end
 
   it "gets a code" do
@@ -99,6 +107,9 @@ RSpec.describe RelatonItu do
       expect(xml).to be_equivalent_to File.read(file_path).sub(
         /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
       )
+      schema = Jing.new "spec/examples/isobib.rng"
+      errors = schema.validate file_path
+      expect(errors).to eq []
     end
   end
 
