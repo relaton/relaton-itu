@@ -70,6 +70,7 @@ module RelatonItu
           copyright: fetch_copyright(hit_data[:code], doc),
           link: fetch_link(doc, url),
           relation: fetch_relations(doc),
+          place: ["Geneva"],
         )
       end
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
