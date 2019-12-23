@@ -1,8 +1,12 @@
 = RelatonItu: retrieve ITU Standards for bibliographic use using the BibliographicItem model
 
-image:https://img.shields.io/gem/v/relaton-bib.svg["Gem Version", link="https://rubygems.org/gems/relaton-bib"]
-image:https://travis-ci.com/metanorma/relaton-bib.svg?branch=master["Build Status", link="https://travis-ci.com/metanorma/relaton-bib"]
-image:https://ci.appveyor.com/api/projects/status/fd39m2762jo8ve04?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/ribose/relaton-bib"]
+image:https://img.shields.io/gem/v/relaton-itu.svg["Gem Version", link="https://rubygems.org/gems/relaton-itu"]
+image:https://github.com/relaton/relaton-itu/workflows/macos/badge.svg["Build Status (macOS)", link="https://github.com/relaton/relaton-itu/actions?workflow=macos"]
+image:https://github.com/relaton/relaton-itu/workflows/windows/badge.svg["Build Status (Windows)", link="https://github.com/relaton/relaton-itu/actions?workflow=windows"]
+image:https://github.com/relaton/relaton-itu/workflows/ubuntu/badge.svg["Build Status (Ubuntu)", link="https://github.com/relaton/relaton-itu/actions?workflow=ubuntu"]
+image:https://codeclimate.com/github/relaton/relaton-itu/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/relaton/relaton-itu"]
+image:https://img.shields.io/github/issues-pr-raw/relaton/relaton-itu.svg["Pull Requests", link="https://github.com/relaton/relaton-itu/pulls"]
+image:https://img.shields.io/github/commits-since/relaton/relaton-itu/latest.svg["Commits since latest",link="https://github.com/relaton/relaton-itu/releases"]
 
 RelatonItu is a Ruby gem that implements the https://github.com/metanorma/metanorma-model-iso#iso-bibliographic-item[IsoBibliographicItem model].
 
