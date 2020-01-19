@@ -21,6 +21,16 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "encode abstract text" do
+    VCR.use_cassette "itu_t_h_264" do
+      file = "spec/examples/itu_t_a_13.xml"
+      result = RelatonItu::ItuBibliography.get("ITU-T H.264").to_xml
+      File.write file, result, encoding: "UTF-8" unless File.exist? file
+      expect(result).to be_equivalent_to File.read(file, encoding: "UTF-8")
+        .sub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
+    end
+  end
+
   it "gets a code with year" do
     VCR.use_cassette "code_with_year" do
       result = RelatonItu::ItuBibliography.get("ITU-T L.163", "2018", {})

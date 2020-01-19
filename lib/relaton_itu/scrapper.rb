@@ -85,9 +85,9 @@ module RelatonItu
         return [] unless abstract_url
 
         url = abstract_url[:onclick].match(/https?[^']+/).to_s
-        d = Nokogiri::HTML Net::HTTP.get(URI(url))
+        d = Nokogiri::HTML Net::HTTP.get(URI(url)).encode(undef: :replace, replace: "")
         abstract_content = d.css("p.MsoNormal").text.gsub(/\r\n/, "")
-          .gsub(/\s{2,}/, " ").gsub(/\u00a0/, "")
+          .squeeze(" ").gsub(/\u00a0/, "")
 
         [{
           content: abstract_content,
