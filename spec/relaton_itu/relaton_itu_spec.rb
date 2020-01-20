@@ -27,7 +27,7 @@ RSpec.describe RelatonItu do
       result = RelatonItu::ItuBibliography.get("ITU-T H.264").to_xml
       File.write file, result, encoding: "UTF-8" unless File.exist? file
       expect(result).to be_equivalent_to File.read(file, encoding: "UTF-8")
-        .sub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
+        .gsub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
     end
   end
 
