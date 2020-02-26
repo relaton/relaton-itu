@@ -9,7 +9,11 @@ module RelatonItu
       def from_xml(xml)
         doc = Nokogiri::XML(xml)
         ituitem = doc.at "/bibitem|/bibdata"
-        ItuBibliographicItem.new item_data(ituitem)
+        if ituitem
+          ItuBibliographicItem.new item_data(ituitem)
+        elsif
+          warn "[relato-itu] can't find bibitem or bibdata element in the XML"
+        end
       end
 
       private
