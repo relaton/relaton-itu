@@ -42,8 +42,8 @@ module RelatonItu
         ret = itubib_get1(code, year, opts)
         return nil if ret.nil?
 
-        ret.to_most_recent_reference unless year || opts[:keep_year]
-        ret.to_all_parts if opts[:all_parts]
+        ret = ret.to_most_recent_reference unless year || opts[:keep_year]
+        ret = ret.to_all_parts if opts[:all_parts]
         ret
       end
 
@@ -51,15 +51,15 @@ module RelatonItu
 
       def fetch_ref_err(code, year, missed_years)
         id = year ? "#{code}:#{year}" : code
-        warn "WARNING: no match found online for #{id}. "\
+        warn "[relaton-itu] WARNING: no match found online for #{id}. "\
           "The code must be exactly like it is on the standards website."
-        warn "(There was no match for #{year}, though there were matches "\
+        warn "[relaton-itu] (There was no match for #{year}, though there were matches "\
           "found for #{missed_years.join(', ')}.)" unless missed_years.empty?
         if /\d-\d/ =~ code
-          warn "The provided document part may not exist, or the document "\
+          warn "[relaton-itu] The provided document part may not exist, or the document "\
             "may no longer be published in parts."
         else
-          warn "If you wanted to cite all document parts for the reference, "\
+          warn "[relaton-itu] If you wanted to cite all document parts for the reference, "\
             "use \"#{code} (all parts)\".\nIf the document is not a standard, "\
             "use its document type abbreviation (TS, TR, PAS, Guide)."
         end
@@ -77,7 +77,7 @@ module RelatonItu
       def search_filter(code)
         docidrx = %r{\w+.\d+|\w\sSuppl\.\s\d+} # %r{^ITU-T\s[^\s]+}
         c = code.match(docidrx).to_s
-        warn "fetching #{code}..."
+        warn "[relaton-itu] (\"#{code}\") fetching..."
         result = search(code)
         result.select do |i|
           i.hit[:code] &&
@@ -94,7 +94,7 @@ module RelatonItu
       def isobib_results_filter(result, year)
         missed_years = []
         result.each_slice(3) do |s| # ISO website only allows 3 connections
-          fetch_pages(s, 3).each_with_index do |r, i|
+          fetch_pages(s, 3).each do |r|
             return { ret: r } if !year
 
             r.date.select { |d| d.type == "published" }.each do |d|
@@ -107,12 +107,15 @@ module RelatonItu
         { years: missed_years }
       end
 
-      def itubib_get1(code, year, opts)
-        result = search_filter(code) or return nil
+      def itubib_get1(code, year, _opts)
+        result = search_filter(code) || return
         ret = isobib_results_filter(result, year)
-        return ret[:ret] if ret[:ret]
-
-        fetch_ref_err(code, year, ret[:years])
+        if ret[:ret]
+          warn "[relaton-itu] (\"#{code}\") found #{ret[:ret].docidentifier.first&.id}"
+          ret[:ret]
+        else
+          fetch_ref_err(code, year, ret[:years])
+        end
       end
     end
   end

@@ -12,7 +12,7 @@ module RelatonItu
         if ituitem
           ItuBibliographicItem.new item_data(ituitem)
         elsif
-          warn "[relato-itu] can't find bibitem or bibdata element in the XML"
+          warn "[relaton-itu] can't find bibitem or bibdata element in the XML"
         end
       end
 
