@@ -66,7 +66,8 @@ RSpec.describe RelatonItu do
     VCR.use_cassette "itu_t_a_13" do
       result = RelatonItu::ItuBibliography.get "ITU-T A.13"
       expect(result.editorialgroup.bureau).to eq "T"
-      expect(result.editorialgroup.group.name).to eq "Telecommunication Standardization Advisory Group"
+      expect(result.editorialgroup.group.name).to eq "Telecommunication "\
+      "Standardization Advisory Group"
     end
   end
 
@@ -77,11 +78,22 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "fetch implementers guide" do
+    VCR.use_cassette "itu_g_imp_712" do
+      result = RelatonItu::ItuBibliography.get "ITU-T G.Imp712"
+      xml = result.to_xml
+      file = "spec/examples/itu_g_imp_712.xml"
+      File.write file, xml, encoding: "UTF-8" unless File.exist? file
+      expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8").
+        gsub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
+    end
+  end
+
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
-      expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }.to output(
-        %r{WARNING: no match found online for ITU-T L.163:1018.}
-      ).to_stderr
+      expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }.
+        to output(%r{WARNING: no match found online for ITU-T L.163:1018.}).
+        to_stderr
     end
   end
 
@@ -92,10 +104,9 @@ RSpec.describe RelatonItu do
       expect(hit_collection.fetch).to be_instance_of RelatonItu::HitCollection
       expect(hit_collection.fetched).to be_truthy
       expect(hit_collection.first).to be_instance_of RelatonItu::Hit
-      expect(hit_collection.to_s).to eq(
-        "<RelatonItu::HitCollection:#{format('%#.14x', hit_collection.object_id << 1)} "\
-        "@ref=ITU-T L.163 @fetched=true>",
-      )
+      expect(hit_collection.to_s).to eq "<RelatonItu::HitCollection:"\
+        "#{format('%<id>#.14x', id: hit_collection.object_id << 1)} "\
+        "@ref=ITU-T L.163 @fetched=true>"
     end
   end
 
@@ -103,9 +114,9 @@ RSpec.describe RelatonItu do
     VCR.use_cassette "hits" do
       hits = RelatonItu::ItuBibliography.search("ITU-T L.163").fetch
       expect(hits.first.to_s).to eq "<RelatonItu::Hit:"\
-        "#{format('%#.14x', hits.first.object_id << 1)} "\
-        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163:2018" '\
-        '@title="ITU-T L.163 (11/2018)">'
+        "#{format('%<id>#.14x', id: hits.first.object_id << 1)} "\
+        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163:2018"'\
+        ' @title="ITU-T L.163 (11/2018)">'
     end
   end
 

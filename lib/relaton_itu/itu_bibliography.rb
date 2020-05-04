@@ -19,9 +19,9 @@ module RelatonItu
       # @return [RelatonItu::HitCollection]
       def search(text, year = nil)
         HitCollection.new text, year
-      rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
-             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError,
-             OpenSSL::SSL::SSLError
+      rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,
+             EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
+             Net::ProtocolError, OpenSSL::SSL::SSLError
         raise RelatonBib::RequestError, "Could not access http://www.itu.int"
       end
 
@@ -66,17 +66,17 @@ module RelatonItu
         nil
       end
 
-      def fetch_pages(hits, threads)
-        workers = RelatonBib::WorkersPool.new threads
-        workers.worker { |w| { i: w[:i], hit: w[:hit].fetch } }
-        hits.each_with_index { |hit, i| workers << { i: i, hit: hit } }
-        workers.end
-        workers.result.sort_by { |a| a[:i] }.map { |x| x[:hit] }
-      end
+      # def fetch_pages(hits, threads)
+      #   workers = RelatonBib::WorkersPool.new threads
+      #   workers.worker { |w| { i: w[:i], hit: w[:hit].fetch } }
+      #   hits.each_with_index { |hit, i| workers << { i: i, hit: hit } }
+      #   workers.end
+      #   workers.result.sort_by { |a| a[:i] }.map { |x| x[:hit] }
+      # end
 
       def search_filter(code)
-        docidrx = %r{\w+.\d+|\w\sSuppl\.\s\d+} # %r{^ITU-T\s[^\s]+}
-        c = code.match(docidrx).to_s
+        docidrx = %r{\w+\.\d+|\w\sSuppl\.\s\d+} # %r{^ITU-T\s[^\s]+}
+        c = code.sub(/Imp\s?/, "").match(docidrx).to_s
         warn "[relaton-itu] (\"#{code}\") fetching..."
         result = search(code)
         result.select do |i|
@@ -93,16 +93,18 @@ module RelatonItu
       # If no match, returns any years which caused mismatch, for error reporting
       def isobib_results_filter(result, year)
         missed_years = []
-        result.each_slice(3) do |s| # ISO website only allows 3 connections
-          fetch_pages(s, 3).each do |r|
-            return { ret: r } if !year
+        # result.each_slice(3) do |s| # ISO website only allows 3 connections
+        #   fetch_pages(s, 3).each do |r|
+        result.each do |r|
+          return { ret: r.fetch } if !year
 
-            r.date.select { |d| d.type == "published" }.each do |d|
-              return { ret: r } if year.to_i == d.on.year
+          /\(\d{2}\/(?<pyear>\d{4})\)/ =~ r.hit[:code]
+          # r.date.select { |d| d.type == "published" }.each do |d|
+          return { ret: r.fetch } if year == pyear
 
-              missed_years << d.on.year
-            end
-          end
+          missed_years << pyear
+          # end
+          # end
         end
         { years: missed_years }
       end

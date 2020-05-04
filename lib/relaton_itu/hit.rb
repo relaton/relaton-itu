@@ -4,9 +4,9 @@ module RelatonItu
   # Hit.
   class Hit < RelatonBib::Hit
     # Parse page.
-    # @return [Isobib::IsoBibliographicItem]
+    # @return [RelatonItu::ItuBibliographicItem]
     def fetch
-      @fetch ||= Scrapper.parse_page @hit
+      @fetch ||= Scrapper.parse_page hit, hit_collection.gi_imp
     end
   end
 end

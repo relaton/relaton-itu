@@ -7,16 +7,39 @@ require "net/http"
 module RelatonItu
   # Page of hit collection.
   class HitCollection < RelatonBib::HitCollection
-    DOMAIN = "https://www.itu.int".freeze
+    DOMAIN = "https://www.itu.int"
 
-    # @param ref_nbr [String]
+    # @return [TrueClass, FalseClass]
+    attr_reader :gi_imp
+
+    # @param ref [String]
     # @param year [String]
-    def initialize(ref_nbr, year = nil)
-      super
-      group = %r{(OB|Operational Bulletin) No} =~ text ? "Publications" : "Recommendations"
-      url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
-      params = {
-        "Input" => ref_nbr,
+    def initialize(ref, year = nil)
+      text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
+      super text, year
+      @gi_imp = /\.Imp\d/.match?(ref)
+      uri = URI "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
+      data = { json: params.to_json }
+      resp = Net::HTTP.post(uri, data.to_json,
+                            "Content-Type" => "application/json")
+      @array = hits JSON.parse(resp.body)
+    end
+
+    private
+
+    # @return [String]
+    def group
+      @group ||= if %r{(OB|Operational Bulletin) No} =~ text then "Publications"
+                 else "Recommendations"
+                 end
+    end
+
+    # rubocop:disable Metrics/MethodLength
+
+    # @return [Hash]
+    def params
+      {
+        "Input" => text,
         "Start" => 0,
         "Rows" => 10,
         "SortBy" => "RELEVANCE",
@@ -61,10 +84,13 @@ module RelatonItu
         "IP" => "",
         "SearchType" => "All",
       }
-      data = { json: params.to_json }
-      resp  = Net::HTTP.post(URI(url), data.to_json, "Content-Type" => "application/json")
-      doc = JSON.parse resp.body
-      @array = doc["results"].map do |h|
+    end
+    # rubocop:enable Metrics/MethodLength
+
+    # @param data [Hash]
+    # @return [Array<RelatonItu::Hit>]
+    def hits(data)
+      data["results"].map do |h|
         code  = h["Media"]["Name"]
         title = h["Title"]
         url   = h["Redirection"]

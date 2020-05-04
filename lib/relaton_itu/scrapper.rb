@@ -3,16 +3,9 @@
 require "nokogiri"
 require "net/http"
 
-# Capybara.request_driver :poltergeist do |app|
-#   Capybara::Poltergeist::Driver.new app, js_errors: false
-# end
-# Capybara.default_driver = :poltergeist
-
 module RelatonItu
   # Scrapper.
-  # rubocop:disable Metrics/ModuleLength
   module Scrapper
-    DOMAIN = "https://www.itu.int"
     ROMAN_MONTHS = %w[I II III IV V VI VII VIII IX X XI XII].freeze
 
     TYPES = {
@@ -31,24 +24,19 @@ module RelatonItu
     }.freeze
 
     class << self
-      # @param text [String]
-      # @return [Array<Hash>]
-      # def get(text)
-      #   iso_workers = WorkersPool.new 4
-      #   iso_workers.worker { |hit| iso_worker(hit, iso_workers) }
-      #   algolia_workers = start_algolia_search(text, iso_workers)
-      #   iso_docs = iso_workers.result
-      #   algolia_workers.end
-      #   algolia_workers.result
-      #   iso_docs
-      # end
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 
       # Parse page.
-      # @param hit [Hash]
+      # @param hit_data [Hash]
       # @return [Hash]
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      def parse_page(hit_data)
+      def parse_page(hit_data, imp = false)
         url, doc = get_page hit_data[:url]
+        if imp
+          a = doc.at "//span[contains(@id, 'tab_ig_uc_rec')]/a"
+          return unless a
+
+          url, doc = get_page URI.join(url, a[:href]).to_s
+        end
 
         # Fetch edition.
         edition = doc.at("//table/tr/td/span[contains(@id, 'Label8')]/b")&.text
@@ -73,7 +61,7 @@ module RelatonItu
           place: ["Geneva"],
         )
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       private
 
@@ -96,37 +84,23 @@ module RelatonItu
         }]
       end
 
-      # Get langs.
-      # @param doc [Nokogiri::HTML::Document]
-      # @return [Array<Hash>]
-      # def langs(doc)
-      #   lgs = [{ lang: 'en' }]
-      #   doc.css('ul#lang-switcher ul li a').each do |lang_link|
-      #     lang_path = lang_link.attr('href')
-      #     lang = lang_path.match(%r{^\/(fr)\/})
-      #     lgs << { lang: lang[1], path: lang_path } if lang
-      #   end
-      #   lgs
-      # end
-
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       # Get page.
       # @param path [String] page's path
-      # @return [Array<Nokogiri::HTML::Document, String>]
+      # @return [Array<String, Nokogiri::HTML::Document>]
       def get_page(url)
         uri = URI url
-        resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
+        resp = Net::HTTP.get_response(uri)
         until resp.code == "200"
           uri = URI resp["location"] if resp.code =~ /^30/
-          resp = Net::HTTP.get_response(uri) # .encode("UTF-8")
+          resp = Net::HTTP.get_response(uri)
         end
         [uri.to_s, Nokogiri::HTML(resp.body)]
-      rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
-             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError,
-             OpenSSL::SSL::SSLError
+      rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,
+             EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
+             Net::ProtocolError, OpenSSL::SSL::SSLError
         raise RelatonBib::RequestError, "Could not access #{url}"
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/MethodLength
 
       # Fetch docid.
       # @param doc [Nokogiri::HTML::Document]
@@ -135,9 +109,11 @@ module RelatonItu
         doc.xpath(
           "//span[@id='ctl00_content_main_uc_rec_main_info1_rpt_main_ctl00_lbl_rec']",
           "//td[.='Identical standard:']/following-sibling::td",
+          "//div/table[1]/tr[4]/td/strong",
         ).map do |code|
-          id = code.text.match(%r{^.*?(?= \()}).to_s.squeeze(" ")
+          id = code.text.match(%r{^.*?(?= \()|\w\.Imp\s?\d+}).to_s.squeeze(" ")
           type = id.match(%r{^\w+}).to_s
+          type = "ITU" if type == "G"
           RelatonBib::DocumentIdentifier.new(type: type, id: id)
         end
       end
@@ -146,10 +122,11 @@ module RelatonItu
       # @param doc [Nokogiri::HTML::Document]
       # @return [RelatonBib::DocumentStatus, NilClass]
       def fetch_status(doc)
-        s = doc.at("//table/tr/td/span[contains(@id, 'Label7')]")
+        s = doc.at("//table/tr/td/span[contains(@id, 'Label7')]",
+                   "//p[contains(.,'Status :')]")
         return unless s
 
-        status = s.text == "In force" ? "Published" : "Withdrawal"
+        status = s.text.include?("In force") ? "Published" : "Withdrawal"
         RelatonBib::DocumentStatus.new(stage: status)
       end
 
@@ -191,9 +168,7 @@ module RelatonItu
       # @return [Array<Hash>]
       def fetch_relations(doc)
         doc.xpath('//div[contains(@id, "tab_sup")]//table/tr[position()>2]').map do |r|
-          # r_type = r.at('./td/span[contains(@id, "Label4")]/nobr').text.downcase
           ref = r.at('./td/span[contains(@id, "title_e")]/nobr/a')
-          # url = DOMAIN + ref[:href].sub(/^\./, "/ITU-T/recommendations")
           fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en", script: "Latn")
           bibitem = RelatonIsoBib::IsoBibliographicItem.new(formattedref: fref)
           { type: "complements", bibitem: bibitem }
@@ -201,22 +176,14 @@ module RelatonItu
       end
       # rubocop:enable Metrics/MethodLength
 
-      # Fetch type.
-      # @param doc [Nokogiri::HTML::Document]
-      # @return [String]
-      # def fetch_type(_doc)
-      #   "recommendation"
-      # end
-
       # Fetch titles.
       # @param doc [Nokogiri::HTML::Document]
       # @return [Array<Hash>]
       def fetch_titles(doc)
-        # t = hit_data[:title].match(%r{(?<=\(\d{2}\/\d{4}\): ).*}).to_s
-        # t = hit_data[:title] if t.empty?
-        t = doc.at("//td[@class='title']")
+        t = doc.at("//td[@class='title']|//div/table[1]/tr[4]/td/strong")
         return [] unless t
-        titles = t.text.split " - "
+
+        titles = t.text.sub(/\w\.Imp\s?\d+\u00A0:\u00A0/, "").split " - "
         case titles.size
         when 0
           intro, main, part = nil, "", nil
@@ -247,10 +214,11 @@ module RelatonItu
       # @return [Array<Hash>]
       def fetch_dates(doc)
         dates = []
-        pdate = doc.at("//table/tr/td/span[contains(@id, 'Label5')]")
-        publish_date = pdate&.text || ob_date(doc)
-        if publish_date && !publish_date&.empty?
-          dates << { type: "published", on: publish_date }
+        date = doc.at("//table/tr/td/span[contains(@id, 'Label5')]",
+                      "//p[contains(.,'Approved in')]")
+        pdate = date&.text&.match(/\d{4}-\d{2}-\d{2}/).to_s || ob_date(doc)
+        if pdate && !pdate&.empty?
+          dates << { type: "published", on: pdate }
         end
         dates
       end
@@ -278,24 +246,17 @@ module RelatonItu
       # @param doc [Nokogiri::HTML::Document]
       # @return [Array<Hash>]
       def fetch_contributors(code)
+        return [] unless code
+
         abbrev = code.sub(/-\w\s.*/, "")
         case abbrev
         when "ITU"
           name = "International Telecommunication Union"
           url = "www.itu.int"
         end
-        [{ entity: { name: name, url: url, abbreviation: abbrev }, role: [type: "publisher"] }]
+        [{ entity: { name: name, url: url, abbreviation: abbrev },
+           role: [type: "publisher"] }]
       end
-
-      # Fetch ICS.
-      # @param doc [Nokogiri::HTML::Document]
-      # @return [Array<Hash>]
-      # def fetch_ics(doc)
-      #   doc.xpath('//th[contains(text(), "ICS")]/following-sibling::td/a').map do |i|
-      #     code = i.text.match(/[\d\.]+/).to_s.split '.'
-      #     { field: code[0], group: code[1], subgroup: code[2] }
-      #   end
-      # end
 
       # Fetch links.
       # @param doc [Nokogiri::HTML::Document]
@@ -303,9 +264,21 @@ module RelatonItu
       # @return [Array<Hash>]
       def fetch_link(doc, url)
         links = [{ type: "src", content: url }]
-        obp_elms = doc.at('//a[@title="Persistent link to download the PDF file"]')
-        links << { type: "obp", content: DOMAIN + obp_elms[:href].strip } if obp_elms
+        obp_elm = doc.at(
+          '//a[@title="Persistent link to download the PDF file"]',
+          "//font[contains(.,'PDF')]/../..",
+        )
+        links << typed_link("obp", obp_elm) if obp_elm
+        wrd_elm = doc.at("//font[contains(.,'Word')]/../..")
+        links << typed_link("word", wrd_elm) if wrd_elm
         links
+      end
+
+      def typed_link(type, elm)
+        {
+          type: type,
+          content: URI.join(HitCollection::DOMAIN + elm[:href].strip).to_s,
+        }
       end
 
       # Fetch copyright.
@@ -325,5 +298,4 @@ module RelatonItu
       end
     end
   end
-  # rubocop:enable Metrics/ModuleLength
 end
