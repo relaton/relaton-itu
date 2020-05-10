@@ -3,6 +3,7 @@
 require "relaton_iso_bib"
 require "relaton_itu/itu_bibliographic_item"
 require "relaton_itu/editorial_group"
+require "relaton_itu/structured_identifier"
 require "relaton_itu/itu_group"
 require "relaton_itu/scrapper"
 require "relaton_itu/hit_collection"

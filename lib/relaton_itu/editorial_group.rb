@@ -16,8 +16,9 @@ module RelatonItu
     # @param subgroup [Hash, RelatonItu::ItuGroup, NilClass]
     # @param workgroup [Hash, RelatonItu::ItuGroup, NilClass]
     def initialize(bureau:, group:, subgroup: nil, workgroup: nil)
-      raise ArgumentError, "invalid bureau: #{bureau}" unless BUREAUS.include? bureau
-
+      unless BUREAUS.include? bureau
+        warn "[relaton-itu] WARNING: invalid bureau: #{bureau}"
+      end
       @bureau = bureau
       @group = group.is_a?(Hash) ? ItuGroup.new(group) : group
       @subgroup = subgroup.is_a?(Hash) ? ItuGroup.new(subgroup) : subgroup
@@ -28,7 +29,7 @@ module RelatonItu
     def to_xml(builder)
       builder.editorialgroup do
         builder.bureau bureau
-        builder.group { |b| group.to_xml b }
+        builder.group { |b| group.to_xml b } if group
         builder.subgroup { |b| group.to_xml b } if subgroup
         builder.workgroup { |b| group.to_xml b } if workgroup
       end
@@ -36,7 +37,8 @@ module RelatonItu
 
     # @return [Hash]
     def to_hash
-      hash = { "bureau" => bureau, "group" => group.to_hash }
+      hash = { "bureau" => bureau }
+      hash["group"] = group.to_hash if group
       hash["subgroup"] = subgroup.to_hash if subgroup
       hash["workgroup"] = workgroup.to_hash if workgroup
       hash

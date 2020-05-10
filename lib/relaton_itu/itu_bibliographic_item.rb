@@ -7,12 +7,12 @@ module RelatonItu
       joint-itu-iso-iec
     ].freeze
 
+    # @params structuredidentifier [RelatonItu::StructuredIdentifier]
     def initialize(**args)
       @doctype = args.delete :doctype
       if doctype && !TYPES.include?(doctype)
-        raise ArgumentError, "invalid doctype: #{doctype}"
+        warn "[relaton-itu] WARNING: invalid doctype: #{doctype}"
       end
-
       super
     end
   end

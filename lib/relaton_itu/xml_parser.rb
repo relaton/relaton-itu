@@ -3,20 +3,13 @@ require "nokogiri"
 module RelatonItu
   class XMLParser < RelatonIsoBib::XMLParser
     class << self
-      # Override RelatonIsoBib::XMLParser.form_xml method.
-      # @param xml [String]
-      # @return [RelatonItu::ItuBibliographicItem]
-      def from_xml(xml)
-        doc = Nokogiri::XML(xml)
-        ituitem = doc.at "/bibitem|/bibdata"
-        if ituitem
-          ItuBibliographicItem.new item_data(ituitem)
-        elsif
-          warn "[relaton-itu] can't find bibitem or bibdata element in the XML"
-        end
-      end
-
       private
+
+      # @param item_hash [Hash]
+      # @return [RelatonItu::ItuBibliographicItem]
+      def bib_item(item_hash)
+        ItuBibliographicItem.new item_hash
+      end
 
       # @param ext [Nokogiri::XML::Element]
       # @return [RelatonItu::EditorialGroup]
@@ -53,6 +46,18 @@ module RelatonItu
         ItuGroup::Period.new(
           start: period.at("start").text, finish: period.at("end")&.text,
         )
+      end
+
+      # @param ext [Nokogiri::XML::Element]
+      # @return [RelatonItu::StructuredIdentifier]
+      def fetch_structuredidentifier(ext)
+        sid = ext.at "./structuredidentifier"
+        return unless sid
+
+        br = sid.at("bureau").text
+        dn = sid.at("docnumber").text
+        an = sid.at("annexid")&.text
+        StructuredIdentifier.new(bureau: br, docnumber: dn, annexid: an)
       end
     end
   end
