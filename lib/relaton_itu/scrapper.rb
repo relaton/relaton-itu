@@ -284,7 +284,7 @@ module RelatonItu
       # Fetch copyright.
       # @param code [String]
       # @param doc [Nokogiri::HTML::Document]
-      # @return [Hash]
+      # @return [Array<Hash>]
       def fetch_copyright(code, doc)
         abbreviation = code.match(/^[^-]+/).to_s
         case abbreviation
@@ -294,7 +294,8 @@ module RelatonItu
         end
         fdate = doc.at("//table/tr/td/span[contains(@id, 'Label5')]")
         from = fdate&.text || ob_date(doc)
-        { owner: { name: name, abbreviation: abbreviation, url: url }, from: from }
+        [{ owner: [{ name: name, abbreviation: abbreviation, url: url }],
+           from: from }]
       end
     end
   end
