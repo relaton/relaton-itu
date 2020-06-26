@@ -1,5 +1,5 @@
 module RelatonItu
-  class HashConverter < RelatonIsoBib::HashConverter
+  class HashConverter < RelatonBib::HashConverter
     class << self
       private
 

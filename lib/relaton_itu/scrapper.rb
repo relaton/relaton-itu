@@ -43,6 +43,7 @@ module RelatonItu
 
         ItuBibliographicItem.new(
           fetched: Date.today.to_s,
+          type: "standard",
           docid: fetch_docid(doc),
           edition: edition,
           language: ["en"],
@@ -170,7 +171,7 @@ module RelatonItu
         doc.xpath('//div[contains(@id, "tab_sup")]//table/tr[position()>2]').map do |r|
           ref = r.at('./td/span[contains(@id, "title_e")]/nobr/a')
           fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en", script: "Latn")
-          bibitem = RelatonIsoBib::IsoBibliographicItem.new(formattedref: fref)
+          bibitem = ItuBibliographicItem.new(formattedref: fref, type: "standard")
           { type: "complements", bibitem: bibitem }
         end
       end
@@ -183,30 +184,7 @@ module RelatonItu
         t = doc.at("//td[@class='title']|//div/table[1]/tr[4]/td/strong")
         return [] unless t
 
-        titles = t.text.sub(/\w\.Imp\s?\d+\u00A0:\u00A0/, "").split " - "
-        case titles.size
-        when 0
-          intro, main, part = nil, "", nil
-        when 1
-          intro, main, part = nil, titles[0], nil
-        when 2
-          if /^(Part|Partie) \d+:/ =~ titles[1]
-            intro, main, part = nil, titles[0], titles[1]
-          else
-            intro, main, part = titles[0], titles[1], nil
-          end
-        when 3
-          intro, main, part = titles[0], titles[1], titles[2]
-        else
-          intro, main, part = titles[0], titles[1], titles[2..-1]&.join(" -- ")
-        end
-        [{
-          title_intro: intro,
-          title_main: main,
-          title_part: part,
-          language: "en",
-          script: "Latn",
-        }]
+        RelatonBib::TypedTitleString.from_string t.text, "en", "Latn"
       end
 
       # Fetch dates

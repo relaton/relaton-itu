@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "relaton_iso_bib"
+require "relaton_bib"
 require "relaton_itu/itu_bibliographic_item"
 require "relaton_itu/editorial_group"
 require "relaton_itu/structured_identifier"

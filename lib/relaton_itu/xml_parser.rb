@@ -1,7 +1,7 @@
 require "nokogiri"
 
 module RelatonItu
-  class XMLParser < RelatonIsoBib::XMLParser
+  class XMLParser < RelatonBib::XMLParser
     class << self
       private
 

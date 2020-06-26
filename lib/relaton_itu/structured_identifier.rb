@@ -33,5 +33,9 @@ module RelatonItu
       hash[:annexid] = annexid if annexid
       hash
     end
+
+    def presence?
+      true
+    end
   end
 end
