@@ -15,7 +15,7 @@ module RelatonItu
         return unless ret[:structuredidentifier]
 
         ret[:structuredidentifier] = StructuredIdentifier.new(
-          ret[:structuredidentifier],
+          ret[:structuredidentifier]
         )
       end
     end

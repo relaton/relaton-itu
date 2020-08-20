@@ -34,6 +34,16 @@ module RelatonItu
       hash
     end
 
+    # @param prefix [String]
+    # @return [String]
+    def to_asciibib(prefix)
+      pref = prefix.empty? ? prefix : prefix + "."
+      pref += "structuredidentifier"
+      out = "#{pref}.bureau:: #{bureau}\n#{pref}.docnumber:: #{docnumber}\n"
+      out += "#{pref}.annexid:: #{annexid}\n" if annexid
+      out
+    end
+
     def presence?
       true
     end

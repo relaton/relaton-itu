@@ -16,8 +16,10 @@ RSpec.describe RelatonItu do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
       expect(results).to include %(<bibitem id="ITU-TL.163" type="standard">)
       expect(results).to include %(<on>2018</on>)
-      expect(results.gsub(/<relation.*<\/relation>/m, "")).not_to include %(<on>2018</on>)
-      expect(results).to include %(<docidentifier type="ITU">ITU-T L.163</docidentifier>)
+      expect(results.gsub(/<relation.*<\/relation>/m, ""))
+        .not_to include %(<on>2018</on>)
+      expect(results)
+        .to include %(<docidentifier type="ITU">ITU-T L.163</docidentifier>)
     end
   end
 
@@ -84,16 +86,16 @@ RSpec.describe RelatonItu do
       xml = result.to_xml
       file = "spec/examples/itu_g_imp_712.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
-      expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8").
-        gsub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
+      expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
+        .gsub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
     end
   end
 
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
-      expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }.
-        to output(%r{WARNING: no match found online for ITU-T L.163:1018.}).
-        to_stderr
+      expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }
+        .to output(%r{WARNING: no match found online for ITU-T L.163:1018.})
+        .to_stderr
     end
   end
 
@@ -139,7 +141,8 @@ RSpec.describe RelatonItu do
     expect(Net::HTTP).to receive(:post).with(
       kind_of(URI), kind_of(String), kind_of(Hash)
     ).and_raise SocketError
-    expect { RelatonItu::ItuBibliography.search "ITU-T L.163" }.
-      to raise_error RelatonBib::RequestError
+    expect do
+      RelatonItu::ItuBibliography.search "ITU-T L.163"
+    end.to raise_error RelatonBib::RequestError
   end
 end

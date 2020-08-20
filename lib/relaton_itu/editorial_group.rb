@@ -26,7 +26,7 @@ module RelatonItu
     end
 
     # @param builder [Nokogiri::XML::Builder]
-    def to_xml(builder)
+    def to_xml(builder) # rubocop:disable Metrics/AbcSize
       builder.editorialgroup do
         builder.bureau bureau
         builder.group { |b| group.to_xml b } if group
@@ -42,6 +42,18 @@ module RelatonItu
       hash["subgroup"] = subgroup.to_hash if subgroup
       hash["workgroup"] = workgroup.to_hash if workgroup
       hash
+    end
+
+    # @param prefix [String]
+    # @return [String]
+    def to_asciibib(prefix) # rubocop:disable Metrics/AbcSize
+      pref = prefix.empty? ? prefix : prefix + "."
+      pref += "editorialgroup"
+      out = "#{pref}.bureau:: #{bureau}\n"
+      out += group.to_asciibib "#{pref}.group" if group
+      out += subgroup.to_asciibib "#{pref}.subgroup" if subgroup
+      out += workgroup.to_asciibib "#{pref}.workgroup" if workgroup
+      out
     end
   end
 end

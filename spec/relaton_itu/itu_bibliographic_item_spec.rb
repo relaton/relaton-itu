@@ -12,4 +12,15 @@ RSpec.describe RelatonItu::ItuBibliographicItem do
     item_hash = item.to_hash
     expect(item_hash["editorialgroup"]).to eq hash["editorialgroup"]
   end
+
+  it "returns AsciiBib" do
+    hash = YAML.load_file "spec/examples/itu_bib_item.yml"
+    item_hash = RelatonItu::HashConverter.hash_to_bib hash
+    item = RelatonItu::ItuBibliographicItem.new item_hash
+    bib = item.to_asciibib
+    file = "spec/examples/asciibib.adoc"
+    File.write file, bib, encoding: "UTF-8" unless File.exist? file
+    expect(bib).to eq File.read(file, encoding: "UTF-8")
+      .gsub(/(?<=fetched::\s)\d{4}-\d{2}-\d{3}/, Date.today.to_s)
+  end
 end

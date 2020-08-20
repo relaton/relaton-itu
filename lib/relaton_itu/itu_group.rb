@@ -28,6 +28,16 @@ module RelatonItu
         hash["finish"] = finish if finish
         hash
       end
+
+      # @param prefix [String]
+      # @return [String]
+      def to_asciibib(prefix)
+        pref = prefix.empty? ? prefix : prefix + "."
+        pref += "period"
+        out = "#{pref}.start:: #{start}\n"
+        out += "#{pref}.finish:: #{finish}\n" if finish
+        out
+      end
     end
 
     TYPES = %w[tsag study-group work-group].freeze
@@ -71,6 +81,17 @@ module RelatonItu
       hash["acronym"] = acronym if acronym
       hash["period"] = period.to_hash if period
       hash
+    end
+
+    # @param prefix [String]
+    # @return [String]
+    def to_asciibib(prefix)
+      pref = prefix.empty? ? prefix : prefix + "."
+      out = "#{pref}name:: #{name}\n"
+      out += "#{pref}type:: #{type}\n" if type
+      out += "#{pref}acronym:: #{acronym}\n" if acronym
+      out += period.to_asciibib prefix if period
+      out
     end
   end
 end

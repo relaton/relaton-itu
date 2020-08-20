@@ -67,14 +67,6 @@ module RelatonItu
         nil
       end
 
-      # def fetch_pages(hits, threads)
-      #   workers = RelatonBib::WorkersPool.new threads
-      #   workers.worker { |w| { i: w[:i], hit: w[:hit].fetch } }
-      #   hits.each_with_index { |hit, i| workers << { i: i, hit: hit } }
-      #   workers.end
-      #   workers.result.sort_by { |a| a[:i] }.map { |x| x[:hit] }
-      # end
-
       def search_filter(code)
         docidrx = %r{\w+\.\d+|\w\sSuppl\.\s\d+} # %r{^ITU-T\s[^\s]+}
         c = code.sub(/Imp\s?/, "").match(docidrx).to_s
