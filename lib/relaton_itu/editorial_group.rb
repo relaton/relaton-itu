@@ -25,6 +25,11 @@ module RelatonItu
       @workgroup = workgroup.is_a?(Hash) ? ItuGroup.new(workgroup) : workgroup
     end
 
+    # @return [true]
+    def presence?
+      true
+    end
+
     # @param builder [Nokogiri::XML::Builder]
     def to_xml(builder) # rubocop:disable Metrics/AbcSize
       builder.editorialgroup do
