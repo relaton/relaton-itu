@@ -33,22 +33,13 @@ Or install it yourself as:
 
 [source,ruby]
 ----
-require 'relaton_bib'
+require 'relaton_itu'
 
 hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
-=> [<RelatonItu::Hit:0x007fe50780a270 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T L.163 (11/2018)">,
- <RelatonItu::Hit:0x007fe50780a220 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T J.163 (12/2007)">,
- <RelatonItu::Hit:0x007fe50780a1d0 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T F.163 (08/1992)">,
- <RelatonItu::Hit:0x007fe50780a180 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T J.163 (11/2005)">,
- <RelatonItu::Hit:0x007fe50780a130 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T J.163 (03/2004)">,
- <RelatonItu::Hit:0x007fe50780a0e0 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T Q.163 (11/1988)">,
- <RelatonItu::Hit:0x007fe50780a090 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T J.163 (03/2001)">,
- <RelatonItu::Hit:0x007fe50780a040 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T F.163 (07/1996)">,
- <RelatonItu::Hit:0x007fe507809ff0 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T X.163 (04/1995)">,
- <RelatonItu::Hit:0x007fe507809fa0 @text="ITU-T L.163" @fetched="false" @fullIdentifier="" @title="ITU-T O.163 (11/1988)">]
+=> <RelatonItu::HitCollection:0x007fbf5fb4ab60 @ref=ITU-T L.163 @fetched=false>
 
  item = hit_collection[1].fetch
- => #<RelatonItu::ItuBibliographicItem:0x007fe5024f3028
+=> #<RelatonItu::ItuBibliographicItem:0x007fbf1fc89548
  ...
 ----
 
@@ -56,73 +47,21 @@ hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
 [source,ruby]
 ----
 item.to_xml
-=> "<bibitem id="ITU-TJ.163(12/2007)">
+=> "<bibitem id="ITU-TL.1470" type="standard">
   <fetched>2019-06-07</fetched>
   <title type="title-main" format="text/plain" language="en" script="Latn">ITU-T J.163 (12/2007): Dynamic quality of service for the provision of real-time services over cable television networks using cable modems</title>
   <title type="main" format="text/plain" language="en" script="Latn">ITU-T J.163 (12/2007): Dynamic quality of service for the provision of real-time services over cable television networks using cable modems</title>
   <uri type="src">https://www.itu.int/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F9306-en&amp;position=9&amp;page=1</uri>
   <uri type="obp">https://www.itu.int/rec/T-REC-J.163-200712-I</uri>
   <docidentifier type="ITU">ITU-T J.163 (12/2007)</docidentifier>
-  <date type="published">
-    <on>2007</on>
-  </date>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>International Telecommunication Union</name>
-      <abbreviation>ITU</abbreviation>
-      <uri>www.itu.int</uri>
-    </organization>
-  </contributor>
-  <edition>4</edition>
-  <language>en</language>
-  <script>Latn</script>
-  <abstract format="text/plain" language="en" script="Latn">ITU-T Recommendation J.163 addresses requirements for a client device to obtain access to network resources. In particular, it specifies a comprehensive mechanism for a client device to request a specific quality of service from the DOCSIS network. Extensive examples illustrate the use of this Recommendation. The scope of this Recommendation is to define the QoS architecture for the "Access" portion of the IPCablecom network, provided to requesting applications on a per-flow basis. The access portion of the network is defined to be between the multimedia terminal adapter (MTA) and the cable modem termination system (CMTS), including the DOCSIS network. The method of QoS allocation over the backbone is unspecified in this Recommendation. Interface to the managed IP backbone and issues related to IP multicast are not within the scope of this Recommendation. This Recommendation also recognizes that per-flow reservations may be required within the customer premises, and the protocol developed addresses this potential need.</abstract>
-  <status>
-    <stage>Published</stage>
-  </status>
-  <copyright>
-    <from>2007</from>
-    <owner>
-      <organization>
-        <name>International Telecommunication Union</name>
-        <abbreviation>ITU</abbreviation>
-        <uri>www.itu.int</uri>
-      </organization>
-    </owner>
-  </copyright>
-  <relation type="published">
-    <bibitem id="JSuppl.1(11/1998)">
-      <formattedref format="text/plain" language="en" script="Latn">J Suppl. 1 (11/1998)</formattedref>
-    </bibitem>
-  </relation>
-  <relation type="published">
-    <bibitem id="JSuppl.2(11/1998)">
-      <formattedref format="text/plain" language="en" script="Latn">J Suppl. 2 (11/1998)</formattedref>
-    </bibitem>
-  </relation>
-  <relation type="published">
-    <bibitem id="JSuppl.3(11/1998)">
-      <formattedref format="text/plain" language="en" script="Latn">J Suppl. 3 (11/1998)</formattedref>
-    </bibitem>
-  </relation>
-  <relation type="published">
-    <bibitem id="JSuppl.5(09/1999)">
-      <formattedref format="text/plain" language="en" script="Latn">J Suppl. 5 (09/1999)</formattedref>
-    </bibitem>
-  </relation>
-  <relation type="published">
-    <bibitem id="JSuppl.6(09/2016)">
-      <formattedref format="text/plain" language="en" script="Latn">J Suppl. 6 (09/2016)</formattedref>
-    </bibitem>
-  </relation>
+  ...
 </bibitem>"
 ----
 With `bibdata: true` option XML output wrapped with `bibdata` element and `ext` element added.
 [source,ruby]
 ----
 item.to_xml bibdata: true
-=> "<bibdata>
+=> "<bibdata type="standard">
   <fetched>2019-06-07</fetched>
   ...
   <ext>
@@ -142,8 +81,9 @@ item.to_xml bibdata: true
 [source,ruby]
 ----
 RelatonItu::ItuBibliography.get("ITU-T L.163", "2018", {})
-fetching ITU-T L.163...
-=> #<RelatonItu::ItuBibliographicItem:0x007fe502509dc8
+[relaton-itu] ("ITU-T L.163") fetching...
+[relaton-itu] ("ITU-T L.163") found ITU-T L.163
+=> #<RelatonItu::ItuBibliographicItem:0x007fbf5f94b9b8
 ...
 ----
 

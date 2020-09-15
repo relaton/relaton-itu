@@ -21,6 +21,6 @@ RSpec.describe RelatonItu::ItuBibliographicItem do
     file = "spec/examples/asciibib.adoc"
     File.write file, bib, encoding: "UTF-8" unless File.exist? file
     expect(bib).to eq File.read(file, encoding: "UTF-8")
-      .gsub(/(?<=fetched::\s)\d{4}-\d{2}-\d{3}/, Date.today.to_s)
+      .gsub(/(?<=fetched::\s)\d{4}-\d{2}-\d{2}/, Date.today.to_s)
   end
 end
