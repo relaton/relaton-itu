@@ -29,7 +29,7 @@ module RelatonItu
 
     # @return [String]
     def group
-      @group ||= if %r{(OB|Operational Bulletin) No} =~ text then "Publications"
+      @group ||= if %r{OB|Operational Bulletin}.match? text then "Publications"
                  else "Recommendations"
                  end
     end

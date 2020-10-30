@@ -1,5 +1,4 @@
 require "bundler/setup"
-require "vcr"
 require "webmock/rspec"
 require "simplecov"
 require "equivalent-xml"
@@ -10,10 +9,7 @@ end
 
 require "relaton_itu"
 
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/vcr_cassettes"
-  config.hook_into :webmock
-end
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
