@@ -15,9 +15,9 @@ RSpec.describe RelatonItu do
     VCR.use_cassette "code" do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
       expect(results).to include %(<bibitem id="ITU-TL.163" type="standard">)
-      expect(results).to include %(<on>2018</on>)
+      expect(results).to include %(<on>2018-11-29</on>)
       expect(results.gsub(/<relation.*<\/relation>/m, ""))
-        .not_to include %(<on>2018</on>)
+        .not_to include %(<on>2018-11-29</on>)
       expect(results)
         .to include %(<docidentifier type="ITU">ITU-T L.163</docidentifier>)
     end
@@ -43,7 +43,7 @@ RSpec.describe RelatonItu do
   it "gets a referece with an year in a code" do
     VCR.use_cassette "year_in_code" do
       result = RelatonItu::ItuBibliography.get("ITU-T L.163 (11/2018)").to_xml
-      expect(result).to include %(<on>2018</on>)
+      expect(result).to include %(<on>2018-11-29</on>)
     end
   end
 
