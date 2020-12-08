@@ -50,7 +50,7 @@ RSpec.describe RelatonItu do
   it "gets Operational Bulletin" do
     VCR.use_cassette "operational_bulletin" do
       result = RelatonItu::ItuBibliography.get "ITU OB.1096 - 15.III.2016"
-      expect(result).to be_instance_of RelatonItu::ItuBibliographicItem
+      expect(result.docidentifier[0].id).to eq "ITU-T OB.1096 - 15.III.2016"
     end
   end
 
@@ -61,6 +61,13 @@ RSpec.describe RelatonItu do
       expect(result.docidentifier[0].type).to eq "ITU"
       expect(result.docidentifier[1].id).to eq "ISO/IEC 17788"
       expect(result.docidentifier[1].type).to eq "ISO"
+    end
+  end
+
+  it "get amendment" do
+    VCR.use_cassette "itu_t_g_989_2_amd_1" do
+      bib = RelatonItu::ItuBibliography.get "ITU-T G.989.2/Amd 1"
+      expect(bib.docidentifier[0].id).to eq "ITU-T G.989.2/Amd 1"
     end
   end
 
@@ -83,7 +90,7 @@ RSpec.describe RelatonItu do
   it "fetch implementers guide" do
     VCR.use_cassette "itu_g_imp_712" do
       result = RelatonItu::ItuBibliography.get "ITU-T G.Imp712"
-      xml = result.to_xml
+     xml = result.to_xml
       file = "spec/examples/itu_g_imp_712.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")

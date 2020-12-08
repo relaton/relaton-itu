@@ -44,7 +44,7 @@ module RelatonItu
         ItuBibliographicItem.new(
           fetched: Date.today.to_s,
           type: "standard",
-          docid: fetch_docid(doc),
+          docid: fetch_docid(doc, hit_data[:title]),
           edition: edition,
           language: ["en"],
           script: ["Latn"],
@@ -105,18 +105,32 @@ module RelatonItu
 
       # Fetch docid.
       # @param doc [Nokogiri::HTML::Document]
+      # @param title [String]
       # @return [Hash]
-      def fetch_docid(doc)
-        doc.xpath(
+      def fetch_docid(doc, title)
+        docids = doc.xpath(
           "//span[@id='ctl00_content_main_uc_rec_main_info1_rpt_main_ctl00_lbl_rec']",
           "//td[.='Identical standard:']/following-sibling::td",
-          "//div/table[1]/tr[4]/td/strong",
-        ).map do |code|
-          id = code.text.match(%r{^.*?(?= \()|\w\.Imp\s?\d+}).to_s.squeeze(" ")
-          type = id.match(%r{^\w+}).to_s
-          type = "ITU" if type == "G"
-          RelatonBib::DocumentIdentifier.new(type: type, id: id)
-        end
+          "//div/table[1]/tr[4]/td/strong"
+        ).map { |c| createdocid c.text }
+        docids << createdocid(title) unless docids.any?
+        docids
+      end
+
+      def createdocid(text)
+        %r{
+          ^(?<code>((ITU-\w|ISO\/IEC)\s)?[^\(:]+)
+          (\(((?<month>\d{2})\/)?(?<year>\d{4})\))?
+          (:[^\(]+\((?<buldate>\d{2}\.\w{1,4}\.\d{4})\))?
+          (\s(?<corr>(Amd|Cor)\.\s?\d+))?
+          # (\s\(((?<cormonth>\d{2})\/)?(?<coryear>\d{4})\))?
+        }x =~ text.squeeze(" ")
+        corr&.sub! /\.\s?/, " "
+        id = [code.sub(/[[:space:]]$/, ""), corr].compact.join "/"
+        id += " - #{buldate}" if buldate
+        type = id.match(%r{^\w+}).to_s
+        type = "ITU" if type == "G"
+        RelatonBib::DocumentIdentifier.new(type: type, id: id)
       end
 
       # Fetch status.

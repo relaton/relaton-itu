@@ -87,6 +87,16 @@ RelatonItu::ItuBibliography.get("ITU-T L.163", "2018", {})
 ...
 ----
 
+=== Get amendment
+[source,ruby]
+----
+RelatonItu::ItuBibliography.get "ITU-T G.989.2/Amd 1"
+[relaton-itu] ("ITU-T G.989.2/Amd 1") fetching...
+[relaton-itu] ("ITU-T G.989.2/Amd 1") found ITU-T G.989.2/Amd 1
+=> #<RelatonItu::ItuBibliographicItem:0x007fe5409e5840
+...
+----
+
 === Create bibliographic item form YAML
 [source,ruby]
 ----

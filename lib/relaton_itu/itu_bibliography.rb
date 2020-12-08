@@ -67,14 +67,35 @@ module RelatonItu
         nil
       end
 
-      def search_filter(code)
-        docidrx = %r{\w+\.\d+|\w\sSuppl\.\s\d+} # %r{^ITU-T\s[^\s]+}
-        c = code.sub(/Imp\s?/, "").match(docidrx).to_s
+      def search_filter(code, year)
+        %r{
+          ^(?<pref1>ITU)?(-(?<type1>\w))?\s?(?<code1>[^\s\/]+)
+          (\s\(((?<month1>\d{2})\/)?(?<year1>\d{4})\))?
+          (\s-\s(?<buldate1>\d{2}\.\w{1,4}\.\d{4}))?
+          (\/(?<corr1>(Amd|Cor)\s?\d+))?
+          (\s\(((?<cormonth1>\d{2})\/)?(?<coryear1>\d{4})\))?
+        }x =~ code
+        year ||= year1
+        # docidrx = %r{\w+\.\d+|\w\sSuppl\.\s\d+} # %r{^ITU-T\s[^\s]+}
+        # c = code.sub(/Imp\s?/, "").match(docidrx).to_s
         warn "[relaton-itu] (\"#{code}\") fetching..."
         result = search(code)
+        code1.sub! /(?<=\.)Imp(?=\d)/, "" if result.gi_imp
         result.select do |i|
-          i.hit[:code] &&
-            i.hit[:code].match(docidrx).to_s == c
+          %r{
+            ^(?<pref2>ITU)?(-(?<type2>\w))?\s?(?<code2>[\S]+)
+            (\s\(((?<month2>\d{2})\/)?(?<year2>\d{4})\))?
+            (\s(?<corr2>(Amd|Cor)\.\s?\d+))?
+            (\s\(((?<cormonth2>\d{2})\/)?(?<coryear2>\d{4})\))?
+          }x =~ i.hit[:code]
+          /:[^\(]+\((?<buldate2>\d{2}\.\w{1,4}\.\d{4})\)/ =~ i.hit[:title]
+          corr2&.sub! /\.\s?/, " "
+          pref1 == pref2 && (!type1 || type1 == type2) && code1 == code2 &&
+            (!year || year == year2) && (!month1 || month1 == month2) &&
+            corr1 == corr2 && (!coryear1 || coryear1 == coryear2) &&
+            buldate1 == buldate2 && (!cormonth1 || cormonth1 == cormonth2)
+          # i.hit[:code] &&
+          #   i.hit[:code].match(docidrx).to_s == c
         end
       end
 
@@ -86,24 +107,19 @@ module RelatonItu
       # If no match, returns any years which caused mismatch, for error reporting
       def isobib_results_filter(result, year)
         missed_years = []
-        # result.each_slice(3) do |s| # ISO website only allows 3 connections
-        #   fetch_pages(s, 3).each do |r|
         result.each do |r|
           return { ret: r.fetch } if !year
 
           /\(\d{2}\/(?<pyear>\d{4})\)/ =~ r.hit[:code]
-          # r.date.select { |d| d.type == "published" }.each do |d|
           return { ret: r.fetch } if year == pyear
 
           missed_years << pyear
-          # end
-          # end
         end
         { years: missed_years }
       end
 
       def itubib_get1(code, year, _opts)
-        result = search_filter(code) || return
+        result = search_filter(code, year) || return
         ret = isobib_results_filter(result, year)
         if ret[:ret]
           warn "[relaton-itu] (\"#{code}\") found #{ret[:ret].docidentifier.first&.id}"
