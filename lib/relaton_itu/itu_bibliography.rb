@@ -30,7 +30,7 @@ module RelatonItu
       # @param year [String] the year the standard was published (optional)
       # @param opts [Hash] options; restricted to :all_parts if all-parts reference is required
       # @return [String] Relaton XML serialisation of reference
-      def get(code, year = nil, opts = {})
+      def get(code, year = nil, opts = {}) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         if year.nil?
           /^(?<code1>[^\s]+\s[^\s]+)\s\(\d{2}\/(?<year1>\d+)\)$/ =~ code
           unless code1.nil?
@@ -50,7 +50,7 @@ module RelatonItu
 
       private
 
-      def fetch_ref_err(code, year, missed_years)
+      def fetch_ref_err(code, year, missed_years) # rubocop:disable Metrics/MethodLength
         id = year ? "#{code}:#{year}" : code
         warn "[relaton-itu] WARNING: no match found online for #{id}. "\
           "The code must be exactly like it is on the standards website."
@@ -67,7 +67,7 @@ module RelatonItu
         nil
       end
 
-      def search_filter(code, year)
+      def search_filter(code, year) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         %r{
           ^(?<pref1>ITU)?(-(?<type1>\w))?\s?(?<code1>[^\s\/]+)
           (\s\(((?<month1>\d{2})\/)?(?<year1>\d{4})\))?

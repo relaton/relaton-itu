@@ -59,7 +59,7 @@ module RelatonItu
           copyright: fetch_copyright(hit_data[:code], doc),
           link: fetch_link(doc, url),
           relation: fetch_relations(doc),
-          place: ["Geneva"],
+          place: ["Geneva"]
         )
       end
       # rubocop:enable Metrics/AbcSize
@@ -92,7 +92,7 @@ module RelatonItu
         uri = URI url
         resp = Net::HTTP.get_response(uri)
         until resp.code == "200"
-          uri = URI resp["location"] if resp.code =~ /^30/
+          uri = URI resp["location"] if resp.code.match? /^30/
           resp = Net::HTTP.get_response(uri)
         end
         [uri.to_s, Nokogiri::HTML(resp.body)]
@@ -156,13 +156,13 @@ module RelatonItu
         group = wg && itugroup(wg.text)
         EditorialGroup.new(
           bureau: code.match(/(?<=-)./).to_s,
-          group: group,
+          group: group
         )
       end
 
       # @param name [String]
       # @return [RelatonItu::ItuGroup]
-      def itugroup(name)
+      def itugroup(name) # rubocop:disable Metrics/MethodLength
         if name.include? "Study Group"
           type = "study-group"
           acronym = "SG"
@@ -204,7 +204,7 @@ module RelatonItu
       # Fetch dates
       # @param doc [Nokogiri::HTML::Document]
       # @return [Array<Hash>]
-      def fetch_dates(doc)
+      def fetch_dates(doc) # rubocop:disable Metrics/CyclomaticComplexity
         dates = []
         date = doc.at("//table/tr/td/span[contains(@id, 'Label5')]",
                       "//p[contains(.,'Approved in')]")
@@ -258,7 +258,7 @@ module RelatonItu
         links = [{ type: "src", content: url }]
         obp_elm = doc.at(
           '//a[@title="Persistent link to download the PDF file"]',
-          "//font[contains(.,'PDF')]/../..",
+          "//font[contains(.,'PDF')]/../.."
         )
         links << typed_link("obp", obp_elm) if obp_elm
         wrd_elm = doc.at("//font[contains(.,'Word')]/../..")

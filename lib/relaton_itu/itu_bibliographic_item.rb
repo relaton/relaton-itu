@@ -4,7 +4,7 @@ module RelatonItu
       recommendation recommendation-supplement recommendation-amendment
       recommendation-corrigendum recommendation-errata recommendation-annex
       focus-group implementers-guide technical-paper technical-report
-      joint-itu-iso-iec
+      joint-itu-iso-iec resolution service-publication handbook question
     ].freeze
 
     # @params structuredidentifier [RelatonItu::StructuredIdentifier]

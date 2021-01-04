@@ -90,7 +90,7 @@ RSpec.describe RelatonItu do
   it "fetch implementers guide" do
     VCR.use_cassette "itu_g_imp_712" do
       result = RelatonItu::ItuBibliography.get "ITU-T G.Imp712"
-     xml = result.to_xml
+      xml = result.to_xml
       file = "spec/examples/itu_g_imp_712.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
@@ -143,6 +143,12 @@ RSpec.describe RelatonItu do
       expect(errors).to eq []
     end
   end
+
+  # context "fetch ITU-R" do
+  #   it "reccomendation" do
+  #     VCR.use_cassette ""
+  #   end
+  # end
 
   it "could not access site" do
     expect(Net::HTTP).to receive(:post).with(
