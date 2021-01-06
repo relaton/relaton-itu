@@ -3,6 +3,8 @@
 module RelatonItu
   # Hit.
   class Hit < RelatonBib::Hit
+    attr_writer :fetch
+
     # Parse page.
     # @return [RelatonItu::ItuBibliographicItem]
     def fetch

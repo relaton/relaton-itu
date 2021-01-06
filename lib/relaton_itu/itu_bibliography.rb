@@ -82,6 +82,8 @@ module RelatonItu
         result = search(code)
         code1.sub! /(?<=\.)Imp(?=\d)/, "" if result.gi_imp
         result.select do |i|
+          next true unless i.hit[:code]
+
           %r{
             ^(?<pref2>ITU)?(-(?<type2>\w))?\s?(?<code2>[\S]+)
             (\s\(((?<month2>\d{2})\/)?(?<year2>\d{4})\))?
@@ -94,8 +96,6 @@ module RelatonItu
             (!year || year == year2) && (!month1 || month1 == month2) &&
             corr1 == corr2 && (!coryear1 || coryear1 == coryear2) &&
             buldate1 == buldate2 && (!cormonth1 || cormonth1 == cormonth2)
-          # i.hit[:code] &&
-          #   i.hit[:code].match(docidrx).to_s == c
         end
       end
 

@@ -18,11 +18,22 @@ module RelatonItu
       text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
       super text, year
       @gi_imp = /\.Imp\d/.match?(ref)
-      uri = URI "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
-      data = { json: params.to_json }
-      resp = Net::HTTP.post(uri, data.to_json,
-                            "Content-Type" => "application/json")
-      @array = hits JSON.parse(resp.body)
+      if ref.match? /^ITU-T/
+        uri = URI "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
+        data = { json: params.to_json }
+        resp = Net::HTTP.post(uri, data.to_json,
+                              "Content-Type" => "application/json")
+        @array = hits JSON.parse(resp.body)
+      elsif ref.match? /^ITU-R/
+        rf = ref.sub(/^ITU-R\s/, "").upcase
+        url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
+        hash = YAML.safe_load Net::HTTP.get(URI(url))
+        item_hash = HashConverter.hash_to_bib(hash)
+        item = ItuBibliographicItem.new **item_hash
+        hit = Hit.new({ url: url }, self)
+        hit.fetch = item
+        @array = [hit]
+      end
     end
 
     private

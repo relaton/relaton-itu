@@ -97,6 +97,17 @@ RelatonItu::ItuBibliography.get "ITU-T G.989.2/Amd 1"
 ...
 ----
 
+=== Get ITU-R documents
+
+[source,ruby]
+----
+RelatonItu::ItuBibliography.get "ITU-R REC-BO.600-1"
+[relaton-itu] ("ITU-R REC-BO.600-1") fetching...
+[relaton-itu] ("ITU-R REC-BO.600-1") found R-REC-BO.600-1
+=> #<RelatonItu::ItuBibliographicItem:0x007f84e9930498
+...
+----
+
 === Create bibliographic item form YAML
 [source,ruby]
 ----

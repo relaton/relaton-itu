@@ -1,0 +1,100 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/REC-BO.600-1.yaml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - raw.githubusercontent.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '554'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Cache-Control:
+      - max-age=300
+      Content-Security-Policy:
+      - default-src 'none'; style-src 'unsafe-inline'; sandbox
+      Etag:
+      - W/"6021ee53e40403e9d8b12ff01bd409b55094a96bc57749958212a38424066709"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      Via:
+      - 1.1 varnish (Varnish/6.0), 1.1 varnish
+      X-Github-Request-Id:
+      - 6870:62D1:8491B80:8B2C152:5FF5D3C4
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 06 Jan 2021 15:14:12 GMT
+      X-Served-By:
+      - cache-hhn4031-HHN
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1609946053.801992,VS0,VE173
+      Vary:
+      - Authorization,Accept-Encoding, Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fastly-Request-Id:
+      - 818504b4ac8c107da57a2f75a436f2eb126890e4
+      Expires:
+      - Wed, 06 Jan 2021 15:19:12 GMT
+      Source-Age:
+      - '0'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        ---
+        id: R-REC-BO.600-1
+        title:
+          type: main
+          content: Standardized set of test conditions and measurement procedures for the
+            subjective and objective determination of protection ratios for television in
+            the terrestrial broadcasting and the broadcasting-satellite services
+          language: en
+          script: Latn
+          format: text/plain
+        link:
+          content: https://extranet.itu.int/brdocsearch/R-REC/Forms/ITU%20Recommendation%20Folder/docsethomepage.aspx?ID=46&FolderCTID=0x0120D52000F22870A5AFA1054181BAD87677D647C400051FC5857030E848B2F8C42DB4271329&List=0661b581-2413-4e84-bab2-77e6db27af7f&RootFolder=%2Fbrdocsearch%2FR%2DREC%2FR%2DREC%2DBO%2FR%2DREC%2DBO%2E600%2FR%2DREC%2DBO%2E600%2D1%2D198607%2DI&RecSrc=%2Fbrdocsearch%2FR%2DREC%2FR%2DREC%2DBO%2FR%2DREC%2DBO%2E600%2FR%2DREC%2DBO%2E600%2D1%2D198607%2DI
+          type: src
+        type: standard
+        docid:
+          id: R-REC-BO.600-1
+          type: ITU
+        date:
+        - type: confirmed
+          value: '1986'
+        - type: published
+          value: 1986-07
+        revdate: 1986-07
+        language: en
+        script: Latn
+        doctype: recommendation
+    http_version:
+  recorded_at: Wed, 06 Jan 2021 15:14:12 GMT
+recorded_with: VCR 5.0.0

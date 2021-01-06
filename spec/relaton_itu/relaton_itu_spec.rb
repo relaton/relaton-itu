@@ -25,7 +25,7 @@ RSpec.describe RelatonItu do
 
   it "encode abstract text" do
     VCR.use_cassette "itu_t_h_264" do
-      file = "spec/examples/itu_t_a_13.xml"
+      file = "spec/examples/itu_t_h_264.xml"
       result = RelatonItu::ItuBibliography.get("ITU-T H.264").to_xml
       File.write file, result, encoding: "UTF-8" unless File.exist? file
       expect(result).to be_equivalent_to File.read(file, encoding: "UTF-8")
@@ -49,7 +49,7 @@ RSpec.describe RelatonItu do
 
   it "gets Operational Bulletin" do
     VCR.use_cassette "operational_bulletin" do
-      result = RelatonItu::ItuBibliography.get "ITU OB.1096 - 15.III.2016"
+      result = RelatonItu::ItuBibliography.get "ITU-T OB.1096 - 15.III.2016"
       expect(result.docidentifier[0].id).to eq "ITU-T OB.1096 - 15.III.2016"
     end
   end
@@ -144,11 +144,19 @@ RSpec.describe RelatonItu do
     end
   end
 
-  # context "fetch ITU-R" do
-  #   it "reccomendation" do
-  #     VCR.use_cassette ""
-  #   end
-  # end
+  context "fetch ITU-R" do
+    it "reccomendation" do
+      VCR.use_cassette "itu_r_rec_bo_600_1" do
+        bib = RelatonItu::ItuBibliography.get "ITU-R REC-BO.600-1"
+        file = "spec/examples/itu_r_rec_bo_600_1.xml"
+        xml = bib.to_xml bibdata: true
+        File.write file, xml, encoding: "UTF-8" unless File.exist? file
+        expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8").sub(
+          /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
+        )
+      end
+    end
+  end
 
   it "could not access site" do
     expect(Net::HTTP).to receive(:post).with(
