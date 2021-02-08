@@ -151,9 +151,23 @@ RSpec.describe RelatonItu do
         file = "spec/examples/itu_r_rec_bo_600_1.xml"
         xml = bib.to_xml bibdata: true
         File.write file, xml, encoding: "UTF-8" unless File.exist? file
-        expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8").sub(
+        expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8").gsub(
           /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
         )
+      end
+    end
+
+    it "radio regulation" do
+      VCR.use_cassette "itu_r_rr_2020" do
+        bib = RelatonItu::ItuBibliography.get "ITU-R RR (2020)"
+        expect(bib.docidentifier[0].id).to eq "ITU-R RR"
+        expect(bib.date[0].on).to eq "2020"
+      end
+    end
+
+    it "not exosted radio regulation" do
+      VCR.use_cassette "itu_r_rr_2012" do
+        expect(RelatonItu::ItuBibliography.get("ITU-R RR (2012)")).to be_nil
       end
     end
   end

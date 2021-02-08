@@ -32,7 +32,7 @@ module RelatonItu
       # @return [String] Relaton XML serialisation of reference
       def get(code, year = nil, opts = {}) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         if year.nil?
-          /^(?<code1>[^\s]+\s[^\s]+)\s\(\d{2}\/(?<year1>\d+)\)$/ =~ code
+          /^(?<code1>[^\s]+\s[^\s]+)\s\((\d{2}\/)?(?<year1>\d+)\)$/ =~ code
           unless code1.nil?
             code = code1
             year = year1
@@ -54,9 +54,11 @@ module RelatonItu
         id = year ? "#{code}:#{year}" : code
         warn "[relaton-itu] WARNING: no match found online for #{id}. "\
           "The code must be exactly like it is on the standards website."
-        warn "[relaton-itu] (There was no match for #{year}, though there were matches "\
-          "found for #{missed_years.join(', ')}.)" unless missed_years.empty?
-        if /\d-\d/ =~ code
+        unless missed_years.empty?
+          warn "[relaton-itu] (There was no match for #{year}, though there were matches "\
+            "found for #{missed_years.join(', ')}.)"
+        end
+        if /\d-\d/.match? code
           warn "[relaton-itu] The provided document part may not exist, or the document "\
             "may no longer be published in parts."
         else
@@ -108,10 +110,10 @@ module RelatonItu
       def isobib_results_filter(result, year)
         missed_years = []
         result.each do |r|
-          return { ret: r.fetch } if !year
-
-          /\(\d{2}\/(?<pyear>\d{4})\)/ =~ r.hit[:code]
-          return { ret: r.fetch } if year == pyear
+          if !year || /\((\d{2}\/)?(?<pyear>\d{4})\)/ =~ r.hit[:code]
+            ret = r.fetch
+            return { ret: ret } if ret
+          end
 
           missed_years << pyear
         end

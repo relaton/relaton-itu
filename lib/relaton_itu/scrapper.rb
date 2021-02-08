@@ -31,6 +31,8 @@ module RelatonItu
       # @return [Hash]
       def parse_page(hit_data, imp = false)
         url, doc = get_page hit_data[:url]
+        return unless doc
+
         if imp
           a = doc.at "//span[contains(@id, 'tab_ig_uc_rec')]/a"
           return unless a
@@ -69,17 +71,19 @@ module RelatonItu
       # Fetch abstracts.
       # @param doc [Nokigiri::HTML::Document]
       # @return [Array<Array>]
-      def fetch_abstract(doc)
+      def fetch_abstract(doc) # rubocop:disable Metrics/AbcSize
         abstract_url = doc.at('//table/tr/td/span[contains(@id, "lbl_dms")]/div')
-        return [] unless abstract_url
-
-        url = abstract_url[:onclick].match(/https?[^']+/).to_s
-        d = Nokogiri::HTML Net::HTTP.get(URI(url)).encode(undef: :replace, replace: "")
-        abstract_content = d.css("p.MsoNormal").text.gsub(/\r\n/, "")
-          .squeeze(" ").gsub(/\u00a0/, "")
+        content = if abstract_url
+                    url = abstract_url[:onclick].match(/https?[^']+/).to_s
+                    d = Nokogiri::HTML Net::HTTP.get(URI(url)).encode(undef: :replace, replace: "")
+                    d.css("p.MsoNormal").text.gsub(/\r\n/, "").squeeze(" ").gsub(/\u00a0/, "")
+                  elsif a = doc.at('//table/tr/td/span[contains(@class, "observation")]/text()')
+                    a.text.strip
+                  end
+        return [] unless content
 
         [{
-          content: abstract_content,
+          content: content,
           language: "en",
           script: "Latn",
         }]
@@ -92,6 +96,8 @@ module RelatonItu
         uri = URI url
         resp = Net::HTTP.get_response(uri)
         until resp.code == "200"
+          return if resp["location"] == "/en/publications/pages/notfound.aspx"
+
           uri = URI resp["location"] if resp.code.match? /^30/
           resp = Net::HTTP.get_response(uri)
         end
@@ -117,13 +123,13 @@ module RelatonItu
         docids
       end
 
-      def createdocid(text)
+      def createdocid(text) # rubocop:disable Metrics/MethodLength
         %r{
           ^(?<code>((ITU-\w|ISO\/IEC)\s)?[^\(:]+)
-          (\(((?<month>\d{2})\/)?(?<year>\d{4})\))?
+          (\(((?<_month>\d{2})\/)?(?<_year>\d{4})\))?
           (:[^\(]+\((?<buldate>\d{2}\.\w{1,4}\.\d{4})\))?
           (\s(?<corr>(Amd|Cor)\.\s?\d+))?
-          # (\s\(((?<cormonth>\d{2})\/)?(?<coryear>\d{4})\))?
+          # (\s\(((?<_cormonth>\d{2})\/)?(?<_coryear>\d{4})\))?
         }x =~ text.squeeze(" ")
         corr&.sub! /\.\s?/, " "
         id = [code.sub(/[[:space:]]$/, ""), corr].compact.join "/"
@@ -204,12 +210,14 @@ module RelatonItu
       # Fetch dates
       # @param doc [Nokogiri::HTML::Document]
       # @return [Array<Hash>]
-      def fetch_dates(doc) # rubocop:disable Metrics/CyclomaticComplexity
+      def fetch_dates(doc) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
         dates = []
         date = doc.at("//table/tr/td/span[contains(@id, 'Label5')]",
                       "//p[contains(.,'Approved in')]")
         pdate = date&.text&.match(/\d{4}-\d{2}-\d{2}/).to_s || ob_date(doc)
         if pdate && !pdate&.empty?
+          dates << { type: "published", on: pdate }
+        elsif pdate = ob_date(doc)
           dates << { type: "published", on: pdate }
         end
         dates
@@ -222,7 +230,7 @@ module RelatonItu
         pdate = doc.at('//table/tbody/tr/td[contains(text(), "Year:")]')
         return unless pdate
 
-        roman_to_arabic pdate.text.match(%r{(?<=Year: )\d{2}.\w+.\d{4}}).to_s
+        roman_to_arabic pdate.text.match(%r{(?<=Year: )(\d{2}.\w+.)?\d{4}}).to_s
       end
 
       # Convert roman month number in string date to arabic number
@@ -230,8 +238,11 @@ module RelatonItu
       # @return [String]
       def roman_to_arabic(date)
         %r{(?<rmonth>[IVX]+)} =~ date
-        month = ROMAN_MONTHS.index(rmonth) + 1
-        Date.parse(date.sub(%r{[IVX]+}, month.to_s)).to_s
+        if ROMAN_MONTHS.index(rmonth)
+          month = ROMAN_MONTHS.index(rmonth) + 1
+          Date.parse(date.sub(%r{[IVX]+}, month.to_s)).to_s
+        else date
+        end
       end
 
       # Fetch contributors

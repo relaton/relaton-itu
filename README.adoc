@@ -108,6 +108,18 @@ RelatonItu::ItuBibliography.get "ITU-R REC-BO.600-1"
 ...
 ----
 
+=== Get ITU-R Radio Regulations (RR)
+
+[source,ruby]
+----
+RelatonItu::ItuBibliography.get 'ITU-R RR (2020)'
+[relaton-itu] ("ITU-R RR") fetching...
+[relaton-itu] WARNING: invalid doctype: publication
+[relaton-itu] ("ITU-R RR") found ITU-R RR
+=> #<RelatonItu::ItuBibliographicItem:0x007fb4b55eb660
+...
+----
+
 === Create bibliographic item form YAML
 [source,ruby]
 ----

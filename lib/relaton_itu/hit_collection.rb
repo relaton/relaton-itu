@@ -14,11 +14,11 @@ module RelatonItu
 
     # @param ref [String]
     # @param year [String]
-    def initialize(ref, year = nil)
+    def initialize(ref, year = nil) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
       super text, year
       @gi_imp = /\.Imp\d/.match?(ref)
-      if ref.match? /^ITU-T/
+      if ref.match? /^(ITU-T|ITU-R\sRR)/
         uri = URI "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
         data = { json: params.to_json }
         resp = Net::HTTP.post(uri, data.to_json,
@@ -40,8 +40,9 @@ module RelatonItu
 
     # @return [String]
     def group
-      @group ||= if %r{OB|Operational Bulletin}.match? text then "Publications"
-                 else "Recommendations"
+      @group ||= case text
+                 when %r{OB|Operational Bulletin}, %r{^ITU-R\sRR} then "Publications"
+                 when %r{^ITU-T} then "Recommendations"
                  end
     end
 
@@ -57,7 +58,7 @@ module RelatonItu
         "ExactPhrase" => false,
         "CollectionName" => "General",
         "CollectionGroup" => group,
-        "Sector" => "t",
+        "Sector" => text.match(/(?<=^ITU-)\w/).to_s.downcase,
         "Criterias" => [{
           "Name" => "Search in",
           "Criterias" => [
