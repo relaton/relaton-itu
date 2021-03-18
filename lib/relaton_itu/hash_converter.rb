@@ -7,7 +7,7 @@ module RelatonItu
         eg = ret[:editorialgroup]
         return unless eg
 
-        ret[:editorialgroup] = EditorialGroup.new eg
+        ret[:editorialgroup] = EditorialGroup.new **eg
       end
 
       # @param ret [Hash]
@@ -15,7 +15,7 @@ module RelatonItu
         return unless ret[:structuredidentifier]
 
         ret[:structuredidentifier] = StructuredIdentifier.new(
-          ret[:structuredidentifier]
+          **ret[:structuredidentifier]
         )
       end
     end

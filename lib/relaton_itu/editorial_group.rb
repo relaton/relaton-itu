@@ -20,7 +20,7 @@ module RelatonItu
         warn "[relaton-itu] WARNING: invalid bureau: #{bureau}"
       end
       @bureau = bureau
-      @group = group.is_a?(Hash) ? ItuGroup.new(group) : group
+      @group = group.is_a?(Hash) ? ItuGroup.new(**group) : group
       @subgroup = subgroup.is_a?(Hash) ? ItuGroup.new(subgroup) : subgroup
       @workgroup = workgroup.is_a?(Hash) ? ItuGroup.new(workgroup) : workgroup
     end

@@ -63,7 +63,7 @@ module RelatonItu
       @type = type
       @name = name
       @acronym = acronym
-      @period = period.is_a?(Hash) ? Period.new(period) : period
+      @period = period.is_a?(Hash) ? Period.new(**period) : period
     end
 
     # @param builder [Nokogiri::XML::Builder]
