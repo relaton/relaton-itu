@@ -14,5 +14,12 @@ module RelatonItu
       end
       super
     end
+
+    # @param hash [Hash]
+    # @return [RelatonItu::ItuBibliographicItem]
+    def self.from_hash(hash)
+      item_hash = ::RelatonItu::HashConverter.hash_to_bib(hash)
+      new **item_hash
+    end
   end
 end

@@ -127,11 +127,7 @@ hash = YAML.load_file 'spec/examples/itu_bib_item.yml'
 => {"id"=>"ITU-T L.163 (11/2018)",
 ...
 
-bib_hash = RelatonItu::HashConverter.hash_to_bib hash
-=> {:id=>"ITU-T L.163 (11/2018)",
-...
-
-RelatonItu::ItuBibliographicItem.new bib_hash
+RelatonItu::ItuBibliographicItem.from_hash hash
 => #<RelatonItu::ItuBibliographicItem:0x007fd88ac02aa0
 ...
 ----

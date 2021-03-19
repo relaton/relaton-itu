@@ -26,8 +26,7 @@ module RelatonItu
     # @param hash [Hash]
     # @return [RelatonItu::ItuBibliographicItem]
     def hash_to_bib(hash)
-      item_hash = ::RelatonItu::HashConverter.hash_to_bib(hash)
-      ::RelatonItu::ItuBibliographicItem.new item_hash
+      ::RelatonItu::ItuBibliographicItem.from_hash hash
     end
 
     # Returns hash of XML grammar
