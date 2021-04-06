@@ -105,7 +105,7 @@ module RelatonItu
         code  = h["Media"]["Name"]
         title = h["Title"]
         url   = h["Redirection"]
-        type  = group.downcase[0...-1]
+        type  = h["Collection"]["Group"].downcase[0...-1]
         Hit.new({ code: code, title: title, url: url, type: type }, self)
       end
     end

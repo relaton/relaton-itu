@@ -80,10 +80,21 @@ RSpec.describe RelatonItu do
     end
   end
 
-  it "fetch supplements" do
-    VCR.use_cassette "itu_t_a_suppl_2" do
-      result = RelatonItu::ItuBibliography.get "ITU-T A Suppl. 2"
-      expect(result.docidentifier.first.id).to eq "ITU-T A Suppl. 2"
+  context "fetch supplements" do
+    it do
+      VCR.use_cassette "itu_t_a_suppl_2" do
+        result = RelatonItu::ItuBibliography.get "ITU-T A Suppl. 2"
+        expect(result.docidentifier.first.id).to eq "ITU-T A Suppl. 2"
+      end
+    end
+
+    it "warn when supplement reference is incorrect" do
+      VCR.use_cassette "itu_t_g_suppl_47" do
+        expect do
+          RelatonItu::ItuBibliography.get "ITU-T G.Suppl.47"
+        end.to output(/Incorrect reference/).to_stderr
+        # expect(result.docidentifier[0].id).to eq "ITU-T G Suppl. 47"
+      end
     end
   end
 
@@ -97,6 +108,13 @@ RSpec.describe RelatonItu do
         .gsub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
     end
   end
+
+  # it "fetch ITU-T H.248.1" do
+  #   VCR.use_cassette "itu_t_h_248_1" do
+  #     result = RelatonItu::ItuBibliography.get "ITU-T H.248.1"
+  #     expect(result.docidentifier[0].id).to eq "ITU-T H.248.1"
+  #   end
+  # end
 
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do

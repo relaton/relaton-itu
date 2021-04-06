@@ -19,6 +19,12 @@ module RelatonItu
       # @param text [String]
       # @return [RelatonItu::HitCollection]
       def search(text, year = nil)
+        # code = text.sub(/(?<=ITU-T\s\w)\.(\w+\.)(?=\d+)/, ' \1')
+        if text =~ /(ITU-T\s\w)\.(Suppl\.|Annex)\s?(\w?\d+)/
+          correct_ref = "#{$~[1]} #{$~[2]} #{$~[3]}"
+          warn "[relaton-itu] WARNING: Incorrect reference #{text}"
+          warn "[relaton-itu] the reference should be #{correct_ref}"
+        end
         HitCollection.new text, year
       rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,
              EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,

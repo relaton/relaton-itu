@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '547'
+      - '397'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"6021ee53e40403e9d8b12ff01bd409b55094a96bc57749958212a38424066709"
+      - W/"312de82d8cc069074b565002ea6139b2a93ddfe45e6f35e46c9d1f5b4396f4ae"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - 6528:BBDF:5725D9:5F0B84:6053A5FE
+      - D4E2:24D0:E434F8:1214648:606CB6B7
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 18 Mar 2021 19:11:58 GMT
+      - Tue, 06 Apr 2021 19:30:00 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie21643-VIE
+      - cache-vie21626-VIE
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1616094719.616580,VS0,VE172
+      - S1617737400.887271,VS0,VE189
       Vary:
       - Authorization,Accept-Encoding
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - f82245d9a2147e1fa3540f48941347ac62021b09
+      - 8543048575fec615bd5deb0541ddd428515d3b6e
       Expires:
-      - Thu, 18 Mar 2021 19:16:58 GMT
+      - Tue, 06 Apr 2021 19:35:00 GMT
       Source-Age:
       - '0'
     body:
@@ -80,7 +80,7 @@ http_interactions:
           script: Latn
           format: text/plain
         link:
-          content: https://extranet.itu.int/brdocsearch/R-REC/Forms/ITU%20Recommendation%20Folder/docsethomepage.aspx?ID=46&FolderCTID=0x0120D52000F22870A5AFA1054181BAD87677D647C400051FC5857030E848B2F8C42DB4271329&List=0661b581-2413-4e84-bab2-77e6db27af7f&RootFolder=%2Fbrdocsearch%2FR%2DREC%2FR%2DREC%2DBO%2FR%2DREC%2DBO%2E600%2FR%2DREC%2DBO%2E600%2D1%2D198607%2DI&RecSrc=%2Fbrdocsearch%2FR%2DREC%2FR%2DREC%2DBO%2FR%2DREC%2DBO%2E600%2FR%2DREC%2DBO%2E600%2D1%2D198607%2DI
+          content: https://extranet.itu.int/brdocsearch/_layouts/15/DocSetHome.aspx?id=/brdocsearch/R-REC/R-REC-BO/R-REC-BO.600/R-REC-BO.600-1-198607-I
           type: src
         type: standard
         docid:
@@ -96,5 +96,5 @@ http_interactions:
         script: Latn
         doctype: recommendation
     http_version:
-  recorded_at: Thu, 18 Mar 2021 19:11:58 GMT
+  recorded_at: Tue, 06 Apr 2021 19:30:00 GMT
 recorded_with: VCR 5.0.0
