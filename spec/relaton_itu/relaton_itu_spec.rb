@@ -71,6 +71,13 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "get reference with slash in code" do
+    VCR.use_cassette "itu_t_g_780_y_1351" do
+      bib = RelatonItu::ItuBibliography.get "ITU-T G.780/Y.1351"
+      expect(bib.docidentifier[0].id).to eq "ITU-T G.780/Y.1351"
+    end
+  end
+
   it "fetch bureau from code" do
     VCR.use_cassette "itu_t_a_13" do
       result = RelatonItu::ItuBibliography.get "ITU-T A.13"
@@ -109,12 +116,12 @@ RSpec.describe RelatonItu do
     end
   end
 
-  # it "fetch ITU-T H.248.1" do
-  #   VCR.use_cassette "itu_t_h_248_1" do
-  #     result = RelatonItu::ItuBibliography.get "ITU-T H.248.1"
-  #     expect(result.docidentifier[0].id).to eq "ITU-T H.248.1"
-  #   end
-  # end
+  it "return nil if ITU-R not found" do
+    VCR.use_cassette "itu_r_1234" do
+      result = RelatonItu::ItuBibliography.get "ITU-R 1234"
+      expect(result).to be_nil
+    end
+  end
 
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do

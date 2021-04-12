@@ -27,7 +27,13 @@ module RelatonItu
       elsif ref.match? /^ITU-R/
         rf = ref.sub(/^ITU-R\s/, "").upcase
         url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
-        hash = YAML.safe_load Net::HTTP.get(URI(url))
+        resp = Net::HTTP.get_response(URI(url))
+        if resp.code == "404"
+          @array = []
+          return
+        end
+
+        hash = YAML.safe_load resp.body
         item_hash = HashConverter.hash_to_bib(hash)
         item = ItuBibliographicItem.new **item_hash
         hit = Hit.new({ url: url }, self)

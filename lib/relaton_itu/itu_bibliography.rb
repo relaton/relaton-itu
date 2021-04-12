@@ -77,7 +77,7 @@ module RelatonItu
 
       def search_filter(code, year) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         %r{
-          ^(?<pref1>ITU)?(-(?<type1>\w))?\s?(?<code1>[^\s\/]+)
+          ^(?<pref1>ITU)?(-(?<type1>\w))?\s?(?<code1>[^\s\/]+(?:\/\w\.\d+)?)
           (\s\(((?<month1>\d{2})\/)?(?<year1>\d{4})\))?
           (\s-\s(?<buldate1>\d{2}\.\w{1,4}\.\d{4}))?
           (\/(?<corr1>(Amd|Cor)\s?\d+))?
