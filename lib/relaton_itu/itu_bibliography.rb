@@ -77,10 +77,11 @@ module RelatonItu
 
       def search_filter(code, year) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         %r{
-          ^(?<pref1>ITU)?(-(?<type1>\w))?\s?(?<code1>[^\s\/]+(?:\/\w\.\d+)?)
+          ^(?<pref1>ITU)?(-(?<type1>\w))?\s?(?<code1>[^\s\/]+(?:\/\w[\.\d]+)?)
+          (\s\(?(?<ver1>v\d+)\)?)?
           (\s\(((?<month1>\d{2})\/)?(?<year1>\d{4})\))?
           (\s-\s(?<buldate1>\d{2}\.\w{1,4}\.\d{4}))?
-          (\/(?<corr1>(Amd|Cor)\s?\d+))?
+          (\s(?<corr1>(Amd|Cor|Amendment|Corrigendum)\.?\s?\d+))?
           (\s\(((?<cormonth1>\d{2})\/)?(?<coryear1>\d{4})\))?
         }x =~ code
         year ||= year1
@@ -89,21 +90,27 @@ module RelatonItu
         warn "[relaton-itu] (\"#{code}\") fetching..."
         result = search(code)
         code1.sub! /(?<=\.)Imp(?=\d)/, "" if result.gi_imp
+        if corr1
+          corr1.sub!(/[\.\s]+/, " ").sub!("Amendment", "Amd")
+          corr1.sub!("Corrigendum", "Corr")
+        end
         result.select do |i|
           next true unless i.hit[:code]
 
           %r{
             ^(?<pref2>ITU)?(-(?<type2>\w))?\s?(?<code2>[\S]+)
+            (\s\(?(?<ver2>v\d+)\)?)?
             (\s\(((?<month2>\d{2})\/)?(?<year2>\d{4})\))?
             (\s(?<corr2>(Amd|Cor)\.\s?\d+))?
             (\s\(((?<cormonth2>\d{2})\/)?(?<coryear2>\d{4})\))?
           }x =~ i.hit[:code]
           /:[^\(]+\((?<buldate2>\d{2}\.\w{1,4}\.\d{4})\)/ =~ i.hit[:title]
           corr2&.sub! /\.\s?/, " "
-          pref1 == pref2 && (!type1 || type1 == type2) && code1 == code2 &&
+          pref1 == pref2 && (!type1 || type1 == type2) && code2.include?(code1) &&
             (!year || year == year2) && (!month1 || month1 == month2) &&
             corr1 == corr2 && (!coryear1 || coryear1 == coryear2) &&
-            buldate1 == buldate2 && (!cormonth1 || cormonth1 == cormonth2)
+            buldate1 == buldate2 && (!cormonth1 || cormonth1 == cormonth2) &&
+            (!ver1 || ver1 == ver2)
         end
       end
 

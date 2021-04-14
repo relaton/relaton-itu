@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/1234.yaml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - raw.githubusercontent.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '14'
+      Content-Security-Policy:
+      - default-src 'none'; style-src 'unsafe-inline'; sandbox
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Type:
+      - text/plain; charset=utf-8
+      X-Github-Request-Id:
+      - BBA8:15E3:146B69:16AC55:6076D216
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 14 Apr 2021 11:29:26 GMT
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-vie21638-VIE
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1618399767.809761,VS0,VE151
+      Vary:
+      - Authorization,Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fastly-Request-Id:
+      - 9d17e1890ec7282ef9389414e5c7a89bfa3750cb
+      Expires:
+      - Wed, 14 Apr 2021 11:34:26 GMT
+      Source-Age:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: '404: Not Found'
+    http_version:
+  recorded_at: Wed, 14 Apr 2021 11:29:26 GMT
+recorded_with: VCR 5.0.0

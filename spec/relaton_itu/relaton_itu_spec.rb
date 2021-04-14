@@ -66,8 +66,15 @@ RSpec.describe RelatonItu do
 
   it "get amendment" do
     VCR.use_cassette "itu_t_g_989_2_amd_1" do
-      bib = RelatonItu::ItuBibliography.get "ITU-T G.989.2/Amd 1"
-      expect(bib.docidentifier[0].id).to eq "ITU-T G.989.2/Amd 1"
+      bib = RelatonItu::ItuBibliography.get "ITU-T G.989.2 Amd 1"
+      expect(bib.docidentifier[0].id).to eq "ITU-T G.989.2 Amd 1"
+    end
+  end
+
+  it do
+    VCR.use_cassette "itu_t_h_225_0_v7_2009_amd_1" do
+      bib = RelatonItu::ItuBibliography.get "ITU-T H.225.0 v7 (2009) Amd. 1"
+      expect(bib.docidentifier[0].id).to eq "ITU-T H.225.0 v7 Amd 1"
     end
   end
 

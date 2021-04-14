@@ -132,7 +132,7 @@ module RelatonItu
           # (\s\(((?<_cormonth>\d{2})\/)?(?<_coryear>\d{4})\))?
         }x =~ text.squeeze(" ")
         corr&.sub! /\.\s?/, " "
-        id = [code.sub(/[[:space:]]$/, ""), corr].compact.join "/"
+        id = [code.sub(/[[:space:]]$/, ""), corr].compact.join " "
         id += " - #{buldate}" if buldate
         type = id.match(%r{^\w+}).to_s
         type = "ITU" if type == "G"
