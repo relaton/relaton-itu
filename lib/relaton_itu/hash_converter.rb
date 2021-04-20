@@ -3,6 +3,15 @@ module RelatonItu
     class << self
       private
 
+      #
+      # Ovverides superclass's method
+      #
+      # @param item [Hash]
+      # @retirn [RelatonItu::ItuBibliographicItem]
+      def bib_item(item)
+        ItuBibliographicItem.new(**item)
+      end
+
       def editorialgroup_hash_to_bib(ret)
         eg = ret[:editorialgroup]
         return unless eg
