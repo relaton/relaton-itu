@@ -28,8 +28,8 @@ module RelatonItu
         HitCollection.new text, year
       rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,
              EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
-             Net::ProtocolError, OpenSSL::SSL::SSLError
-        raise RelatonBib::RequestError, "Could not access http://www.itu.int"
+             Net::ProtocolError, URI::InvalidURIError => e
+        raise RelatonBib::RequestError, e.message
       end
 
       # @param code [String] the ISO standard Code to look up (e..g "ISO 9000")
