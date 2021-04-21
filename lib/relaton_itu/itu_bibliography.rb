@@ -123,7 +123,8 @@ module RelatonItu
       def isobib_results_filter(result, year)
         missed_years = []
         result.each do |r|
-          if !year || /\((\d{2}\/)?(?<pyear>\d{4})\)/ =~ r.hit[:code]
+          /\((\d{2}\/)?(?<pyear>\d{4})\)/ =~ r.hit[:code]
+          if !year || year == pyear
             ret = r.fetch
             return { ret: ret } if ret
           end
