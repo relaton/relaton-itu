@@ -23,9 +23,11 @@ module RelatonItu
       @agent = Mechanize.new
       agent.user_agent_alias = "Mac Safari"
       @gi_imp = /\.Imp\d/.match?(ref)
-      if ref.match? /^(ITU-T|ITU-R\sRR)/
+
+      case ref
+      when /^(ITU-T|ITU-R\sRR)/
         request_search
-      elsif ref.match /^ITU-R\s([-_.\w]+)$/
+      when /^ITU-R\s([-_.\w]+)$/
         rf = $1.upcase
         request_document(rf)
       end
