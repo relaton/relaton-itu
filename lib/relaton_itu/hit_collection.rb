@@ -24,12 +24,24 @@ module RelatonItu
       agent.user_agent_alias = "Mac Safari"
       @gi_imp = /\.Imp\d/.match?(ref)
       if ref.match? /^(ITU-T|ITU-R\sRR)/
+        request_search
+      elsif ref.match /^ITU-R\s([-_.\w]+)$/
+        rf = $1.upcase
+        request_document(rf)
+      end
+    end
+
+    private
+
+    def request_search
         url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
         data = { json: params.to_json }
         resp = agent.post url, data.to_json, "Content-Type" => "application/json"
         @array = hits JSON.parse(resp.body)
-      elsif ref.match /^ITU-R\s([-_.\w]+)$/
-        rf = $1.upcase
+    end
+
+    # @param rf [String] a document ref
+    def request_document(rf)
         url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
         resp = Net::HTTP.get_response(URI(url))
         if resp.code == "404"
@@ -43,10 +55,7 @@ module RelatonItu
         hit = Hit.new({ url: url }, self)
         hit.fetch = item
         @array = [hit]
-      end
     end
-
-    private
 
     # @return [String]
     def group
