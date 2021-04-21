@@ -34,27 +34,27 @@ module RelatonItu
     private
 
     def request_search
-        url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
-        data = { json: params.to_json }
-        resp = agent.post url, data.to_json, "Content-Type" => "application/json"
-        @array = hits JSON.parse(resp.body)
+      url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
+      data = { json: params.to_json }
+      resp = agent.post url, data.to_json, "Content-Type" => "application/json"
+      @array = hits JSON.parse(resp.body)
     end
 
     # @param rf [String] a document ref
     def request_document(rf)
-        url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
-        resp = Net::HTTP.get_response(URI(url))
-        if resp.code == "404"
-          @array = []
-          return
-        end
+      url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
+      resp = Net::HTTP.get_response(URI(url))
+      if resp.code == "404"
+        @array = []
+        return
+      end
 
-        hash = YAML.safe_load resp.body
-        item_hash = HashConverter.hash_to_bib(hash)
-        item = ItuBibliographicItem.new **item_hash
-        hit = Hit.new({ url: url }, self)
-        hit.fetch = item
-        @array = [hit]
+      hash = YAML.safe_load resp.body
+      item_hash = HashConverter.hash_to_bib(hash)
+      item = ItuBibliographicItem.new **item_hash
+      hit = Hit.new({ url: url }, self)
+      hit.fetch = item
+      @array = [hit]
     end
 
     # @return [String]
