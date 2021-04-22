@@ -24,20 +24,18 @@ module RelatonItu
     }.freeze
 
     class << self
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-
       # Parse page.
-      # @param hit_data [Hash]
+      # @param hit [RelatonItu::Hit]
       # @return [Hash]
-      def parse_page(hit_data, imp = false)
-        url, doc = get_page hit_data[:url]
-        return unless doc
+      def parse_page(hit, imp = false) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+        doc = get_page hit
+        return unless doc.code == "200"
 
         if imp
           a = doc.at "//span[contains(@id, 'tab_ig_uc_rec')]/a"
           return unless a
 
-          url, doc = get_page URI.join(url, a[:href]).to_s
+          doc = get_page hit, a[:href].to_s
         end
 
         # Fetch edition.
@@ -46,36 +44,37 @@ module RelatonItu
         ItuBibliographicItem.new(
           fetched: Date.today.to_s,
           type: "standard",
-          docid: fetch_docid(doc, hit_data[:title]),
+          docid: fetch_docid(doc, hit.hit[:title]),
           edition: edition,
           language: ["en"],
           script: ["Latn"],
           title: fetch_titles(doc),
-          doctype: hit_data[:type],
+          doctype: hit.hit[:type],
           docstatus: fetch_status(doc),
           ics: [], # fetch_ics(doc),
           date: fetch_dates(doc),
-          contributor: fetch_contributors(hit_data[:code]),
-          editorialgroup: fetch_workgroup(hit_data[:code], doc),
-          abstract: fetch_abstract(doc),
-          copyright: fetch_copyright(hit_data[:code], doc),
-          link: fetch_link(doc, url),
+          contributor: fetch_contributors(hit.hit[:code]),
+          editorialgroup: fetch_workgroup(hit.hit[:code], doc),
+          abstract: fetch_abstract(doc, hit),
+          copyright: fetch_copyright(hit.hit[:code], doc),
+          link: fetch_link(doc),
           relation: fetch_relations(doc),
           place: ["Geneva"]
         )
       end
-      # rubocop:enable Metrics/AbcSize
 
       private
 
       # Fetch abstracts.
-      # @param doc [Nokigiri::HTML::Document]
-      # @return [Array<Array>]
-      def fetch_abstract(doc) # rubocop:disable Metrics/AbcSize
-        abstract_url = doc.at('//table/tr/td/span[contains(@id, "lbl_dms")]/div')
+      # @param doc [Mechanize::Page]
+      # @param hit [RelatonItu::Hit]
+      # @return [Array<Hash>]
+      def fetch_abstract(doc, hit) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+        abstract_url = doc.at '//table/tr/td/span[contains(@id, "lbl_dms")]/div'
         content = if abstract_url
                     url = abstract_url[:onclick].match(/https?[^']+/).to_s
-                    d = Nokogiri::HTML Net::HTTP.get(URI(url)).encode(undef: :replace, replace: "")
+                    rsp = hit.hit_collection.agent.get url
+                    d = Nokogiri::HTML rsp.body.encode(undef: :replace, replace: "")
                     d.css("p.MsoNormal").text.gsub(/\r\n/, "").squeeze(" ").gsub(/\u00a0/, "")
                   elsif a = doc.at('//table/tr/td/span[contains(@class, "observation")]/text()')
                     a.text.strip
@@ -90,27 +89,20 @@ module RelatonItu
       end
 
       # Get page.
-      # @param path [String] page's path
+      # @param hit [RelatonItu::Hit]
+      # @param url [String, nil]
       # @return [Array<String, Nokogiri::HTML::Document>]
-      def get_page(url)
-        uri = URI url
-        resp = Net::HTTP.get_response(uri)
-        until resp.code == "200"
-          return if resp["location"] == "/en/publications/pages/notfound.aspx"
-
-          uri = URI resp["location"] if resp.code.match? /^30/
-          resp = Net::HTTP.get_response(uri)
-        end
-        [uri.to_s, Nokogiri::HTML(resp.body)]
+      def get_page(hit, url = nil)
+        uri = url || hit.hit[:url]
+        hit.hit_collection.agent.get uri
       rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,
              EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
              Net::ProtocolError, OpenSSL::SSL::SSLError
-        raise RelatonBib::RequestError, "Could not access #{url}"
+        raise RelatonBib::RequestError, "Could not access #{uri}"
       end
-      # rubocop:enable Metrics/MethodLength
 
       # Fetch docid.
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @param title [String]
       # @return [Hash]
       def fetch_docid(doc, title)
@@ -123,6 +115,8 @@ module RelatonItu
         docids
       end
 
+      # @param text [String]
+      # @return [RelatonBib::DocumentIdentifier]
       def createdocid(text) # rubocop:disable Metrics/MethodLength
         %r{
           ^(?<code>((ITU-\w|ISO\/IEC)\s)?[^\(:]+)
@@ -140,7 +134,7 @@ module RelatonItu
       end
 
       # Fetch status.
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @return [RelatonBib::DocumentStatus, NilClass]
       def fetch_status(doc)
         s = doc.at("//table/tr/td/span[contains(@id, 'Label7')]",
@@ -153,7 +147,7 @@ module RelatonItu
 
       # Fetch workgroup.
       # @param code [String]
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @return [RelatonItu::EditorialGroup, NilClass]
       def fetch_workgroup(code, doc)
         wg = doc.at('//table/tr/td/span[contains(@id, "Label8")]/a')
@@ -161,8 +155,7 @@ module RelatonItu
 
         group = wg && itugroup(wg.text)
         EditorialGroup.new(
-          bureau: code.match(/(?<=-)./).to_s,
-          group: group
+          bureau: code.match(/(?<=-)./).to_s, group: group
         )
       end
 
@@ -182,24 +175,24 @@ module RelatonItu
         ItuGroup.new name: name, type: type, acronym: acronym
       end
 
-      # rubocop:disable Metrics/MethodLength
-
       # Fetch relations.
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @return [Array<Hash>]
       def fetch_relations(doc)
-        doc.xpath('//div[contains(@id, "tab_sup")]//table/tr[position()>2]').map do |r|
+        doc.xpath('//div[contains(@id, "tab_sup")]//table/tr[position()>2]')
+          .map do |r|
           ref = r.at('./td/span[contains(@id, "title_e")]/nobr/a')
-          fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en", script: "Latn")
-          bibitem = ItuBibliographicItem.new(formattedref: fref, type: "standard")
+          fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en",
+                                              script: "Latn")
+          bibitem = ItuBibliographicItem.new(formattedref: fref,
+                                             type: "standard")
           { type: "complements", bibitem: bibitem }
         end
       end
-      # rubocop:enable Metrics/MethodLength
 
       # Fetch titles.
-      # @param doc [Nokogiri::HTML::Document]
-      # @return [Array<Hash>]
+      # @param doc [Mechanize::Page]
+      # @return [RelatonBib::TypedTitleStringCollection]
       def fetch_titles(doc)
         t = doc.at("//td[@class='title']|//div/table[1]/tr[4]/td/strong")
         return [] unless t
@@ -208,7 +201,7 @@ module RelatonItu
       end
 
       # Fetch dates
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @return [Array<Hash>]
       def fetch_dates(doc) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
         dates = []
@@ -224,7 +217,7 @@ module RelatonItu
       end
 
       # Scrape Operational Bulletin date.
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @return [String]
       def ob_date(doc)
         pdate = doc.at('//table/tbody/tr/td[contains(text(), "Year:")]')
@@ -246,7 +239,7 @@ module RelatonItu
       end
 
       # Fetch contributors
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @return [Array<Hash>]
       def fetch_contributors(code)
         return [] unless code
@@ -262,11 +255,10 @@ module RelatonItu
       end
 
       # Fetch links.
-      # @param doc [Nokogiri::HTML::Document]
-      # @param url [String]
+      # @param doc [Mechanize::Page]
       # @return [Array<Hash>]
-      def fetch_link(doc, url)
-        links = [{ type: "src", content: url }]
+      def fetch_link(doc)
+        links = [{ type: "src", content: doc.uri.to_s }]
         obp_elm = doc.at(
           '//a[@title="Persistent link to download the PDF file"]',
           "//font[contains(.,'PDF')]/../.."
@@ -277,6 +269,8 @@ module RelatonItu
         links
       end
 
+      # @param type [String]
+      # @param elm [Nokogiri::XML::Element]
       def typed_link(type, elm)
         {
           type: type,
@@ -286,7 +280,7 @@ module RelatonItu
 
       # Fetch copyright.
       # @param code [String]
-      # @param doc [Nokogiri::HTML::Document]
+      # @param doc [Mechanize::Page]
       # @return [Array<Hash>]
       def fetch_copyright(code, doc)
         abbreviation = code.match(/^[^-]+/).to_s

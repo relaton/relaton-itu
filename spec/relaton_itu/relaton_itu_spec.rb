@@ -205,9 +205,13 @@ RSpec.describe RelatonItu do
   end
 
   it "could not access site" do
-    expect(Net::HTTP).to receive(:post).with(
-      kind_of(URI), kind_of(String), kind_of(Hash)
-    ).and_raise SocketError
+    # expect(Net::HTTP).to receive(:post).with(
+    #   kind_of(URI), kind_of(String), kind_of(Hash)
+    # ).and_raise SocketError
+    agent = double "Mechanize agent"
+    expect(agent).to receive(:post).and_raise SocketError
+    expect(agent).to receive(:user_agent_alias=)
+    expect(Mechanize).to receive(:new).and_return agent
     expect do
       RelatonItu::ItuBibliography.search "ITU-T L.163"
     end.to raise_error RelatonBib::RequestError

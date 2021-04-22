@@ -34,7 +34,8 @@ module RelatonItu
 
       # @param code [String] the ISO standard Code to look up (e..g "ISO 9000")
       # @param year [String] the year the standard was published (optional)
-      # @param opts [Hash] options; restricted to :all_parts if all-parts reference is required
+      # @param opts [Hash] options; restricted to :all_parts if all-parts
+      #   reference is required
       # @return [String] Relaton XML serialisation of reference
       def get(code, year = nil, opts = {}) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         if year.nil?
@@ -61,12 +62,12 @@ module RelatonItu
         warn "[relaton-itu] WARNING: no match found online for #{id}. "\
           "The code must be exactly like it is on the standards website."
         unless missed_years.empty?
-          warn "[relaton-itu] (There was no match for #{year}, though there were matches "\
-            "found for #{missed_years.join(', ')}.)"
+          warn "[relaton-itu] (There was no match for #{year}, though there "\
+            "were matches found for #{missed_years.join(', ')}.)"
         end
         if /\d-\d/.match? code
-          warn "[relaton-itu] The provided document part may not exist, or the document "\
-            "may no longer be published in parts."
+          warn "[relaton-itu] The provided document part may not exist, or "\
+            "the document may no longer be published in parts."
         else
           warn "[relaton-itu] If you wanted to cite all document parts for the reference, "\
             "use \"#{code} (all parts)\".\nIf the document is not a standard, "\

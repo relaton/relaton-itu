@@ -8,7 +8,7 @@ module RelatonItu
     # Parse page.
     # @return [RelatonItu::ItuBibliographicItem]
     def fetch
-      @fetch ||= Scrapper.parse_page hit, hit_collection.gi_imp
+      @fetch ||= Scrapper.parse_page self, hit_collection.gi_imp
     end
   end
 end

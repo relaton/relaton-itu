@@ -12,17 +12,21 @@ module RelatonItu
     # @return [TrueClass, FalseClass]
     attr_reader :gi_imp
 
+    # @return [Mechanize]
+    attr_reader :agent
+
     # @param ref [String]
     # @param year [String]
     def initialize(ref, year = nil) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
       super text, year
+      @agent = Mechanize.new
+      agent.user_agent_alias = "Mac Safari"
       @gi_imp = /\.Imp\d/.match?(ref)
       if ref.match? /^(ITU-T|ITU-R\sRR)/
-        uri = URI "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
+        url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
         data = { json: params.to_json }
-        resp = Net::HTTP.post(uri, data.to_json,
-                              "Content-Type" => "application/json")
+        resp = agent.post url, data.to_json, "Content-Type" => "application/json"
         @array = hits JSON.parse(resp.body)
       elsif ref.match? /^ITU-R/
         rf = ref.sub(/^ITU-R\s/, "").upcase
@@ -47,7 +51,8 @@ module RelatonItu
     # @return [String]
     def group
       @group ||= case text
-                 when %r{OB|Operational Bulletin}, %r{^ITU-R\sRR} then "Publications"
+                 when %r{OB|Operational Bulletin}, %r{^ITU-R\sRR}
+                   "Publications"
                  when %r{^ITU-T} then "Recommendations"
                  end
     end

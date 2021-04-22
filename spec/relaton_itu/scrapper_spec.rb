@@ -12,9 +12,12 @@ RSpec.describe RelatonItu::Scrapper do
   end
 
   it "raises an access error" do
-    expect(Net::HTTP).to receive(:get_response).and_raise SocketError
+    agent = double "Mechanize agent"
+    hit_collection = double "Hit collection", agent: agent
+    expect(agent).to receive(:get).and_raise SocketError
+    hit = RelatonItu::Hit.new({ url: "https://www.itu.int" }, hit_collection)
     expect do
-      RelatonItu::Scrapper.parse_page url: "https://www.itu.int"
+      RelatonItu::Scrapper.parse_page hit
     end.to raise_error RelatonBib::RequestError
   end
 end

@@ -1,3 +1,4 @@
+require "mechanize"
 require "relaton_itu/version"
 require "relaton_itu/itu_bibliography"
 require "digest/md5"
