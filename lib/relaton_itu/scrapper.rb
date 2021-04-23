@@ -70,7 +70,7 @@ module RelatonItu
       # @param hit [RelatonItu::Hit]
       # @return [Array<Hash>]
       def fetch_abstract(doc, hit) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-        abstract_url = doc.at '//table/tr/td/span[contains(@id, "lbl_dms")]/div'
+        abstract_url = doc.at '//table/tr[td/span[.="In force"]]/td/span[contains(@id, "lbl_dms")]/div'
         content = if abstract_url
                     url = abstract_url[:onclick].match(/https?[^']+/).to_s
                     rsp = hit.hit_collection.agent.get url

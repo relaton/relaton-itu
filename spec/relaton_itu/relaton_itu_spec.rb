@@ -23,6 +23,14 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "get document without abstract" do
+    VCR.use_cassette "itu_t_g_994_1" do
+      bib = RelatonItu::ItuBibliography.get "ITU-T G.994.1"
+      expect(bib.docidentifier[0].id).to eq "ITU-T G.994.1"
+      expect(bib.abstract.size).to eq 0
+    end
+  end
+
   it "encode abstract text" do
     VCR.use_cassette "itu_t_h_264" do
       file = "spec/examples/itu_t_h_264.xml"
