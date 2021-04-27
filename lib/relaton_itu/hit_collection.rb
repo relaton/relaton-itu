@@ -41,9 +41,9 @@ module RelatonItu
       @array = hits JSON.parse(resp.body)
     end
 
-    # @param rf [String] a document ref
-    def request_document(rf)
-      url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
+    # @param ref [String] a document ref
+    def request_document(ref)
+      url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{ref}.yaml"
       resp = Net::HTTP.get_response(URI(url))
       if resp.code == "404"
         @array = []
