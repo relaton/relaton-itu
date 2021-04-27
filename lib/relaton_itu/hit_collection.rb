@@ -28,8 +28,7 @@ module RelatonItu
       when /^(ITU-T|ITU-R\sRR)/
         request_search
       when /^ITU-R\s([-_.\w]+)$/
-        rf = $1.upcase
-        request_document(rf)
+        request_document($1.upcase)
       end
     end
 
