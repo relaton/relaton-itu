@@ -17,7 +17,7 @@ module RelatonItu
 
     # @param ref [String]
     # @param year [String]
-    def initialize(ref, year = nil) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    def initialize(ref, year = nil) # rubocop:todo Metrics/MethodLength
       text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
       super text, year
       @agent = Mechanize.new
@@ -42,7 +42,7 @@ module RelatonItu
     end
 
     # @param ref [String] a document ref
-    def request_document(ref)
+    def request_document(ref) # rubocop:todo Metrics/MethodLength
       uri = URI::HTTPS.build(
         host: "raw.githubusercontent.com",
         path: "/relaton/relaton-data-itu-r/master/data/#{ref}.yaml"
@@ -70,10 +70,8 @@ module RelatonItu
                  end
     end
 
-    # rubocop:disable Metrics/MethodLength
-
     # @return [Hash]
-    def params
+    def params # rubocop:disable Metrics/MethodLength
       {
         "Input" => text,
         "Start" => 0,
@@ -120,7 +118,6 @@ module RelatonItu
         "SearchType" => "All",
       }
     end
-    # rubocop:enable Metrics/MethodLength
 
     # @param data [Hash]
     # @return [Array<RelatonItu::Hit>]
