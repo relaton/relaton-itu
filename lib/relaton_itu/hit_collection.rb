@@ -43,8 +43,11 @@ module RelatonItu
 
     # @param ref [String] a document ref
     def request_document(ref)
-      url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{ref}.yaml"
-      resp = Net::HTTP.get_response(URI(url))
+      uri = URI::HTTPS.build(
+        host: "raw.githubusercontent.com",
+        path: "/relaton/relaton-data-itu-r/master/data/#{ref}.yaml"
+      )
+      resp = Net::HTTP.get_response(uri)
       if resp.code == "404"
         @array = []
         return
@@ -53,7 +56,7 @@ module RelatonItu
       hash = YAML.safe_load resp.body
       item_hash = HashConverter.hash_to_bib(hash)
       item = ItuBibliographicItem.new **item_hash
-      hit = Hit.new({ url: url }, self)
+      hit = Hit.new({ url: uri.to_s }, self)
       hit.fetch = item
       @array = [hit]
     end
