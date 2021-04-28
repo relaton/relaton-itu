@@ -17,36 +17,49 @@ module RelatonItu
 
     # @param ref [String]
     # @param year [String]
-    def initialize(ref, year = nil) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    def initialize(ref, year = nil) # rubocop:todo Metrics/MethodLength
       text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
       super text, year
       @agent = Mechanize.new
       agent.user_agent_alias = "Mac Safari"
       @gi_imp = /\.Imp\d/.match?(ref)
-      if ref.match? /^(ITU-T|ITU-R\sRR)/
-        url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
-        data = { json: params.to_json }
-        resp = agent.post url, data.to_json, "Content-Type" => "application/json"
-        @array = hits JSON.parse(resp.body)
-      elsif ref.match? /^ITU-R/
-        rf = ref.sub(/^ITU-R\s/, "").upcase
-        url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
-        resp = Net::HTTP.get_response(URI(url))
-        if resp.code == "404"
-          @array = []
-          return
-        end
 
-        hash = YAML.safe_load resp.body
-        item_hash = HashConverter.hash_to_bib(hash)
-        item = ItuBibliographicItem.new **item_hash
-        hit = Hit.new({ url: url }, self)
-        hit.fetch = item
-        @array = [hit]
+      case ref
+      when /^(ITU-T|ITU-R\sRR)/
+        request_search
+      when /^ITU-R\s([-_.\w]+)$/
+        request_document($1.upcase)
       end
     end
 
     private
+
+    def request_search
+      url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
+      data = { json: params.to_json }
+      resp = agent.post url, data.to_json, "Content-Type" => "application/json"
+      @array = hits JSON.parse(resp.body)
+    end
+
+    # @param ref [String] a document ref
+    def request_document(ref) # rubocop:todo Metrics/MethodLength
+      uri = URI::HTTPS.build(
+        host: "raw.githubusercontent.com",
+        path: "/relaton/relaton-data-itu-r/master/data/#{ref}.yaml"
+      )
+      resp = Net::HTTP.get_response(uri)
+      if resp.code == "404"
+        @array = []
+        return
+      end
+
+      hash = YAML.safe_load resp.body
+      item_hash = HashConverter.hash_to_bib(hash)
+      item = ItuBibliographicItem.new **item_hash
+      hit = Hit.new({ url: uri.to_s }, self)
+      hit.fetch = item
+      @array = [hit]
+    end
 
     # @return [String]
     def group
@@ -57,10 +70,8 @@ module RelatonItu
                  end
     end
 
-    # rubocop:disable Metrics/MethodLength
-
     # @return [Hash]
-    def params
+    def params # rubocop:disable Metrics/MethodLength
       {
         "Input" => text,
         "Start" => 0,
@@ -107,7 +118,6 @@ module RelatonItu
         "SearchType" => "All",
       }
     end
-    # rubocop:enable Metrics/MethodLength
 
     # @param data [Hash]
     # @return [Array<RelatonItu::Hit>]
