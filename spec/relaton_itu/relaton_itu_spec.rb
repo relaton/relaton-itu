@@ -206,8 +206,8 @@ RSpec.describe RelatonItu do
     end
 
     it "not exosted radio regulation" do
-      VCR.use_cassette "itu_r_rr_2012" do
-        expect(RelatonItu::ItuBibliography.get("ITU-R RR (2012)")).to be_nil
+      VCR.use_cassette "itu_r_rr_2014" do
+        expect(RelatonItu::ItuBibliography.get("ITU-R RR (2014)")).to be_nil
       end
     end
   end
