@@ -33,7 +33,7 @@ module RelatonItu
         ItuGroup.new(
           type: group[:type],
           name: group.at("name").text,
-          acronym: group.at("acronym").text,
+          acronym: group.at("acronym")&.text,
           period: itugroupperiod(group.at("period")),
         )
       end
