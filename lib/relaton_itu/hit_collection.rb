@@ -18,7 +18,7 @@ module RelatonItu
     # @param ref [String]
     # @param year [String]
     def initialize(ref, year = nil) # rubocop:todo Metrics/MethodLength
-      text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
+      text = ref.sub(/(?<=\.)Imp\s?(?=\d)/, "")
       super text, year
       @agent = Mechanize.new
       agent.user_agent_alias = "Mac Safari"
@@ -27,8 +27,8 @@ module RelatonItu
       case ref
       when /^(ITU-T|ITU-R\sRR)/
         request_search
-      when /^ITU-R\s([-_.\w]+)$/
-        request_document($1.upcase)
+      when /^ITU-R\s/
+        request_document(ref)
       end
     end
 
@@ -45,7 +45,7 @@ module RelatonItu
     def request_document(ref) # rubocop:todo Metrics/MethodLength
       uri = URI::HTTPS.build(
         host: "raw.githubusercontent.com",
-        path: "/relaton/relaton-data-itu-r/master/data/#{ref}.yaml"
+        path: "/relaton/relaton-data-itu-r/master/data/#{ref.gsub(/[\s.]/, '_')}.yaml",
       )
       resp = Net::HTTP.get_response(uri)
       if resp.code == "404"
@@ -55,7 +55,7 @@ module RelatonItu
 
       hash = YAML.safe_load resp.body
       item_hash = HashConverter.hash_to_bib(hash)
-      item = ItuBibliographicItem.new **item_hash
+      item = ItuBibliographicItem.new(**item_hash)
       hit = Hit.new({ url: uri.to_s }, self)
       hit.fetch = item
       @array = [hit]

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/1234.yaml
+    uri: https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/ITU-R_1234.yaml
     body:
       encoding: US-ASCII
       string: ''
@@ -37,34 +37,34 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       X-Github-Request-Id:
-      - 5EFE:2424:1999300:1AC5372:60B4B9AD
+      - E5AE:FE16:DF76D7:EA6C6E:60DDEDC2
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 31 May 2021 10:25:49 GMT
+      - Thu, 01 Jul 2021 16:30:58 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-hhn4041-HHN
+      - cache-muc13935-MUC
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1622456750.562776,VS0,VE174
+      - S1625157059.523816,VS0,VE157
       Vary:
       - Authorization,Accept-Encoding
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - cf31fe82d75c3d9a70565261b3ddb11ef426c0b8
+      - a5f156ac45b0882e82bf80d395694c0906354200
       Expires:
-      - Mon, 31 May 2021 10:30:49 GMT
+      - Thu, 01 Jul 2021 16:35:58 GMT
       Source-Age:
       - '0'
     body:
       encoding: UTF-8
       string: '404: Not Found'
     http_version:
-  recorded_at: Mon, 31 May 2021 10:25:49 GMT
+  recorded_at: Thu, 01 Jul 2021 16:30:58 GMT
 recorded_with: VCR 5.0.0

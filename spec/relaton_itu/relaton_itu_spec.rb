@@ -37,7 +37,7 @@ RSpec.describe RelatonItu do
       result = RelatonItu::ItuBibliography.get("ITU-T H.264").to_xml
       File.write file, result, encoding: "UTF-8" unless File.exist? file
       expect(result).to be_equivalent_to File.read(file, encoding: "UTF-8")
-        .gsub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
+        .gsub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s)
     end
   end
 
@@ -127,7 +127,7 @@ RSpec.describe RelatonItu do
       file = "spec/examples/itu_g_imp_712.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
-        .gsub /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
+        .gsub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s)
     end
   end
 
@@ -186,9 +186,9 @@ RSpec.describe RelatonItu do
 
   context "fetch ITU-R" do
     it "reccomendation" do
-      VCR.use_cassette "itu_r_rec_bo_600_1" do
-        bib = RelatonItu::ItuBibliography.get "ITU-R REC-BO.600-1"
-        file = "spec/examples/itu_r_rec_bo_600_1.xml"
+      VCR.use_cassette "itu_r_bo_600_1" do
+        bib = RelatonItu::ItuBibliography.get "ITU-R BO.600-1"
+        file = "spec/examples/itu_r_bo_600_1.xml"
         xml = bib.to_xml bibdata: true
         File.write file, xml, encoding: "UTF-8" unless File.exist? file
         expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8").gsub(
