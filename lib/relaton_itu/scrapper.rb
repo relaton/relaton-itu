@@ -274,7 +274,7 @@ module RelatonItu
       def typed_link(type, elm)
         {
           type: type,
-          content: URI.join(HitCollection::DOMAIN + elm[:href].strip).to_s,
+          content: URI.join(HitCollection::DOMAIN, elm[:href].strip).to_s,
         }
       end
 
