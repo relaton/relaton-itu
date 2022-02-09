@@ -19,7 +19,7 @@ RSpec.describe RelatonItu do
       expect(results.gsub(/<relation.*<\/relation>/m, ""))
         .not_to include %(<on>2018-11-29</on>)
       expect(results)
-        .to include %(<docidentifier type="ITU">ITU-T L.163</docidentifier>)
+        .to include %(<docidentifier type="ITU" primary="true">ITU-T L.163</docidentifier>)
     end
   end
 
@@ -97,8 +97,9 @@ RSpec.describe RelatonItu do
     VCR.use_cassette "itu_t_a_13" do
       result = RelatonItu::ItuBibliography.get "ITU-T A.13"
       expect(result.editorialgroup.bureau).to eq "T"
-      expect(result.editorialgroup.group.name).to eq "Telecommunication "\
-      "Standardization Advisory Group"
+      expect(result.editorialgroup.group.name).to eq(
+        "Telecommunication Standardization Advisory Group",
+      )
     end
   end
 
@@ -153,9 +154,11 @@ RSpec.describe RelatonItu do
       expect(hit_collection.fetch).to be_instance_of RelatonItu::HitCollection
       expect(hit_collection.fetched).to be_truthy
       expect(hit_collection.first).to be_instance_of RelatonItu::Hit
-      expect(hit_collection.to_s).to eq "<RelatonItu::HitCollection:"\
+      expect(hit_collection.to_s).to eq(
+        "<RelatonItu::HitCollection:"\
         "#{format('%<id>#.14x', id: hit_collection.object_id << 1)} "\
-        "@ref=ITU-T L.163 @fetched=true>"
+        "@ref=ITU-T L.163 @fetched=true>",
+      )
     end
   end
 

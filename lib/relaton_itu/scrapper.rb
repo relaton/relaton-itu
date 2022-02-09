@@ -59,7 +59,7 @@ module RelatonItu
           copyright: fetch_copyright(hit.hit[:code], doc),
           link: fetch_link(doc),
           relation: fetch_relations(doc),
-          place: ["Geneva"]
+          place: ["Geneva"],
         )
       end
 
@@ -109,7 +109,7 @@ module RelatonItu
         docids = doc.xpath(
           "//span[@id='ctl00_content_main_uc_rec_main_info1_rpt_main_ctl00_lbl_rec']",
           "//td[.='Identical standard:']/following-sibling::td",
-          "//div/table[1]/tr[4]/td/strong"
+          "//div/table[1]/tr[4]/td/strong",
         ).map { |c| createdocid c.text }
         docids << createdocid(title) unless docids.any?
         docids
@@ -119,18 +119,18 @@ module RelatonItu
       # @return [RelatonBib::DocumentIdentifier]
       def createdocid(text) # rubocop:disable Metrics/MethodLength
         %r{
-          ^(?<code>((ITU-\w|ISO\/IEC)\s)?[^\(:]+)
-          (\(((?<_month>\d{2})\/)?(?<_year>\d{4})\))?
-          (:[^\(]+\((?<buldate>\d{2}\.\w{1,4}\.\d{4})\))?
-          (\s(?<corr>(Amd|Cor)\.\s?\d+))?
+          ^(?<code>(?:(?:ITU-\w|ISO/IEC)\s)?[^(:]+)
+          (?:\((?:(?<_month>\d{2})/)?(?<_year>\d{4})\))?
+          (?::[^(]+\((?<buldate>\d{2}\.\w{1,4}\.\d{4})\))?
+          (?:\s(?<corr>(?:Amd|Cor)\.\s?\d+))?
           # (\s\(((?<_cormonth>\d{2})\/)?(?<_coryear>\d{4})\))?
         }x =~ text.squeeze(" ")
-        corr&.sub! /\.\s?/, " "
+        corr&.sub!(/\.\s?/, " ")
         id = [code.sub(/[[:space:]]$/, ""), corr].compact.join " "
         id += " - #{buldate}" if buldate
         type = id.match(%r{^\w+}).to_s
         type = "ITU" if type == "G"
-        RelatonBib::DocumentIdentifier.new(type: type, id: id)
+        RelatonBib::DocumentIdentifier.new(type: type, id: id, primary: true)
       end
 
       # Fetch status.
@@ -261,7 +261,7 @@ module RelatonItu
         links = [{ type: "src", content: doc.uri.to_s }]
         obp_elm = doc.at(
           '//a[@title="Persistent link to download the PDF file"]',
-          "//font[contains(.,'PDF')]/../.."
+          "//font[contains(.,'PDF')]/../..",
         )
         links << typed_link("obp", obp_elm) if obp_elm
         wrd_elm = doc.at("//font[contains(.,'Word')]/../..")

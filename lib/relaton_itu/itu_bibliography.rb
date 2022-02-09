@@ -39,7 +39,7 @@ module RelatonItu
       # @return [String] Relaton XML serialisation of reference
       def get(code, year = nil, opts = {}) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         if year.nil?
-          /^(?<code1>[^\s]+\s[^\s]+)\s\((\d{2}\/)?(?<year1>\d+)\)$/ =~ code
+          /^(?<code1>[^\s]+\s[^\s]+)\s\((?:\d{2}\/)?(?<year1>\d+)\)$/ =~ code
           unless code1.nil?
             code = code1
             year = year1
@@ -78,35 +78,33 @@ module RelatonItu
 
       def search_filter(code, year) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
         %r{
-          ^(?<pref1>ITU)?(-(?<type1>\w))?\s?(?<code1>[^\s\/]+(?:\/\w[\.\d]+)?)
-          (\s\(?(?<ver1>v\d+)\)?)?
-          (\s\(((?<month1>\d{2})\/)?(?<year1>\d{4})\))?
-          (\s-\s(?<buldate1>\d{2}\.\w{1,4}\.\d{4}))?
-          (\s(?<corr1>(Amd|Cor|Amendment|Corrigendum)\.?\s?\d+))?
-          (\s\(((?<cormonth1>\d{2})\/)?(?<coryear1>\d{4})\))?
+          ^(?<pref1>ITU)?(?:-(?<type1>\w))?\s?(?<code1>[^\s/]+(?:/\w[.\d]+)?)
+          (?:\s\(?(?<ver1>v\d+)\)?)?
+          (?:\s\((?:(?<month1>\d{2})/)?(?<year1>\d{4})\))?
+          (?:\s-\s(?<buldate1>\d{2}\.\w{1,4}\.\d{4}))?
+          (?:\s(?<corr1>(?:Amd|Cor|Amendment|Corrigendum)\.?\s?\d+))?
+          (?:\s\((?:(?<cormonth1>\d{2})/)?(?<coryear1>\d{4})\))?
         }x =~ code
         year ||= year1
-        # docidrx = %r{\w+\.\d+|\w\sSuppl\.\s\d+} # %r{^ITU-T\s[^\s]+}
-        # c = code.sub(/Imp\s?/, "").match(docidrx).to_s
         warn "[relaton-itu] (\"#{code}\") fetching..."
         result = search(code)
-        code1.sub! /(?<=\.)Imp(?=\d)/, "" if result.gi_imp
+        code1.sub!(/(?<=\.)Imp(?=\d)/, "") if result.gi_imp
         if corr1
-          corr1.sub!(/[\.\s]+/, " ").sub!("Amendment", "Amd")
+          corr1.sub!(/[.\s]+/, " ").sub!("Amendment", "Amd")
           corr1.sub!("Corrigendum", "Corr")
         end
         result.select do |i|
           next true unless i.hit[:code]
 
           %r{
-            ^(?<pref2>ITU)?(-(?<type2>\w))?\s?(?<code2>[\S]+)
-            (\s\(?(?<ver2>v\d+)\)?)?
-            (\s\(((?<month2>\d{2})\/)?(?<year2>\d{4})\))?
-            (\s(?<corr2>(Amd|Cor)\.\s?\d+))?
-            (\s\(((?<cormonth2>\d{2})\/)?(?<coryear2>\d{4})\))?
+            ^(?<pref2>ITU)?(?:-(?<type2>\w))?\s?(?<code2>\S+)
+            (?:\s\(?(?<ver2>v\d+)\)?)?
+            (?:\s\((?:(?<month2>\d{2})/)?(?<year2>\d{4})\))?
+            (?:\s(?<corr2>(?:Amd|Cor)\.\s?\d+))?
+            (?:\s\((?:(?<cormonth2>\d{2})/)?(?<coryear2>\d{4})\))?
           }x =~ i.hit[:code]
-          /:[^\(]+\((?<buldate2>\d{2}\.\w{1,4}\.\d{4})\)/ =~ i.hit[:title]
-          corr2&.sub! /\.\s?/, " "
+          /:[^(]+\((?<buldate2>\d{2}\.\w{1,4}\.\d{4})\)/ =~ i.hit[:title]
+          corr2&.sub!(/\.\s?/, " ")
           pref1 == pref2 && (!type1 || type1 == type2) && code2.include?(code1) &&
             (!year || year == year2) && (!month1 || month1 == month2) &&
             corr1 == corr2 && (!coryear1 || coryear1 == coryear2) &&
@@ -124,7 +122,7 @@ module RelatonItu
       def isobib_results_filter(result, year)
         missed_years = []
         result.each do |r|
-          /\((\d{2}\/)?(?<pyear>\d{4})\)/ =~ r.hit[:code]
+          /\((?:\d{2}\/)?(?<pyear>\d{4})\)/ =~ r.hit[:code]
           if !year || year == pyear
             ret = r.fetch
             return { ret: ret } if ret
