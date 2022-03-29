@@ -86,6 +86,9 @@ module RelatonItu
           language: "en",
           script: "Latn",
         }]
+      rescue Mechanize::ResponseCodeError => e
+        warn "HTTP Service Unavailable: #{e.message}"
+        []
       end
 
       # Get page.
