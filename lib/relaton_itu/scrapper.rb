@@ -187,7 +187,8 @@ module RelatonItu
           ref = r.at('./td/span[contains(@id, "title_e")]/nobr/a')
           fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en",
                                               script: "Latn")
-          bibitem = ItuBibliographicItem.new(formattedref: fref,
+          did = RelatonBib::DocumentIdentifier.new(id: ref.text, type: "ITU")
+          bibitem = ItuBibliographicItem.new(formattedref: fref, docid: [did],
                                              type: "standard")
           { type: "complements", bibitem: bibitem }
         end

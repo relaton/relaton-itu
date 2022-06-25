@@ -194,11 +194,11 @@ RSpec.describe RelatonItu do
       VCR.use_cassette "itu_r_bo_600_1" do
         bib = RelatonItu::ItuBibliography.get "ITU-R BO.600-1"
         file = "spec/examples/itu_r_bo_600_1.xml"
-        xml = bib.to_xml bibdata: true
+        xml = bib.to_xml(bibdata: true)
+          .gsub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s)
         File.write file, xml, encoding: "UTF-8" unless File.exist? file
-        expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8").gsub(
-          /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
-        )
+        expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
+          .gsub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s)
       end
     end
 
