@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"e2e91cf06819ede134709f8c1a8cb143bd8ef5bd8b9f1eec560e8eebf0da9303"
+      - W/"72e6a08324f50c0f1756b4485d0ee6d2320dc7a2f772d5b776338e1e8c13176d"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - AF82:8044:412E50:45B4F7:62B5C3D8
+      - F832:06B9:107D280:117A9ED:6300B7A2
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 24 Jun 2022 14:02:00 GMT
+      - Sat, 20 Aug 2022 10:29:54 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie6379-VIE
+      - cache-vie6331-VIE
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1656079321.629555,VS0,VE177
+      - S1660991394.482656,VS0,VE160
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - 899fd2a68cc47207395b4408ba459b4a2b988bbf
+      - 552fc8a8f2835f00dd286c50605145d9390de6aa
       Expires:
-      - Fri, 24 Jun 2022 14:07:00 GMT
+      - Sat, 20 Aug 2022 10:34:54 GMT
       Source-Age:
       - '0'
     body:
@@ -99,8 +99,8 @@ http_interactions:
         - en
         script:
         - Latn
-        fetched: '2022-06-24'
+        fetched: '2022-08-19'
         doctype: recommendation
     http_version:
-  recorded_at: Fri, 24 Jun 2022 14:02:00 GMT
+  recorded_at: Sat, 20 Aug 2022 10:29:54 GMT
 recorded_with: VCR 5.0.0
