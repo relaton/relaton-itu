@@ -1,5 +1,5 @@
-<bibitem id="ITU-TH.264" type="standard">
-  <fetched>2022-06-24</fetched>
+<bibitem id="ITU-TH.264" type="standard" schema-version="v1.2.1">
+  <fetched>2022-11-27</fetched>
   <title type="title-main" format="text/plain" language="en" script="Latn">Advanced video coding for generic audiovisual services</title>
   <title type="main" format="text/plain" language="en" script="Latn">Advanced video coding for generic audiovisual services</title>
   <uri type="src">https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=14659&amp;lang=en</uri>
@@ -95,9 +95,15 @@
       <docidentifier type="ITU">H Suppl. 19 (04/2021)</docidentifier>
     </bibitem>
   </relation>
+  <relation type="complements">
+    <bibitem type="standard">
+      <formattedref format="text/plain" language="en" script="Latn">H Suppl. 20 (10/2022)</formattedref>
+      <docidentifier type="ITU">H Suppl. 20 (10/2022)</docidentifier>
+    </bibitem>
+  </relation>
   <relation type="instance">
     <bibitem type="standard">
-      <fetched>2022-06-24</fetched>
+      <fetched>2022-11-27</fetched>
       <title type="title-main" format="text/plain" language="en" script="Latn">Advanced video coding for generic audiovisual services</title>
       <title type="main" format="text/plain" language="en" script="Latn">Advanced video coding for generic audiovisual services</title>
       <uri type="src">https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=14659&amp;lang=en</uri>
@@ -195,6 +201,12 @@
         <bibitem type="standard">
           <formattedref format="text/plain" language="en" script="Latn">H Suppl. 19 (04/2021)</formattedref>
           <docidentifier type="ITU">H Suppl. 19 (04/2021)</docidentifier>
+        </bibitem>
+      </relation>
+      <relation type="complements">
+        <bibitem type="standard">
+          <formattedref format="text/plain" language="en" script="Latn">H Suppl. 20 (10/2022)</formattedref>
+          <docidentifier type="ITU">H Suppl. 20 (10/2022)</docidentifier>
         </bibitem>
       </relation>
       <place>Geneva</place>

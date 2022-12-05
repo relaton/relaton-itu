@@ -15,6 +15,15 @@ module RelatonItu
       super
     end
 
+    #
+    # Fetch flavor schema version
+    #
+    # @return [String] flavor schema version
+    #
+    def ext_schema
+      @ext_schema ||= schema_versions["relaton-model-itu"]
+    end
+
     # @param hash [Hash]
     # @return [RelatonItu::ItuBibliographicItem]
     def self.from_hash(hash)

@@ -14,7 +14,7 @@ RSpec.describe RelatonItu do
   it "gets a code" do
     VCR.use_cassette "code" do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
-      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard">)
+      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.1">)
       expect(results).to include %(<on>2018-11-29</on>)
       expect(results.gsub(/<relation.*<\/relation>/m, ""))
         .not_to include %(<on>2018-11-29</on>)
@@ -166,10 +166,10 @@ RSpec.describe RelatonItu do
     VCR.use_cassette "hits" do
       hits = RelatonItu::ItuBibliography.search("ITU-T L.163").fetch
       expect(hits.first.to_s).to eq(
-        "<RelatonItu::Hit:"\
-        "#{format('%<id>#.14x', id: hits.first.object_id << 1)} "\
-        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163:2018"'\
-        ' @title="ITU-T L.163 (11/2018)">',
+        "<RelatonItu::Hit:" \
+        "#{format('%<id>#.14x', id: hits.first.object_id << 1)} " \
+        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163:2018" ' \
+        '@title="ITU-T L.163 (11/2018)">',
       )
     end
   end
@@ -183,7 +183,7 @@ RSpec.describe RelatonItu do
       expect(xml).to be_equivalent_to File.read(file_path).sub(
         /(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s
       )
-      schema = Jing.new "spec/examples/isobib.rng"
+      schema = Jing.new "grammars/relaton-itu-compile.rng"
       errors = schema.validate file_path
       expect(errors).to eq []
     end

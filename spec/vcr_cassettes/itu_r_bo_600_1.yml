@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '437'
+      - '433'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"72e6a08324f50c0f1756b4485d0ee6d2320dc7a2f772d5b776338e1e8c13176d"
+      - W/"a005c2cb637ddf22e824678a66e8065d501094f5d078fe5c2c5d3daa2104d271"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,29 +41,29 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - F832:06B9:107D280:117A9ED:6300B7A2
+      - C286:1942:1351B:3FBB6:638D7EB7
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 20 Aug 2022 10:29:54 GMT
+      - Mon, 05 Dec 2022 05:16:39 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie6331-VIE
+      - cache-atl18434-ATL
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1660991394.482656,VS0,VE160
+      - S1670217400.760344,VS0,VE86
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - 552fc8a8f2835f00dd286c50605145d9390de6aa
+      - a63ee64b3c0281d1abd5d7af886494594800586f
       Expires:
-      - Sat, 20 Aug 2022 10:34:54 GMT
+      - Mon, 05 Dec 2022 05:21:39 GMT
       Source-Age:
       - '0'
     body:
@@ -72,8 +72,7 @@ http_interactions:
         ---
         id: ITU-RBO.600-1
         title:
-        - type: main
-          content: Standardized set of test conditions and measurement procedures for the
+        - content: Standardized set of test conditions and measurement procedures for the
             subjective and objective determination of protection ratios for television in
             the terrestrial broadcasting and the broadcasting-satellite services
           language:
@@ -81,6 +80,7 @@ http_interactions:
           script:
           - Latn
           format: text/plain
+          type: main
         link:
         - content: https://extranet.itu.int/brdocsearch/_layouts/15/DocSetHome.aspx?id=/brdocsearch/R-REC/R-REC-BO/R-REC-BO.600/R-REC-BO.600-1-198607-I
           type: src
@@ -99,8 +99,8 @@ http_interactions:
         - en
         script:
         - Latn
-        fetched: '2022-08-19'
+        fetched: '2022-12-04'
         doctype: recommendation
     http_version:
-  recorded_at: Sat, 20 Aug 2022 10:29:54 GMT
+  recorded_at: Mon, 05 Dec 2022 05:16:39 GMT
 recorded_with: VCR 5.0.0

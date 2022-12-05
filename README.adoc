@@ -34,11 +34,12 @@ Or install it yourself as:
 [source,ruby]
 ----
 require 'relaton_itu'
+=> true
 
 hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
 => <RelatonItu::HitCollection:0x007fbf5fb4ab60 @ref=ITU-T L.163 @fetched=false>
 
- item = hit_collection[1].fetch
+item = hit_collection[1].fetch
 => #<RelatonItu::ItuBibliographicItem:0x007fbf1fc89548
  ...
 ----
@@ -47,34 +48,25 @@ hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
 [source,ruby]
 ----
 item.to_xml
-=> "<bibitem id="ITU-TL.1470" type="standard">
-  <fetched>2019-06-07</fetched>
-  <title type="title-main" format="text/plain" language="en" script="Latn">ITU-T J.163 (12/2007): Dynamic quality of service for the provision of real-time services over cable television networks using cable modems</title>
-  <title type="main" format="text/plain" language="en" script="Latn">ITU-T J.163 (12/2007): Dynamic quality of service for the provision of real-time services over cable television networks using cable modems</title>
-  <uri type="src">https://www.itu.int/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F9306-en&amp;position=9&amp;page=1</uri>
-  <uri type="obp">https://www.itu.int/rec/T-REC-J.163-200712-I</uri>
-  <docidentifier type="ITU">ITU-T J.163 (12/2007)</docidentifier>
-  ...
-</bibitem>"
+=> "<bibitem id="ITU-TLSuppl.39" type="standard" schema-version="v1.2.1">
+      <fetched>2022-12-05</fetched>
+      <title type="title-intro" format="text/plain" language="en" script="Latn">ITU-T L.1470</title>
+      ...
+    </bibitem>"
 ----
-With `bibdata: true` option XML output wrapped with `bibdata` element and `ext` element added.
+With `bibdata: true` option XML output is wrapped with `bibdata` element and `ext` element added.
 [source,ruby]
 ----
 item.to_xml bibdata: true
-=> "<bibdata type="standard">
-  <fetched>2019-06-07</fetched>
-  ...
-  <ext>
-    <doctype>recommendation</doctype>
-    <editorialgroup>
-      <bureau>T</bureau>
-      <group type="study-group">
-        <name>ITU-T Study Group 9</name>
-        <acronym>SG</acronym>
-      </group>
-    </editorialgroup>
-  </ext>
-</bibdata>"
+=> "<bibdata type="standard" schema-version="v1.2.1">
+      <fetched>2022-12-05</fetched>
+      <title type="title-intro" format="text/plain" language="en" script="Latn">ITU-T L.1470</title>
+      ...
+      <ext schema-version="v1.0.0">
+        <doctype>recommendation</doctype>
+        ...
+      </ext>
+    </bibdata>"
 ----
 
 === Get code, and year
@@ -101,10 +93,10 @@ RelatonItu::ItuBibliography.get "ITU-T G.989.2/Amd 1"
 
 [source,ruby]
 ----
-RelatonItu::ItuBibliography.get "ITU-R REC-BO.600-1"
-[relaton-itu] ("ITU-R REC-BO.600-1") fetching...
-[relaton-itu] ("ITU-R REC-BO.600-1") found R-REC-BO.600-1
-=> #<RelatonItu::ItuBibliographicItem:0x007f84e9930498
+RelatonItu::ItuBibliography.get "ITU-R BO.600-1"
+[relaton-itu] ("ITU-R BO.600-1") fetching...
+[relaton-itu] ("ITU-R BO.600-1") found ITU-R BO.600-1
+=> #<RelatonItu::ItuBibliographicItem:0x00007fb0cf8a1308
 ...
 ----
 
@@ -131,7 +123,7 @@ item.link
  #<RelatonBib::TypedUri:0x00007f82d665f0f8 @content=#<Addressable::URI:0xc184 URI:https://www.itu.inthttp//handle.itu.int/11.1002/1000/13786-en?locatt=format:pdf&auth>, @type="obp">]
 ----
 
-=== Create bibliographic item form YAML
+=== Create bibliographic item from YAML
 [source,ruby]
 ----
 hash = YAML.load_file 'spec/examples/itu_bib_item.yml'

@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!--
-    Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
-    we cannot have a new default namespace: we will end up with a grammar with two different
-    namespaces, one for isostandard and one for csand additions. And we do not want that.
-  -->
-  <include href="isodoc.rng">
-    <start>
-      <ref name="itu"/>
-    </start>
-    <define name="ol">
-      <element name="ol">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <attribute name="class">
-            <value>steps</value>
-          </attribute>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <oneOrMore>
-          <ref name="li"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
-    </define>
+  <include href="biblio-standoc.rng">
     <define name="DocumentType">
       <choice>
         <value>recommendation</value>
@@ -88,6 +59,9 @@
     </define>
     <define name="BibDataExtensionType">
       <optional>
+        <attribute name="schema-version"/>
+      </optional>
+      <optional>
         <ref name="doctype"/>
       </optional>
       <optional>
@@ -121,73 +95,6 @@
       <optional>
         <ref name="structuredidentifier"/>
       </optional>
-    </define>
-    <define name="preface">
-      <element name="preface">
-        <oneOrMore>
-          <choice>
-            <ref name="content"/>
-            <ref name="abstract"/>
-            <ref name="foreword"/>
-            <ref name="introduction"/>
-            <ref name="acknowledgements"/>
-            <ref name="clause"/>
-          </choice>
-        </oneOrMore>
-      </element>
-    </define>
-    <define name="Clause-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
-      <optional>
-        <attribute name="inline-header">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="type"/>
-      </optional>
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <ref name="section-title"/>
-      </optional>
-      <group>
-        <choice>
-          <zeroOrMore>
-            <ref name="BasicBlock"/>
-          </zeroOrMore>
-          <ref name="amend"/>
-        </choice>
-        <zeroOrMore>
-          <choice>
-            <ref name="clause-subsection"/>
-            <ref name="terms"/>
-            <ref name="definitions"/>
-            <ref name="floating-title"/>
-          </choice>
-        </zeroOrMore>
-      </group>
     </define>
   </include>
   <define name="meeting">
@@ -343,38 +250,6 @@
   <define name="workgroup">
     <element name="workgroup">
       <ref name="ItuGroup"/>
-    </element>
-  </define>
-  <define name="itu">
-    <element name="itu-standard">
-      <attribute name="version"/>
-      <attribute name="type">
-        <choice>
-          <value>semantic</value>
-          <value>presentation</value>
-        </choice>
-      </attribute>
-      <ref name="bibdata"/>
-      <zeroOrMore>
-        <ref name="termdocsource"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="misccontainer"/>
-      </optional>
-      <optional>
-        <ref name="boilerplate"/>
-      </optional>
-      <ref name="preface"/>
-      <oneOrMore>
-        <ref name="sections"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="annex"/>
-      </zeroOrMore>
-      <ref name="bibliography"/>
-      <zeroOrMore>
-        <ref name="indexsect"/>
-      </zeroOrMore>
     </element>
   </define>
 </grammar>
