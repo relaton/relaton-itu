@@ -1,0 +1,111 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/ITU-R_BO_600-1.yaml",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Ruby"
+          ],
+          "Host": [
+            "raw.githubusercontent.com"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "770"
+          ],
+          "Cache-Control": [
+            "max-age=300"
+          ],
+          "Content-Security-Policy": [
+            "default-src 'none'; style-src 'unsafe-inline'; sandbox"
+          ],
+          "Content-Type": [
+            "text/plain; charset=utf-8"
+          ],
+          "Etag": [
+            "W/\"dc16cbb7da63f695f33f9f559e54bddd4792b355518d9058f1192c7f3cc86374\""
+          ],
+          "Strict-Transport-Security": [
+            "max-age=31536000"
+          ],
+          "X-Content-Type-Options": [
+            "nosniff"
+          ],
+          "X-Frame-Options": [
+            "deny"
+          ],
+          "X-Xss-Protection": [
+            "1; mode=block"
+          ],
+          "X-Github-Request-Id": [
+            "C49A:41B1:4443C9:585937:64322550"
+          ],
+          "Accept-Ranges": [
+            "bytes"
+          ],
+          "Date": [
+            "Sun, 09 Apr 2023 02:39:12 GMT"
+          ],
+          "Via": [
+            "1.1 varnish"
+          ],
+          "X-Served-By": [
+            "cache-iad-kcgs7200154-IAD"
+          ],
+          "X-Cache": [
+            "MISS"
+          ],
+          "X-Cache-Hits": [
+            "0"
+          ],
+          "X-Timer": [
+            "S1681007952.216050,VS0,VE80"
+          ],
+          "Vary": [
+            "Authorization,Accept-Encoding,Origin"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "X-Fastly-Request-Id": [
+            "d3b7a9890e806880255dfc284524d220d1f3107b"
+          ],
+          "Expires": [
+            "Sun, 09 Apr 2023 02:44:12 GMT"
+          ],
+          "Source-Age": [
+            "0"
+          ]
+        },
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "string": "---\nschema-version: v1.2.3\nid: ITU-RBO.600-1\ntitle:\n- content: Standardized set of test conditions and measurement procedures for the\n    subjective and objective determination of protection ratios for television in\n    the terrestrial broadcasting and the broadcasting-satellite services\n  language:\n  - en\n  script:\n  - Latn\n  format: text/plain\n  type: main\nlink:\n- content: https://extranet.itu.int/brdocsearch/_layouts/15/DocSetHome.aspx?id=/brdocsearch/R-REC/R-REC-BO/R-REC-BO.600/R-REC-BO.600-1-198607-I\n  type: src\ntype: standard\ndocid:\n- id: ITU-R BO.600-1\n  type: ITU\n  primary: true\ndate:\n- type: confirmed\n  value: '1986'\n- type: published\n  value: 1986-07\nrevdate: 1986-07\nlanguage:\n- en\nscript:\n- Latn\ndoctype: recommendation\next:\n  schema-version: v1.0.0\n"
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 02:39:12 GMT"
+    }
+  ],
+  "recorded_with": "VCR 6.1.0"
+}

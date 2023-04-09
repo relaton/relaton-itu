@@ -27,13 +27,8 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
 
   spec.add_development_dependency "equivalent-xml", "~> 0.6"
-  spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "ruby-jing"
-  spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "vcr", "~> 5.0.0"
-  spec.add_development_dependency "webmock"
 
   spec.add_dependency "mechanize", "~> 2.8.0"
   spec.add_dependency "relaton-bib", "~> 1.14.0"

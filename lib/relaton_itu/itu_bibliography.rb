@@ -59,19 +59,19 @@ module RelatonItu
 
       def fetch_ref_err(code, year, missed_years) # rubocop:disable Metrics/MethodLength
         id = year ? "#{code}:#{year}" : code
-        warn "[relaton-itu] WARNING: no match found online for #{id}. "\
-          "The code must be exactly like it is on the standards website."
+        warn "[relaton-itu] WARNING: no match found online for #{id}. " \
+             "The code must be exactly like it is on the standards website."
         unless missed_years.empty?
-          warn "[relaton-itu] (There was no match for #{year}, though there "\
-            "were matches found for #{missed_years.join(', ')}.)"
+          warn "[relaton-itu] (There was no match for #{year}, though there " \
+               "were matches found for #{missed_years.join(', ')}.)"
         end
         if /\d-\d/.match? code
-          warn "[relaton-itu] The provided document part may not exist, or "\
-            "the document may no longer be published in parts."
+          warn "[relaton-itu] The provided document part may not exist, or " \
+               "the document may no longer be published in parts."
         else
-          warn "[relaton-itu] If you wanted to cite all document parts for the reference, "\
-            "use \"#{code} (all parts)\".\nIf the document is not a standard, "\
-            "use its document type abbreviation (TS, TR, PAS, Guide)."
+          warn "[relaton-itu] If you wanted to cite all document parts for the reference, " \
+               "use \"#{code} (all parts)\".\nIf the document is not a standard, " \
+               "use its document type abbreviation (TS, TR, PAS, Guide)."
         end
         nil
       end

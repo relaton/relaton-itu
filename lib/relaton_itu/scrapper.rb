@@ -190,7 +190,7 @@ module RelatonItu
           did = RelatonBib::DocumentIdentifier.new(id: ref.text, type: "ITU")
           bibitem = ItuBibliographicItem.new(formattedref: fref, docid: [did],
                                              type: "standard")
-          { type: "complements", bibitem: bibitem }
+          { type: "complementOf", bibitem: bibitem }
         end
       end
 

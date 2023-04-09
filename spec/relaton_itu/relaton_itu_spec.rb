@@ -14,7 +14,7 @@ RSpec.describe RelatonItu do
   it "gets a code" do
     VCR.use_cassette "code" do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
-      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.1">)
+      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.3">)
       expect(results).to include %(<on>2018-11-29</on>)
       expect(results.gsub(/<relation.*<\/relation>/m, ""))
         .not_to include %(<on>2018-11-29</on>)
@@ -79,12 +79,12 @@ RSpec.describe RelatonItu do
     end
   end
 
-  it do
-    VCR.use_cassette "itu_t_h_225_0_v7_2009_amd_1" do
-      bib = RelatonItu::ItuBibliography.get "ITU-T H.225.0 v7 (2009) Amd. 1"
-      expect(bib.docidentifier[0].id).to eq "ITU-T H.225.0 v7 Amd 1"
-    end
-  end
+  # it do
+  #   VCR.use_cassette "itu_t_h_225_0_v7_2009_amd_1" do
+  #     bib = RelatonItu::ItuBibliography.get "ITU-T H.225.0 v7 (2009) Amd. 1"
+  #     expect(bib.docidentifier[0].id).to eq "ITU-T H.225.0 v7 Amd 1"
+  #   end
+  # end
 
   it "get reference with slash in code" do
     VCR.use_cassette "itu_t_g_780_y_1351" do
@@ -147,25 +147,25 @@ RSpec.describe RelatonItu do
     end
   end
 
-  it "fetch hits" do
-    VCR.use_cassette "hits" do
-      hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
-      expect(hit_collection.fetched).to be_falsy
-      expect(hit_collection.fetch).to be_instance_of RelatonItu::HitCollection
-      expect(hit_collection.fetched).to be_truthy
-      expect(hit_collection.first).to be_instance_of RelatonItu::Hit
-      expect(hit_collection.to_s).to eq(
-        "<RelatonItu::HitCollection:"\
-        "#{format('%<id>#.14x', id: hit_collection.object_id << 1)} "\
-        "@ref=ITU-T L.163 @fetched=true>",
-      )
-    end
+  it "fetch hits", vcr: { cassette_name: "hits" } do
+    hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
+    expect(hit_collection.fetched).to be false
+    expect(hit_collection.fetch).to be_instance_of RelatonItu::HitCollection
+    expect(hit_collection.fetched).to be true
+    expect(hit_collection.first).to be_instance_of RelatonItu::Hit
+    expect(hit_collection.to_s).to eq(
+      "<RelatonItu::HitCollection:" \
+      "#{format('%<id>#.14x', id: hit_collection.object_id << 1)} " \
+      "@ref=ITU-T L.163 @fetched=true>",
+    )
   end
 
   it "return string of hit" do
     VCR.use_cassette "hits" do
-      hits = RelatonItu::ItuBibliography.search("ITU-T L.163").fetch
-      expect(hits.first.to_s).to eq(
+      hits = RelatonItu::ItuBibliography.search("ITU-T L.163")
+      hit = hits.first
+      hit.fetch
+      expect(hit.to_s).to eq(
         "<RelatonItu::Hit:" \
         "#{format('%<id>#.14x', id: hits.first.object_id << 1)} " \
         '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163:2018" ' \

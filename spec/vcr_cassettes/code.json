@@ -1,0 +1,554 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://www.itu.int/net4/ITU-T/search/GlobalSearch/RunSearch",
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "string": "json=%7B%22Input%22%3A%22ITU-T+L.163%22%2C%22Start%22%3A0%2C%22Rows%22%3A10%2C%22SortBy%22%3A%22RELEVANCE%22%2C%22ExactPhrase%22%3Afalse%2C%22CollectionName%22%3A%22General%22%2C%22CollectionGroup%22%3A%22Recommendations%22%2C%22Sector%22%3A%22t%22%2C%22Criterias%22%3A%5B%7B%22Name%22%3A%22Search+in%22%2C%22Criterias%22%3A%5B%7B%22Selected%22%3Afalse%2C%22Value%22%3A%22%22%2C%22Label%22%3A%22Name%22%2C%22Target%22%3A%22%2Fname_s%22%2C%22TypeName%22%3A%22CHECKBOX%22%2C%22GetCriteriaType%22%3A0%7D%2C%7B%22Selected%22%3Afalse%2C%22Value%22%3A%22%22%2C%22Label%22%3A%22Short+description%22%2C%22Target%22%3A%22%2Fshort_description_s%22%2C%22TypeName%22%3A%22CHECKBOX%22%2C%22GetCriteriaType%22%3A0%7D%2C%7B%22Selected%22%3Afalse%2C%22Value%22%3A%22%22%2C%22Label%22%3A%22File+content%22%2C%22Target%22%3A%22%2Ffile%22%2C%22TypeName%22%3A%22CHECKBOX%22%2C%22GetCriteriaType%22%3A0%7D%5D%2C%22ShowCheckbox%22%3Atrue%2C%22Selected%22%3Afalse%7D%5D%2C%22Topics%22%3A%22%22%2C%22ClientData%22%3A%7B%7D%2C%22Language%22%3A%22en%22%2C%22SearchType%22%3A%22All%22%7D"
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Host": [
+            "www.itu.int"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "Content-Length": [
+            "1060"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Set-Cookie": [
+            "BIGipServerV19edYz/rGMxUCJeS7ZH3w=!9Z8KTMloBhqRON3/dsa4jizK8gtM0PNfV53M8iEMuDzPsuzma2e6WDvSEUjnNM2/2MpTRU/9fThULjk=; path=/; Httponly; Secure",
+            "GSCookie_CookieId=EHs6fiEAfF07sll1Dq87W9HwDxFFlnELZchAABRN9LVELuOgca36GN47dGlhyFJO5oHULp3Zbimgug1BGIhNEw%3D%3D; expires=Wed, 09 Apr 2025 15:11:52 GMT; domain=www.itu.int; path=/",
+            "GSCookie_CookieId=Z7yAzo7MchgIniF7VlpJSxRsr5YOg2KLP%2FYiInZv7ToPxsvKOJlRgF2OSaa%2BW046f9h2ZbT09PuuvaxKe1YiHQ%3D%3D; expires=Wed, 09 Apr 2025 15:11:52 GMT; domain=www.itu.int; path=/",
+            "GSCookie_QueryId=6338849; expires=Wed, 09 Apr 2025 15:11:52 GMT; domain=www.itu.int; path=/",
+            "GSCookie_QueryId=; expires=Wed, 09 Apr 2025 15:11:52 GMT; domain=www.itu.int; path=/",
+            "TS010592a8=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; Path=/",
+            "TS0110b275=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; path=/; domain=www.itu.int"
+          ],
+          "Date": [
+            "Sun, 09 Apr 2023 15:11:52 GMT"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"results\":[{\"Identifier\":\"11.1002/1000/13786-en\",\"Title\":\"ITU-T L.163 (11/2018): Criteria for optical cable installation with minimal existing infrastructure\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F13786-en\\u0026position=10\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"March, 2019\"}],\"ExtractFileContent\":\"...ES  L.430\\u2013L.449   For further details, please refer to the list of ITU-T Recommendations.      Rec. ITU-T L.163 (11/2018) i Recommendation ITU-T L.163 Criteria for optical fibre cable installation with minimal e...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F13786-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.163-201811-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"2\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F13786-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.163-201811-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"},{\"Id\":\"3\",\"Type\":\"epu\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F13786-en%3Flocatt%3Did%3A3%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.163-201811-I!!EPB-E\\u0026type=items\",\"Icon\":\"epub-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/13786-en\",\"Date\":\"March, 2019\",\"Url\":null,\"Name\":\"ITU-T L.163 (11/2018)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/14547-en\",\"Title\":\"ITU-T L Suppl. 39 (09/2020): ITU-T L.1470 -  Optical fibre cable Recommendations and standardization guideline\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F14547-en\\u0026position=9\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"December, 2020\"}],\"ExtractFileContent\":\"...U-T L.162 (2016), Microduct technology and its applications.  2 L series \\u2013 Supplement 39 (09/2020) [ITU-T L.163] Recommendation ITU-T L.163 (2018), Criteria for optical cable installation with minimal existing i...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F14547-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"https://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.Sup39-202009-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"2\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F14547-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"https://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.Sup39-202009-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/14547-en\",\"Date\":\"December, 2020\",\"Url\":null,\"Name\":\"ITU-T L Suppl. 39 (09/2020)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/15032-en\",\"Title\":\"ITU-T L.1604 (08/2022): Development framework for bioeconomy in cities and communities\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F15032-en\\u0026position=8\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"October, 2022\"}],\"ExtractFileContent\":\"...  T e l e c o m m u n i c a t i o n  U n i o n    ITU-T  L.1604 TELECOMMUNICATION STANDARDIZATION SECTOR ...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F15032-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"https://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.1604-202208-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"2\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F15032-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"https://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.1604-202208-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/15032-en\",\"Date\":\"October, 2022\",\"Url\":null,\"Name\":\"ITU-T L.1604 (08/2022)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/15087-en\",\"Title\":\"ITU-T L Suppl. 50 (07/2022): Case studies on implementation of cities\\u2019 circular actions\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F15087-en\\u0026position=7\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"October, 2022\"}],\"ExtractFileContent\":\"...  T e l e c o m m u n i c a t i o n  U n i o n    ITU-T  Series L TELECOMMUNICATION STANDARDIZATION SECTO...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F15087-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"https://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.Sup50-202207-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"2\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F15087-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"https://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.Sup50-202207-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/15087-en\",\"Date\":\"October, 2022\",\"Url\":null,\"Name\":\"ITU-T L Suppl. 50 (07/2022)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/14564-en\",\"Title\":\"ITU-T L.1024 (01/2021): The potential impact of selling services instead of equipment on waste creation and the environment \\u2013 Effects on global information and communication technology\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F14564-en\\u0026position=6\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"March, 2021\"}],\"ExtractFileContent\":\"...  T e l e c o m m u n i c a t i o n  U n i o n    ITU-T  L.1024 TELECOMMUNICATION STANDARDIZATION SECTOR ...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F14564-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.1024-202101-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"2\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F14564-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-L.1024-202101-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/14564-en\",\"Date\":\"March, 2021\",\"Url\":null,\"Name\":\"ITU-T L.1024 (01/2021)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/1895-en\",\"Title\":\"ITU-T Q.163 (11/1988): Manual testing\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F1895-en\\u0026position=5\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"November, 2002\"}],\"ExtractFileContent\":\"...\\n  \\u0022    INTERNATIONAL  TELECOMMUNICATION  UNION   ITU-T  Q.140-Q.180TELECOMMUNICATION STANDARDIZATION  SE...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"zip\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F1895-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-Q.140-Q.180-198811-I!!ZWD-E\\u0026type=items\",\"Icon\":\"zip-icon.png\"},{\"Id\":\"2\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F1895-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-Q.140-Q.180-198811-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"3\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F1895-en%3Flocatt%3Did%3A3%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-Q.140-Q.180-198811-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/1895-en\",\"Date\":\"November, 2002\",\"Url\":null,\"Name\":\"ITU-T Q.163 (11/1988)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/3394-en\",\"Title\":\"ITU-T F.163 (07/1996): Operational requirements of the interconnection of facsimile store-and-forward units\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F3394-en\\u0026position=4\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"January, 1997\"}],\"ExtractFileContent\":\"...[\\r\\n  \\u0022INTERNATIONAL  TELECOMMUNICATION  UNIONITU-T F.163TELECOMMUNICATIONSTANDARDIZATION  SECTOROF  ITU(0...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F3394-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-F.163-199607-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"2\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F3394-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-F.163-199607-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/3394-en\",\"Date\":\"January, 1997\",\"Url\":null,\"Name\":\"ITU-T F.163 (07/1996)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/9306-en\",\"Title\":\"ITU-T J.163 (12/2007): Dynamic quality of service for the provision of real-time services over cable television networks using cable modems\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F9306-en\\u0026position=3\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"May, 2008\"}],\"ExtractFileContent\":\"...  T e l e c o m m u n i c a t i o n  U n i o n    ITU-T  J.163TELECOMMUNICATION STANDARDIZATION  SECTOR O...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"zip\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F9306-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200712-I!!ZWD-E\\u0026type=items\",\"Icon\":\"zip-icon.png\"},{\"Id\":\"2\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F9306-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200712-I!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"3\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F9306-en%3Flocatt%3Did%3A3%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200712-I!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/9306-en\",\"Date\":\"May, 2008\",\"Url\":null,\"Name\":\"ITU-T J.163 (12/2007)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/8655-en\",\"Title\":\"ITU-T J.163 (11/2005): Dynamic quality of service for the provision of real-time services over cable television networks using cable modems\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F8655-en\\u0026position=2\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"April, 2006\"}],\"ExtractFileContent\":\"...  T e l e c o m m u n i c a t i o n  U n i o n    ITU-T  J.163TELECOMMUNICATION STANDARDIZATION  SECTOR O...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"zip\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F8655-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200511-S!!ZWD-E\\u0026type=items\",\"Icon\":\"zip-icon.png\"},{\"Id\":\"2\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F8655-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200511-S!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"3\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F8655-en%3Flocatt%3Did%3A3%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200511-S!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/8655-en\",\"Date\":\"April, 2006\",\"Url\":null,\"Name\":\"ITU-T J.163 (11/2005)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"},{\"Identifier\":\"11.1002/1000/5388-en\",\"Title\":\"ITU-T J.163 (03/2001): Dynamic quality of service for the provision of real time services over cable television networks using cable modems\",\"Collection\":{\"Name\":\"ITU-T Recommendations\",\"Title\":\"ITU-T Recommendations\",\"Description\":\"\",\"Sector\":\"ITU-T\",\"Group\":\"Recommendations\"},\"Redirection\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F5388-en\\u0026position=1\\u0026page=1\",\"Language\":\"en\",\"Dir\":\"ltr\",\"Properties\":[{\"Title\":\"Publication date\",\"Value\":\"January, 2002\"}],\"ExtractFileContent\":\"...\\n  \\u0022    INTERNATIONAL  TELECOMMUNICATION  UNION   ITU-T  J.163 TELECOMMUNICATION STANDARDIZATION  SECTOR ...\",\"Locations\":[{\"Id\":\"1\",\"Type\":\"zip\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F5388-en%3Flocatt%3Did%3A1%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200103-S!!ZWD-E\\u0026type=items\",\"Icon\":\"zip-icon.png\"},{\"Id\":\"2\",\"Type\":\"pdf\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F5388-en%3Flocatt%3Did%3A2%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200103-S!!PDF-E\\u0026type=items\",\"Icon\":\"pdf-icon.png\"},{\"Id\":\"3\",\"Type\":\"doc\",\"Href\":\"/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F5388-en%3Flocatt%3Did%3A3%26auth\",\"RawHref\":\"http://www.itu.int/rec/dologin_pub.asp?lang=e\\u0026id=T-REC-J.163-200103-S!!MSW-E\\u0026type=items\",\"Icon\":\"doc-icon.png\"}],\"TopResult\":false,\"Words\":{\"ITU-T\":true,\"L.163\":true},\"Media\":{\"Identifier\":\"11.1002/1000/5388-en\",\"Date\":\"January, 2002\",\"Url\":null,\"Name\":\"ITU-T J.163 (03/2001)\",\"ParentHandleID\":\"\",\"ParentName\":null,\"Type\":null,\"ContentText\":null,\"ImageUrl\":null,\"Tags\":[]},\"WordsMissing\":false,\"CollectionTypeCSSClass\":\"label-t-sector\",\"LanguageCSSClass\":\"label-en\"}],\"input\":\"ITU-T L.163\",\"totalAmount\":714,\"collationQuery\":\"\",\"attempt\":0,\"languageUpdated\":false,\"allowed\":true}"
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:52 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://www.itu.int/net4/ITU-T/search/api/redirection?dest=http://handle.itu.int/11.1002/1000/13786-en&page=1&position=10",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Cookie": [
+            "BIGipServerV19edYz/rGMxUCJeS7ZH3w=!9Z8KTMloBhqRON3/dsa4jizK8gtM0PNfV53M8iEMuDzPsuzma2e6WDvSEUjnNM2/2MpTRU/9fThULjk=; GSCookie_CookieId=EHs6fiEAfF07sll1Dq87W9HwDxFFlnELZchAABRN9LVELuOgca36GN47dGlhyFJO5oHULp3Zbimgug1BGIhNEw%3D%3D; GSCookie_QueryId=6338849; TS010592a8=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; TS0110b275=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98"
+          ],
+          "Host": [
+            "www.itu.int"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 302,
+          "message": "Found"
+        },
+        "headers": {
+          "Location": [
+            "http://handle.itu.int/11.1002/1000/13786-en"
+          ],
+          "Date": [
+            "Sun, 09 Apr 2023 15:11:52 GMT"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": ""
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:52 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "http://handle.itu.int/11.1002/1000/13786-en",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Host": [
+            "handle.itu.int"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 301,
+          "message": "Moved Permanently"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.18.0 (Ubuntu)"
+          ],
+          "Date": [
+            "Sun, 09 Apr 2023 15:11:52 GMT"
+          ],
+          "Content-Type": [
+            "text/html"
+          ],
+          "Content-Length": [
+            "178"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Location": [
+            "https://handle.itu.int/11.1002/1000/13786-en"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx/1.18.0 (Ubuntu)</center>\r\n</body>\r\n</html>\r\n"
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:52 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://handle.itu.int/11.1002/1000/13786-en",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Host": [
+            "handle.itu.int"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 302,
+          "message": "Found"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.18.0 (Ubuntu)"
+          ],
+          "Date": [
+            "Sun, 09 Apr 2023 15:11:53 GMT"
+          ],
+          "Content-Type": [
+            "text/html;charset=utf-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Location": [
+            "http://www.itu.int/ITU-T/recommendations/rec.aspx?rec=13786&lang=en"
+          ],
+          "Expires": [
+            "Mon, 10 Apr 2023 15:11:53 GMT"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "<html><head><title>Handle Redirect</title></head>\n<body><a href=\"http://www.itu.int/ITU-T/recommendations/rec.aspx?rec=13786&amp;lang=en\">http://www.itu.int/ITU-T/recommendations/rec.aspx?rec=13786&amp;lang=en</a></body></html>"
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:53 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "http://www.itu.int/ITU-T/recommendations/rec.aspx?lang=en&rec=13786",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Cookie": [
+            "GSCookie_CookieId=EHs6fiEAfF07sll1Dq87W9HwDxFFlnELZchAABRN9LVELuOgca36GN47dGlhyFJO5oHULp3Zbimgug1BGIhNEw%3D%3D; GSCookie_QueryId=6338849; TS010592a8=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; TS0110b275=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98"
+          ],
+          "Host": [
+            "www.itu.int"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 302,
+          "message": "Moved Temporarily"
+        },
+        "headers": {
+          "Location": [
+            "https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=13786&lang=en"
+          ],
+          "Server": [
+            "BigIP"
+          ],
+          "Connection": [
+            "Keep-Alive"
+          ],
+          "Content-Length": [
+            "0"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": ""
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:53 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://www.itu.int/ITU-T/recommendations/rec.aspx?lang=en&rec=13786",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Cookie": [
+            "BIGipServerV19edYz/rGMxUCJeS7ZH3w=!9Z8KTMloBhqRON3/dsa4jizK8gtM0PNfV53M8iEMuDzPsuzma2e6WDvSEUjnNM2/2MpTRU/9fThULjk=; GSCookie_CookieId=EHs6fiEAfF07sll1Dq87W9HwDxFFlnELZchAABRN9LVELuOgca36GN47dGlhyFJO5oHULp3Zbimgug1BGIhNEw%3D%3D; GSCookie_QueryId=6338849; TS010592a8=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; TS0110b275=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98"
+          ],
+          "Host": [
+            "www.itu.int"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Cache-Control": [
+            "private"
+          ],
+          "Content-Type": [
+            "text/html; charset=utf-8"
+          ],
+          "Content-Encoding": [
+            "gzip"
+          ],
+          "Vary": [
+            "Accept-Encoding"
+          ],
+          "Date": [
+            "Sun, 09 Apr 2023 15:11:55 GMT"
+          ],
+          "Content-Length": [
+            "21874"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "\u001f‹\b\u0000\u0000\u0000\u0000\u0000\u0004\u0000í½\u0007`\u001cI–%&/mÊ{JõJ×àt¡\b€`\u0013$Ø@\u0010ìÁˆÍæ’ì\u001diG#)«*ÊeVe]f\u0016@Ìí¼÷Ş{ï½÷Ş{ï½÷º;N'÷ßÿ?\\fd\u0001löÎJÚÉ!€ªÈ\u001f?~|\u001f?\"~ãä7N\u001eÿ®O¿<yóû¼<Mçí¢L_~õäùÙIúÑöİ»ß½wr÷îÓ7OÓßûÛo¾xîwÒ7u¶lŠ¶¨–Yy÷îé‹Òæm»zt÷îÕÕÕøêŞ¸ª/î¾yu÷\u001d`íâeıu»õŞ\u001cÏÚÙGGÜ9¾L‹Ùg\u001fMÛrgç÷ÿ6ı¹ûQZfË‹Ï>Ê—\u001f¥ï\u0016å²yT}öÑº^>j¦ó|‘5Û‹bZWMuŞnO«Å£êü¼˜æú\u0003`\u001fÏólæ\u0001•¿M\u001fîâë”Ç¿ëövúyYM²2%¬ò´Í.Ò­\u000búwüÓÍ”¾«ª‹2O\tÛë¶˜6éö¶yµ™ÖÅªM³æz9M›zú\u0019“ Q\u001a\\ğ‹\u0004h‘-³‹¼\u001e\u0013Šw\u0001øîO7¿\u0007áôÕñöÃƒıû»÷÷>İ¾ÿÑÑã»\u0002.\u0004®á¹*–³êj<ËÚìyv×égı~ægÒï}ÿĞ½s¾^NAé\u0014ınİIqjÛWëf¾•Õ\u0017ëE¾l›;‡é/qïqóºùx”.ó«ôiÖæ[wî\u0010àn“iµ</.¨ÙÇÁp>F[j”z£Ò\u000f\u0016D’\u0014tÚÎÑº¸üì£ß{›^=©\u0016«¬-&eşQJ0[Bé³ÎN?;ø(½{$ï,³EşÙGŸŸ¾8}uüæËW^»/\f\u0017¤¯çY¿¬ŠeÛ}oUW\u0017ÅÌ{É5\u001d7Ÿ¼Ìêö%ÍÒøi5e‚¸÷}\\Oäíí7×+\u001fÑ6×Ş\u0005\u0003\u001f¦S\u0002Ûäígëö|ÛC>\u0006ä9ñöšúô\u0000Ñc¯œ¾[\u0015uŞx-w¸a[´eN´ı±³7_m¿I_åÄc„=M2&~d“¬ÉI\u0010îš–:\u000bàzz'móÅª¤ÙM›–(Ğ¤Xâ€Uzöb–¯\b\u0016uçñ|Y,ß¦u^~öQ3¯êvºnÓ‚ú(m‰$Ÿ}T,èÕ»ï¶å³yŸëgÍİ²º¨š»E»Ş>Ï.ñı˜şáQ8˜ÙjUæÛmµÎ‡AH£û\u000fÆ«åÅï7Å\u000fòæ³\u001eì½{°·\u0001Úƒ½÷¶»»ÿş¿\u0001\u001e}k\u0000*á@ñgÙ4ŸTÕÛôK\"lúy­æĞ7Í£ô¼¨›6İK‰'©ošô:ŸÒi¶L×MO\u001ee³E±lÒl9»[ÕüÁjõû\u00173of˜iˆÍWyİ^öQuñ\búì÷\u0007û{|C“\u000e¤\"­\u0001“;Á÷\n\u0013H_\u0015eIZ Ÿ¥mExÒ\u001fí¼hÒŠf0!~_\u0012³\u0014-K \u0004-b¹~\u000fÌƒ\u001e./??Mßœ½y~š~şåéëôÛ§¯NÑyäÕY.z„ØÚ\u0003ğÅé›ãôééë“Wg/ßœ}ùâF0ëºô^çş¿zõüÆ×ÀÛŞ{$d«ly=Ğ˜¹\u0001ßÉÜ(%\u001dW5íu™7ó<'\u001d#ü3mD. «cúÃ\b\u0013«\u0015ş{‘ÏŠŒ\u0018²$ô©ÓÛ\u0000[dÅò\u001b\u0003Ön×ùô\u001b¶h¶ë6?Y7mµØ&f¼üô6`•ˆÂ\u0003~ÛŸÎ.3ù”„Ó·ÀÙOgïÔ\u0004g«¢aã‹Ïî–Å¤¹ûÓ¿h××wwÇŸ÷õ1±>™ü!Cüuº.¨Ûƒñî§ú÷öºø®Z&È\u0018úæ\u0003áTWËo\u0004\u0016¸o™]F!@©ĞÌ;ÛCFFİ*i!ÿ\n+\tçÜ¥öÛoî\u0012\u0013zö­¹K†ûUŞTëzš³w³ßcöÙéü§¾øÉ“ÉËÙŞïóæ§ïwúû|ú`şûŸÿÔüùÕÓlñí¯Ş¾xrùàİê\u0017½½ÿtçË/Ÿ¿yöfúö'_}÷ÅÉÓ§ëÕl÷âAıùÅO5»ßşÁÓëÅ“\u0007{/²7ÏO¿üòË{ÓæéŞÕä\u0017=ûE{Íé·«ûÕòêéêôéï}rzµ]Ì~â\u0017}5y8ËŸÌN^]<˜]¼Ù}‘í}¾ÿÅëû÷îß{s±÷\u000b³Åê°ıìÓ{\u0007»÷w÷vö\u001e><¸÷`ÿş}ò\u0010<B2ã÷dÇ\bÕ{Râúùú÷şıËo\u0017çŸşÄì‹Ÿş½î]üş?ıùOïï~ûÛ_şäñ›\u0017ÅËïü^O\u001f\u001eÿ¢ãİŸø©ü÷şî—\u0007Ó_´¾÷åõ/úE?ø½_lgïİOœ½İ¹wPİ›´¿ÿñOış«/òáŞ§{ÍO>Ûn¾øêù«åWU~5Ÿ¶ëÓ³\u0007\u0007¿ÏÓÕêİîƒû×«§çÍ‹ƒë‹*_ıtşİ/úÕ“/_şäåêÓo¿^5ß}şzoşê'¾ûİ‹'ÛïòyşS_­¿s>}õ|ºûäá?»-‰›~l,\u000e¿*îßŸèµşı×ÓßŸˆ÷û7yVOç»¿?\u0018U¾Ø!ïx’Mß^ÔÕz9£€¢¬êGWs²¡‡—ESLŠ²h¯\u001fÍ‹\u0019yD‡³¢!Ş½~´¬–ùáª\"KKÓğ(›4U¹¦\u0017Êü¼}´³zwØV+ş\tçúıĞÙ%t\u0004‡\u001fß;Ø?}xpˆ¡mÏhâktéûı\u0001ïõ\u0000¿?Œ{\u0004£G«\u001frÿäÁÓS\u0006Göÿ.O\u000bI?‚°#ú '÷}Ÿ³ãqâ•ï\u0015çiÙ¦g§éƒï\u001f¥'Õì:–YCnXA~Gş)}›?Ä?\u0007øçAJ\u001eL1£ğ\u0015Íãßõ{\u0004°8ÿ~\u0000o\u0010Ø\u0003€x`\u0007Q`\fBİ\u000eÎÃ(\u001c\u0006ñğ6 .˜N}(7¿ù»~ÿ\bà³Ø»ª“©E\b€>äOÃ™¥\u0006F<+.\rÄ+r{É[\"[\u0001şøì#ÇGÒ\u001f???OÉIÛb'ª¹ë¾»\u000b¤È\u0017_mO.¶÷v\u001f¾Ûİƒ}‡\u0014Â*ÏÚíwéN\nA\u0003¦Ò'Ç&ü{óåK\u0018¢,üÖÃ\n|OìMx\u0005MğøÍêê\n\rèÓàñ›€İ\u0005\f}Ñ{ü–$64\u0014´Œ·ÅÃ´M¿¨ˆàEÎ.8ÅUyIún§/kŠ_Ó¢iÖyJ\u0001ßÎAúÓëeîíìî¥¯ÈóX\u0016éO¾<¦I›ïš^\u0011¦\u0010-(À\u0014ƒ’/ï~tD³\u0007ê°î\u001eñ¼Q×Ñ'|/e—^¢Š\r/áy\\,.\u0002\u0014ÄWĞ‰Æ'âà7ÌìGiV’¯\rÈĞñ„Ü0|Ÿ¨\u0014O‘¹ÌY§l7WEK©¢ÁÙ0ÏãùŞ\u0011¥ \u0016EÛ\n‘‰\u001d–9yAË\u000b¦óUU—3\"ÎŞMpÖ¥ÁcJ>`}^¼»©k<dà~árÒ¬\u000e\u001f“«xÃ\u000bï®Ë›šxô`<h¾ïÒg\u001b^»ñ{âÃ»cCÜq@İÍ\fC/\u0012ÿ^\u0012]Ï)^Ü½¿“bŠE;Ğ÷ÑÇ{\t*\u0000a/ñı‚?¸=„»c‘Åm1`›ÛÓğ;$ÛĞx\u0003±6~ÇH‰Ø\u000fb\u0013`BMw)\rªª’=€¬,.–Òº¸˜·¬îèèƒŞÒ×\u0014i‘^Ë(³FÖõ2/«\u0015Yğ–)ø(=\u001e§_}~üüt”îİK_¯rRà\u0013J#’şxx\u0003y!Íó\u001c8|öÑ=JF)†«l6#¡¢~”îC!§çe•µ\u0016_‘ê«¶h(\u0019××\u0000_½Ø~ıôóíçô‡(\u0001\u0013ûÅ\u001e\u001eàé’\u0012%›F98ÛÍÔn|¦†^–\u0017•ïº/š—:ŸÒ‡fÂoa_€Ô½½X+<Ü’²Ë\u001fÁY£\bŒò\u0000MK\nĞ¼·éó¡÷ñ|\r-F\u001aÌ¼2¯\u0016yºXîa\u000bŒ\u0005Ò«ÍİY~­Ëvœ5+\u0002JÚ\u001dšı6ZÏu@°iø\u0001ì‹œ,wV’ OkJÈÔEÖFûû\\Ú¥¯]»¯Õÿ½´ÎfE…\u0018l½,¦ìwP¢¡m¿Š\"ñª÷ê×Âa?ÍÈ@]ZßlÓÓÃìM\u0014³×-)Ú¬\u0015?°hİ\u0002öûs‹y¼\u00015ë‰°¥E\u0015I\u0015Ê©`)…ü‚19:w—y«Ø\u0017ËóêîÓ\u0000ùã\tR’ü5\u0010'a»‘ æy_<¸“»¤ghá„œ§Sşå\u001bíÔÍ\u0013ÜßU\u0013®cÊÅ~Î_ÿ,õ½ZOJeÑ8\u0006†a~¶\u0010ài–áö\"½Ñh×&İñ³ÕõE¶ÒÃ!?yıù7Úc„½,\u000eM»]o`€×øşg“\u0005j·¯ò\u000bâ\u0001R°/i\u001aò%’LŒ€ùœ\u0002\u0011ùüg\u0005‹7w\u0017ì—4ó\">'ß¡e¼oJòÉ†dä,Zåj±ÁD!ÉëÏ”´¥FÔí‡õJ\u0011ÆÛfEëC·ëxqm_ –·ï}(x ¯Ìs\u000bH\u001eşdˆ°xmp5Söô££§¤\u001fÕ\u000f\u0003‚ï\u000f÷Ó\u000e\\\u001a{›—”ÿZ°ã¾‘?¾\u001eğ\u0007\u001dàÃ>:úB~ÿ8ı)Ê°}\rğ?Mì¸MØvºÀÇWo\u0003wÃl\u0019W’~í=âƒ\u001aO¯ç…â\u0019z]^\u0015\u00173ş\"7 7•¿|OpÙÿ\\‘œrvÀºôÒcÀoi3t¾·ŸâımøÑ\u0014N\f½†‡2\u001bà†Şê7)Dú&şŞĞèñÈ\u0000#Hğ€©Aïé\"@ó~«\u000e\u000en†?\u0004H€\u0010Eù­È÷ô\u001aOÃ¤&èÓz½˜|y¸·—z\u0000\u0006^ÂÓ}‘h‡\u001f¼¬½é=<W74Àó8_\u001cı>Õš\u0017È)å@bI\u001fÜâ5R‘K\u0010âcIo¿¦tş\u0017ÙêeÖÎw?Öœ‹ÿïÍ\u0010ñ\u0018±ş\u0018bİ7H\u001f\u001f}›b \b¸\u0000ı…\u0017­‚§\u0017Y&>û8Ê²\u001f\u001b°ü-¹<Á·ä\rÍòwÚ\u0003·è¾.o7\u0002K—„.å¤üı§ëº&eıûƒ)Fó÷G\f‡–G\u0018\u0002eôñ+”\u0017uıœ–0ï¥[»»w)[ppG¿¼¹÷[5||w\u0013O\f\t…yD8À{û\u0003òa.ß\u001e0ÛÒß7s­÷f3'¶ÜnçECŸKpË\u0010\bxR–KS»“k›²ÍW\u0019Ò¹»;”Î-¯‘Ù£t\fåIT^£/NJÒ\u0012z}\rJÑw·éMßÅ\u001b·hí\rr:\u0018ÛïßVU9©n54<>ˆ)%hªÅï/¹Û\u0002ÀC\u0012£ \f\u0016“uÛVËßÿœ\\ŸIU½}\u001f`x8så'\u0004^s×\u0000Ü&wz9“ì\u0013'«˜j˜gÚ\u0002Y©Û‹\u001aÁQ´”BEzæ=`á\u0019\u001c„Â\u001b\u001eƒ6ø\u0006‡@\tá·9\u0019°ol\f\u0006àğ s‹³å78ŠœÜ¥ò\u001b\u001b\u0002C\u001bÀÿ²ÈRşşı°¿Iéù\u000f\u0014\u000b)@_æn§\"nÙ‡À7\u0014Tµpc\u000f·.>İ\bô&€\u0002\f\nı\u0016\u0016M\u0000\u001d°À)ŠÂ\u001a‚#0ÈÿŠ¿EßÂ¸Æ–Qéëàá¶²úG¹L\u0018ÿôî]i\u001aiLØ\u0018¶§…-¬ï\u000fqúcZ£Yèš)9\u001a”p{F\u001f|”.òv^‘·°ªÈ2rˆZ-?ûh\f\u0017…\u001d’ßƒ~ùl÷ŞƒƒOa¶X\u001dbyè³œä\u0013\u001e\u0006}oàP¯@\u0006?ŠåŠÒuíõŠzš\u00173ZôÿHûııÿÓŸ<}ñæÍñ«ÏOß\bˆÎG—Y¹¦†\u0010 Û@¢·¾ú‚~\u0006°Ü‡·…&’\u0012ğ÷'\t^şşo²É\tıM¿æõîïR\u0016ô\råÄZ\nzĞÕû½¡xüâ_ø‹ÖU{xL4¾Ì©ù\u0019¼>ùìÑÎH~¡OyµcÆïÊ‡¾×Öë|\u0014ùçûîµïfÍóŠ\u0016'f_R¶&xù<+›|4ğï÷ÉäùıÿŸ<;ıîë7ÇoNeôÁ\u0007:¸»W§/Ÿ^}õ/Ş\\üà‹7Çû/~pvÿéŞO|÷xñû¼ü©'¿ÏéñÅ\u0017/Ÿ¾û}N¾}ñê«Ÿú½ç;O^O\u000f¦÷Ì'?½¿ø©{?ñàåÉÃ\u001fL?¶~Y<ùÎO>ûªıÉ“'_<ÿéÓ½/®«/Şœ^~ñÓÇï¾<)ßşÔñÙ3†{qöT>±?¯\u001e¾}vq–?Ù{¸ş©ÅÃŸıŞ_<{º|Ue¿÷\u0017ëéŞO6?õİ\u0017;¿×ÉÛ\u0007?õäâäÉ«ûç¿÷Î‹ËÉòÕõdïİ\u000f¾Züä»ÙwËëŸúÉ'—Ó{¯N~Ÿï¾¨_ïıäıß{÷à»Ç?ñÕÅïsïUóÅÓã·¿\u000fÁ}ş“ëÙ³‡íïóİrıg¯æ¿Ï[†3Ï¾{¿œşôé³³Ï_ìL\u001e_}çsş¼¤ÿŸO¾ûl5)^}õû|÷;O'{÷wğîOıŞgï€óO-^ıŞ?uõÓ;o²7¿èIsñäóıwÕİÏ_ÿ¢ßûîª~³÷ÕåÎ'Eı¬njzïìEvõÙg:cª‹è·fZ\u0017+3yXK¼ûÓÙe&ŸB4ïŞ}ü»~ïäéñ›ãïıÆÉeVÃË„Ø¦Ÿ¥³jº¦8£\u001dC?4ßûØÉôÇß§ ©8O·~Wm}'ıÅ¢[ôoÿm÷\u001a½ôK~ãä|½$6'åõûÿş³ê%é–'´Ú»E‰£eû&«)0Jùãú‚\u0001XØ~‡c²¸ë\t­İ§?ó3éV÷Ã­;éïúYÊL|Ç¾Ç4T}\u0000…púfÌ|J(s·‚\u0003¡JÍùé¼C¯°\u000e\tß2ÈFŞ3(éWD\u0001úßİ»ßÿ>QŸ\u0002#\tú\u0015ÿ™Ùb÷b  ün>1iğqönö{Ì>Ë‹Uõôü§§õƒŸ|rıíóßëÓ§ßİ>¹\\—OÎë½ıöaöùÙâéùç\u0007³õÉüMşà÷Ÿ|qõğ«rYM>ıé\u001fLçõÛÏú÷zST§{_MÎpP>Üıöïó{ıŞ?5¿¬N¿š}şöÛoVå‹w“\u001f<ÿöO.š]ÖôígŸ’Ößİÿôá§;{;ò|4ÄbßÈ\u0010÷î½ZÜ?ø}Ş¼şü÷úüà÷y·¿œşÔ“OÏ\u000eN>oÿW?õùO}wq0¹¸÷àí»Éüù»ıŸz½üê«Ë·gŸ?˜_İû©Ëç“jµ¾ş‰¯~ïı\u001f<»÷ÕzVÿŞo¾ \u001e\u000ezòéÕŞ³7÷¾(N¾sş{¿{1ÏöŸ\u000f\u001bâm†÷š›tFøÕòù³'_•ÓU{\\^í½;}ğôŞ$ÿô÷!ÄŸŸXm_\\\u001cgùŞÓƒíƒëãg÷ßüÔÅñÁÃßçåó“«İï|¾ÿÕïÿúşÛÓßë\u0007ÏúM¶Ú{Z¾ù´ş²|—íœ=ü‰'O®\u000fæïf¿×«ùıóçùO¼üé×Ÿ®š7û¿ÿwï_\u001dÌ¾{=ı½®~òíëß«˜?Ü½÷Ó{ëßûşó7ûåóã‡Õúø;Å\u000fšıÉşïõpûÁìøÓúåd¿~ù{ç'ß½Ü{³zõéïµ?{ú/\u001e–§§íÅÕï“ŸäW;J¶ı‡÷î=8Ï\u000fŞ‡X\u0003-!%r‚ø£eu¾õúº¹“~öÙgéÇk2”çdWg\u001fß!#/+]æWéi]WõÖÇÇ¯__œ¾I:{G¾\u0010ÌîvSÌòô¼Î\u00169’é¤#\n2¨i[¥%YÈñÇÒ˜l\u001aTß{^¿ûS¤T¯ß¼ûôÙïŸ½Úo÷ŞÍ›ƒW{«İ“b²W~úÅ‹ùÙîŞ\u000f~Ñïõ—Ù\u000fšßÿéw¿øE/ËO‚,á/zûô÷_|:yPÿŞ‹Ó|g6¿_ı^ïü^o<xúS?yµx·÷æş—?qùâŞ›ë\u0017Ÿ¾¾|ıîùï_åÓW÷>?[İ{µWîì\u001d×‹Ÿxv°\\^Ï_ŞÿÉß{ö\u0013?õäé«ï,§ßı©Ÿ”\u0017{:[\u000ff÷\u001f\u001e|š½Ïd½7\u0005~9;?ıEQ¿8ÿò÷úòª|·ø*õdV\u001f_|9ÿòÓ|ç§ëİ×\u0007óI[şÔ·›O¯·÷—Yñòú§/Î\u000f~ğÕƒ_ôbqÕ¼ºz]ÿàúÉÕïÿû¯êÁO~÷ÍO>ùü\u0007¿ÿï={³z}r²ıÕÁïÿİßgı`¹ı‹^NÏÊ½×oŸ½½¼ÿü'~ê'ëËsÒ#W+Ã™?Œ±~U¿øÉIöíª¾úòÉçßÙ¹ÿ{\u001f¿¿~şülçòÉş¬:=şâ‹‹\u001f”ÕîƒûÅy»<y·[_üÔÙï=}yıSÅË×«ÅÓ—'ßş}N÷f/\u000eÊ·_=ûÁôìÛùöï=ßş‰æÍw¿]~úâÅ³ï®Ÿœ´åÅ»§¿×ñé—Ÿ¶í‹O¯ïN²âÁõ^Sş¢íıËéÕƒƒŸÎòw/î}úS\u0017ûåç\u0017gßY¼ş¡ÎöïıÕW_Tû×“ì÷~øßÿÁëâ÷®Ö—o¾³·ûí‡ß¹üêé«ïn×'ßùê§¿¼úò÷:Ÿï¼;™}qúüéıü\u0007³õâ÷¹øÉ—Ïv‹oï®ëß{òğŞä«ö÷ŞkO_gû;×OVõ½_´XıŞÓ×\u000fN‹\u0007¿ÿêbù{ı>ŸşŞOzşìôaµ˜ÿş?1ûıO–\u0007ÏŞÎß½+æ\u0007?xÑş>Ùw·_d?QÿŞëë‹ßë'~˜\u00148û‰ƒéî|ç÷ÿ©OïıŞû—ÇW_>\\şßçøõù§—W÷³ıÏ¿º÷ƒgíêİı·íOûAóü şE\u000fÊÅ›ßëíï}ü¬¾j¿:;+šú'¯^¾)&³ßÿE³³ÿÕóïÔ‹ç»»/ğƒ³ßÿ\u0007\u0007OgYõêÍOœıŞ_^½<ø}–o¯W?9ù½\u000e^\u0016åı×³‹ßë‡ÉïÏ¾ıdùüŞË¯Î­>'\u0017âÕÙüÁ~ş|ùüê§\n2ĞOW/¿óç÷W\u0007_=[ïœ¼x8ıòxrĞş^åÁëß§xñú÷y°z—Ÿµ]¬~ï½“×/NŞ.^õíƒïüŞ\u000f³×{WÏŞ.¾ü}~ï³‹æ»í§\u000f\u0017OiÄ×¿ÿw^½xúª<Ÿ}÷÷)êçgëıÅñüü\u0007o¶\u001f<_>{rUîşÄ«·¿Ï/ºúaÎö\u0017O~z¯®Ï~¯é½íïìœ¾›ÿtşä÷º(\u001fÎ&ËüÁtñô\u0007\u0017ÅåÓ7Ëßÿâ»Ÿ·úöW¯ß>)·ï¿ÉNÏ¿h\u001e¼z{ş“_L®ïıä§õOş^íÃÅåçÇïòwózù`rñòó×ëƒü÷o^|õÕêóo¿ù©lı{¿ı‰{íÁÓ¶¾·ÿ{?ÿöYıû\\]ş^Ûß®®ò\u0007?uzïÛoïßçÉ§¯\u001fü^O—Í·W\u0017?T‰ŸU¿WõômuòåâÓëßûäéâ'î7?ù¬\\¿{ş{ı>÷ï­\u0016ÏÏÿ\u001fÔíÉÅé›³“åÅ“'õ¼Ù~º—}ùSÛå—‹ƒõù“ç³wÏv×¯~ŸÉşO¼şj¶>~úE±?}Ö6\u000fv~Ñşîƒõõ½‡¿Ï§Ï^ŞûÁ·Ïç¿Ïtıö«íO\u001f\u0016ÕO4Õ\u0017ï^üô“ŸÌóŸØ^ì>ø‰ŸøâŞÅÓ'/^\u0014õşìÕ³Ÿú¡JüWŸ¾}ğ\u001dRfg?ùå«é»ŸŞ}vY~ñ{ı^Ùïÿò'Êgó\u0017?Øß}uJjàêä;å·ßş>góÏó·g³úúÉO¿ûÉÅ·ç÷÷¾¸|øeö²yú{/_}uıúøÕ§W?YŞkÿŸøâÙùw¯û?˜]>Ø}·Şy¸»øôİÅWW¿×ówÍ\u0017\u0007¯^½üjû§³ßë\u0017}º_<ûš\u0012O\u0003yÿ±\u001eüÄrşÓç/\u000f~âÓßïí·«Ó:_ïıäñ¼ì?yş\u0013§_ütûäø÷ÿÎâIõ\u0013_mŸ]\u0015\u000fÛËEsºhŸ½ª^ìıàÓƒv÷Í·?pıùÉïõú÷¯~úùŞçÇ_}U¼=YìíÖ/ö¿ø‰ûÏfßŞ¹wñ‹® õO>§ï\u0016O.¯ß¬¯¿úÉ§\u0017_\u001d÷Áñ\u000fs¬?Y­Š/Ë¦Şyór:ûòåïóû”˜»/~ÿO_í\u0015«ùïı—;ß]6÷\u001e~ç`5i¿xıì\u0007åÙùéö½ùé\u0017¿÷/ú‰§\u0017{Ç÷Oúíƒì«üİ“³W÷÷\u001f>ıér¹|útòfşâdçŞ·ïÍö¿û{í<Û¾qüİÙÉzçùı“ıIû”^Ù?ùı\u000f&\u000fÑéÉÓ\u0007O.æïÚƒóŸüE÷óŸ¬\u001ff³ûïÏÙD\u0001“\u000eø±Ûår>?}qúêøÍ—¯zI\u001dï\u001b?ûèÁñı½İûŸ’ÃÌÃæ\u000e^Ÿ¼úòùó—_¾>{söå‹ßÛ@ï}¬ )âz_˜¿O\u001c&}ü>09ĞÿÉãçg\u0014zĞÛ\u0006fïc…I\t®ÙñÉ—ß9ùôlï;'÷wšwßyò\u0013‹æ÷n~ğòê\u0007_İm§Ÿ¼ú‰·÷Ï—¿¨ùÎ§«Éu»÷ò\u0017Möö/Ïf'{ûõ·Ÿ¼ŞıöO¯¾8?{ñÅŞz·xº¿ÿİóŸxÕ>ÿâ;Ÿ|rù¦\\üÔóæ\u0007ßùòİÓW\u0007'\u000fÎß}uú“Ï¯Ÿ]/_ÿà»¯÷~ºøîwï¢=_±ÿò÷¹ŞÿöƒêÁë7{§WO\u000f..Ÿß}øİwÇ¿×/º^½¸ø‰‡Ùú«'\u000f_­¦;\u0017ëßë\u0007“ÉşäÛ?qï«ë³Ÿxï¼}pñúü÷şòÁÎÓìóÙª½şü÷ùîO~÷Ş‹æ“æİçåNùê“«_ôæ÷jŸãwå\u0017ÙõWW¿èôÓ7÷§o_\u0017¯~b6;ı½ïãì\u0007§{\u0007çõçç\u0017?5{²×>}õòüÓıw\u0007;ËŸxsñpQì~röSŸßûr1]îü`~ÿåÉò‹ËoÿÔ«õdş{ïıàÛßùnõğYV|ç¸ø©İW“{w\u000f¾È_½½;İÿ½ß­¾øÁwŸüÔÙç\u000f§ß}@¡fşS¿÷ï³ûéE~ÿ÷~rÿ:›y}<yöÕ§»\u0007õ—ù¼XñŸxv÷âÅâ§¯ï_”¿ÏÁl÷«æõüÕ\u0017ßm~êóæ'¯îÿô“‹éÓ¬ş}\u000eª‹Ÿş¼ùÁïuòûœ®îŞoŸ~^_­ŠwŸru÷j5Y=ŸüÄòË—\u0007í^3}×şDuï÷~~÷“—“/ÖÍ'Ÿï\u001e\u001f<}=¹údïÍïuyùyqĞüôó»\u0007ëßgù »¾˜òúŞ›'íÙäìşƒŸ˜¿ysr¼./~ğí«§”_¸¾zõ\u0013_’t÷õñêáı½\u0017ŸÖ\u000fhğßş\u0001…ö/¿ø‰/?=ÿÉ\u001fì}zñíÙ/úüÓüóòóOîÑ\u001aÃ\u0017«“ù\u0017_=y}qñ'_}úò§óŸŞÙmßü>ÏÎ®¦;¿ÏïsA)›ïœüäz÷'òóióê'§/^|úÉò÷úôôÓ¬9›\u0010;Ü›’½ù©ŸxY]ïßİıéóUuÿòşÎïõr\u001d|ûÛ4 vçùÕâú“OfÏ^íúíéO=<?ùâÛŸ,Ï\u001fîV¿×âõe½øéé‹·ËW\u0007§³W?ıæì\u0017µë«ùÁ\u0017\u0007\u000f«b·ıE¯OŠıßg}zğÕ»ÕÕÁ“ÙîìÕÉóçß¾w0k¾s~¯øÁÃ¯¦ß9¸&\u0017e:}rşrñ•ˆ›$$¡(\u0003\u0016}Œ’\u0016ì©óá\u0017ñPˆ®8ëH™1¥xkÆ/iıçUş‹ÖyÓ~‘-ézL©½³eÓf”\bçŒÜf¸\u0004\u0013+^¿±,Ú\"+‹\u001f\u0018p[gİO\u0000ŒŞ\u0018|\f(29úÆÖ©ı\u0015/o~İ&M{\u001do5\u00042¯G)å-› Ù9ôØÌì¤š]›öºÌiİ°nªš\bøñUV´\u001f\u0013>Ôpğ¡\u0004ææ\u0006\u0016]7Æo\u001aÏlİV·À“ş>0Üèë~÷¸Å:\r¦ß\u0007ŸÇm}C\u000b<¼è÷*ğVÈL]\u0016\u0017ò+}¸–%@j»ñyÜÎR¦ág\u001f]\u0015´ˆû(İİÙY½»I´Ì#­0h\u0019\\\b‹@ıî‡\u0006T80¯_ZH­êGéçuvm\u001b›çuÕÓy:¹N—´Âš×Ü×ï¶3mM¿\u001aØ½^¼¿ğ¨\u0017“Î‹r¿›]”#¢ınëéïONàïßp¿»¿[û®Åß¾?)fŸ_uëyôêï\u001f¾úû»W‹\u0016ÃÔ¡Ğª\tVv·ßt¦¯I³å,}½^­Êœ>l›ÒjyN¼N+µXş\u001e7yIË»¤>2„S\"ß§ù¢\u000f¡PÃ±†1Ë@\u0003¦WE;'àå5ı“Ó\u0012ó»–ÖìÓi¶\\Vm:ÉIo–\u0005!E\tPn™¥MA«Ğ9Im›×éÛœHÑ4ônzvš>ºCK)=Nã¾ŞTivY\u00154Ïk\u001aw¶L‹¦¡UHzQ{nªr¡R\n‡ó”Vm¨+\"\nÑA‘ú]Çãq:¡ù\u0012W\fõûz¿\u0019\u0015H¿¿v@³C£!\nÓŸ·Ø.\u0004Ë¢)&EY´×\u0014İÃtV4´|O\u001f,i¼2E„±}Â¿üÇ}C¼mx˜~5Ìİcsƒ\u0005°Ú¦ù»X>J§4‚¼îÉ”\u0012L\u0006.ËPÆÇåÁo$ß¤]êïÖÏ\u0015Æ¾-õ|\u0000Šó95ß>Ï\u0016Eyıè¸&36úÉ¼‘iV®&œù¡ñß†\u0014Ş_xÜ_ô’ù’~5oõŞ7hmÒK_Ò2^İ|¸6ÊÒyŸöÑßL¸EV,å‹×o‹Õóbù–ÂÙbq‘feK“@Ÿ¥/œ\u0005À÷¤B6\u0005·ä\u0010u\"Ûƒ\u001f|ÙşŞO~Ñeıònßşòé§¯w›ãıö§~¯íw?xX®O~Ñ“{''ÍïóæŞ§/¾|ıİ/ÿİ«EùÅO¾ú½Ñj»ıÁ»ãßÿáÓùùëê~µ¨ß\u001c”ïŞ¬Û½_ôûçåö/º7;9)\u001e\u001eï=Ü¹÷ê'\u0017ûÏ÷Ÿ±i=õ\u001aÇdó¼¸˜ÓèèW”IU“»°ÍM\u001e\u0019Å÷ønv¤öçvLhiù\u0011-\u0000e\r©Ø÷xç÷ß£·ò²\\‘ãV,/\u0018;üİ¬²©ù[ĞÄ¯4ã?Fl@\noQ­›¼ºÄÇ_\u0000Ì·ñûë–fcJKÕEs\u0007\u001a_\u001a­iÌÜæ«å\u001c­Ü÷¤}×+ıò÷Ê¯Í\u0017jcè\u0013Z¿š5¤FômeÒ\u000em)ø\u0012Â3CPŒìv#5ó\u0006«/`\b\u000eøŸ~¡ß¬\\]Í‹6ß\u0006ŒüÑ²ºª³Õ!¿iÜ\u0005\u0012Š¯1)»Ä-,J.>xôûÿş³êeÕ´O²éÛ­_øã÷\u001e\u001e2Ä\nÎBäö#şwŞ¶«æÑİ»WWWã¢]‹e{WÚó×w>::\u0011ˆJwæGQ\b\u0018ºè\u0003ş\u0005$µ_ÑÏšÈüCâãÙ%â\u001bš\u0006ÆñıycW&•f’Æ@˜\u0017~¾ó†|7ÎšÕ;ş›˜¡CéÿWrƒ\u0018m8Ö«º‚ëR-³’½€÷gŒ=™QšFÂ\u001fcbFøùÎ\u0018 +è\u0019°ÆKúĞ'öÿ[yCXƒBô‚œ<\u001auJQKA.-õB˜Ÿ½şòîÙé‰ÆdïÏ0÷d¦iziP\u0018(3ÈÏw†)š*à•Êÿïæ\u0014Šj\u0017Ä\u0018³\\hB\fNÎçû²Å¾Ì'M\"\u0000£b6øùÎ\u0016çeÀ\u0015ˆàCJÿ¿‹3ŞwÒïËlÑ\u0014\u0011r@˜'ùÿS“şã6:‘<ä#\u0004á\u0004öu»]SüX­WMÚÖ9eVŠüÊN— c³CïpD÷~QÛ\u0017ß}şåO<ü½ïêÉÉwö~ò;ÕõO|wUíï·«7“ï¬¿½7½ş©òÙÁ:ÿıw\u000f\u001e¼›í\u001e?ûéO_üŞ\u000f_^½½ú©§/çŸÿôv•½:ø©İ¬ù*[\u001f?x¾[½şrû;—ßıé‹ßÿÉ§»_TÓƒì\u0007×—_~ç§ßnŠÚ8\f=}·â4Vtä–L2ƒÛü\u0017MÈ2?$Î\"æËJM],(Ræ\u001aÛ\u0011©xFé7™[ú\u0005Œb¿¢Ÿø‚~ÈÇ´¬ùşlxÖæ\u000bÒY_ƒ\u000fvÒ§×dË‹)Dá§Î(MÉ´÷x_¬¡2¿†™\u001b|¿A\u000eğ\u0012½5(ÏŠ”‘KÓêFf\b\u001f ĞŸ\nf„\u001aXœ\u0007\u0005Ì7ŒÄ\u001f4KB Ñ\u0004\b³K¿àW'2?»2ı³ ÈãBñûş¾\u00058æ÷o.~ÿ¬\u0014Uÿ{4\u0017Ÿíğ+¤ïË2}ıycµ†P‚~U¢Ğo ±û’~Ù¨ç®øâÎ'Í!¡\u0007œ™\u000f~Ä\u00177ñEŸ'Ş¼>şüÿû\fq \u0013I“Gè\u0001gf€\u001f1Ä­\u0019b›\u0013Cxo¤{ÿßçŒ‡:£4‹„\u001epfNø\u0011gxó¼™3îqó\u000egÜûÿ>gìªßƒi$ü€4³ÂXÃ›èÍ¬qŸ›wXãşÿ\u000fXCóÓ˜FÂ\u000fH3+üˆ5¼‰ŞÌ\u001a\u000f¹y‡5\u001eşÿ€54Ci$ü€4³ÂXÃ›èÍ¬±»Ëí;¼±»ûÿ\u0003æø›\u0010$DÄ\u001cÜş}™#êˆîşÿÀ\u0013İÕœ4&’ğ\u0003ÒÌ\f?b\u000eo¦o`¨/ºûÿ\u0007gTs×˜HÂ\u000fH33üˆ9¼™¾9¢Şèîÿ\u001fÜÑ\u001fåA?˜9>åö]æøôÿ\u0007Ìñ£dè\u00073Ç\u0003nße\u0007ÿ?`\u001f%F?”9ölªÜ{%İÛyOæ _è§|EÅ¯A\u000eš÷YŠüj\u0005–\u0012–#.ûì£—ÕêËuûûµ2|e¾\u0005Cê—¯ÛÊ~­³Œµh]URßyM3Kãú±¯±ĞÜì>xw|õú`çíõÎ\u000fÎ–\u0007ßY¿Û=øÉïş^\u000f\u001fœì¾ü^¿w{õÓ{ËŸ:>{qùâ÷É÷^=<ŸıÔò'ŸüŞ_,îUõîå“ë¦ı©ùbg1Û};½ø½~ÿ/î¯vÊ—?ıê'öß~ş“õ§ô×w>ÿêÙÉ—¯——Ç7.4¿Ö\u0015­Œ­‰Jw1Çwi‚~ø³ôtéæÁŸ¥§ÕÕÒL„ùş‡6O/¯óß{õÕÃwëï^}ñû·åñ´ş©«ï´Oú:».>vúû|^?¹·ÿÕO\u001e<ËŞ>ûîïı|ùÕw.æ‹íƒÏ·_|qñr»(Ö¿èêõë—¿ÿê§ïï|Ñ´û¿ÏÕO999]\u001f?øôÉç?ñûì-ï]¿yûäåõ‹¶Ø¹í<Íˆ\u001eÁLa¹\u001e?IÉ¼'åÿ×o‹Õóbù–4\u0014‰óoœ¤ú¨Bvé7ü\né¥\u001f,¼ô[±\\­Û´½^\u0011©çÅl–\u0013:¤Şé/îz£*jßµ¿1£OnË%Ş\u000b\u0018ò\u0007uşmnÿ¬ÈË\u0019©ÖÛõ\u001f¾ó(ôQÀpÊlyqÛî]ûË¬\\Ó(1^`!ÿÑül|hÖÌ<nz`É\b>\t\f\tOEz@\u0005‰Ä°-¦Y©Â”â»[€Ã#­X‰DF\n\u0006üjEb—¿Ì–y)9EyÅ<ÊÍ³¼ÍŠ²é2(\u001eµçh\u0015\u0001Ï_şşæu3\"5üÒÃt‘Õ\u0017\u0005Š~\rŒ5¡B¶\u001dL\u000fk¶‘€›Æ§3É¿\u0017Ëój÷÷§ÆáGè‹ (±Ì#ãÒ¯üG¢_zÏ\rX2@C\u0002ño\u001e¥MU\u0016³twõ.ıñ{÷>ı4tY†Áá!T,<òD.È)XÎ¶§UY\u0011d‚·ÿäá§7\u0002ÁC˜\u001b@vnî¯Ş\u001d’_&¶G\\+¨ôÛ€Ãóx¾wô˜|±åíg¦^éWÒºœ”ha¹FÆõ]`BƒbÛ‘>\u001fï~z/İÚİ½»·³{pçñ]ôH\\JßŒæ{È¥¢\u0010\u0010'\u00059ŒPÖÅÅ¼ı zeâf~<†A\u0014Ç~¡lÓƒƒO!´ÏgYıqÚ\u0016-\u0010±D9'’nŸ“[_^?J?~Sg³\u0002V4+Óã:›\u0014Ó\u000f¹ESü D9ªU{˜\n\u001dSFQ\u00071#\u0013\\³ù}”.«%èûoıİÿÖßüoıUÿö\u001f\u0003‰O¦#\u001cCÏ-\u0006ñƒù\rƒx],^¯—·Eó?û»şúÿâÏø#¿i$óe\u001fÉÛásº¼(‹fş#Ô|m„H\"şÑ¿¹*¿iŒÎ#Ìx;ŒÕÙò\u001fı+³¢ù¦Qª×_\u0017¥é/ú—ÿĞù\u000fş—ÿàéïù—ş®éï\u0006^7#u\u000bíAM†l\u0005\u001eú\u001a&aS\u000bn`Æ2l3nR2d(nh\u0007ŠÎ(0¦£¥¢\u0018éí2?oI‹°ò»*ÚÙüQú\u0010AùIMÔ­‹,=¯(ù°bo%2êÅ²i³²drãyº(–Å‚¾Ïß\u0015MKÊ”šœ×YÓÖëi»®s\"ÊMdÅ\u0003\\\u001591˜é.01\\òÑ¼mWÍ£»wçÙrVæã¢]‹e{wwwL–uï.ı³s—Yg;_ş\u001ee5ÍÚö3Â~‘µV³ó_˜­ÛùG†™^æuC¸’åJKrÓÉ\u0001c÷¿¬²YÚÎóôåÓgéyAä:r±\r\rñ\"oî\u0012¬ñ\nã]2J6T'ü\u0007\u001fjrÓ\\İ~6‰ûIüÉŸ$ß½$İf½ )½şèè\u0015É‚‹½Rß¨Îr$;&y“Ò\u000f7½\u0018p0©Õ¹òóbRSj\u0007\u0013ßĞûçÅ2ŸQãt¨—İ\u001d|[ç‹ªÍÓ¬Î³FX¤$g\u0006p×Íš †üÁH\u0004\b\u0014Ëi¹†YfÜVu5ÍgÔ°\u0001\u0004Æe›ü\"ê`UfË%5\u001bÉ§i“—ù\u0014\u0010ôƒí\u0000j3ç‹~#R!Ë†şL‰¯è÷Å*'UB½\u0011©és\u0012Oy›¿%l˜ı¸Ï\t\r\u001fÈµ\u0002[Ô\u0005ùöwËì-½^V\rµ\u0003ÎxOûª.rú«\u0016ª¬Š²¢ +oÚ†ßnkò•ğN—\"ãÇ“úîQ\"ÿ¾¡ ¼;\u0001YÙ\u0010\u000bÛùWWÔ\u0015\tf[\\P0 \b˜á\u0000ºhŞrŸwÑSÓ¬é%z”êtÎ­#\f@ı5\ršÄ|U5Ä\u0006Wó\u001cSåO%¤ÖF\u001fĞœa0ş@F\u0004„¤6_fË)1\b¹bzÓW ¥Î³\u0019®„ß\u001f,aô5ğ\u001fhAßÆàÓÇ1˜Ã’JÒ9ğ\r÷Òûô¿\rÏ0\nşCè\u0010\u000b²n@&ö÷‡¦'½^´LìG4¼Mèš§\u000b…bÒ<ĞA_;\fxMòòáGG·Öè6\b¸\u0011gjr\u0013q>„|¯Ii\u0012“³\u0015ù¹'!-ß='u\u0006”\u001e¥§ËË¢¦<\u001eÁ`¹:;yÓ†+I\u0012I\u0001L‰Æ\u0017ù(Í·¯HZñË2¯/®Óüü¼˜\u0016ùrz\r÷œ\u0004\u0015‚Lü1\n¤–\u0001’x\u001aMG*5\u0002‰;}Q‘¾¨SÒªè›u4)g¨\u001aÖÏ-Ëò/\\NšÕ¡üKfbgg›ş}øğQúe_Ï4iì•ûö•Ï×ÅÌª\u0000MÂo¾,~Ñš\\\u000eP÷ÿ\u0005\fs¼\"²Q\n(%=ıÿ\u0002¹ÿÑ\u0011¢êíİİí½‡ß(‘6\u000b\u0012vG%\u0004zIä)`~‰FÈ7\nºm•\u0002ÏÇÓi!\rnÆh¸O;)ôcš7ÍÆ>{şçÕÕ•UUíİ,[!zÑ|Øİƒ½‡÷¬—ùšV(Ãœ×KbÏKú½Ó/\u0019l~‹0:~iIúç6CÛÜ\u0002Ow@<xcæ9†G>6¹şlsnñ¼&Û±VjİüF·{¡ç‡ôÿ\r\b\u0000-jŸ-á^M¿Y\u001d±ùÛ\u000f˜¯[¼‡ç\u000b\u001a'Ñ\u0002jQ4&yQ+ÒçÅ¤(‹öúÃæì\u0016/âù\u0006¦‡–•7ÊÛEu·m.vï[\u0011Ã¸Ó\u0015\u0005f0;d‡(ôhV°R$nŞº*Í:G(ŞGÄy\"rÀš~ÜH\u001fjrÓ,nşö\u0003¸ XE¸\u0005\u0010<ÏÖ5\u0011¤\u0016vPMóÿ\u0015>Øõø\u0000Ù!²ïùì÷_5’$*è×ºšI¢È²\u0002´-%‚JŠ@ÈY¡\u0017È\u0011\"ß€\":úm‹–1^Ò\u001f\u000f™\u0005àm(\u001füĞFˆğİp|÷ªªßÒ˜.î^­tJ‡Ú`Å¥yKc½÷ğa0ÖŠ&¥€ÙÄ»)Åó‹æ—yY­0¸”¢Ä¶ª¯ÎFxFøCîrÿ=º¼…$P“M\u0012K_Ã]\u001dhAßÆàÓÇ]˜ôQ\u0007üF«²\u001c\u0000cA\u0012©\u001eú…>Mo¿TKÔ1ë¤ø]\bÇK¥ºò{kb{ï&Âz©Ê\u001e–L\t§o\b)’Ú–R”ï‰–¾¥ˆmër2!õ`E!\f%ûŞ\u000b%yEñA—ÀÇÍ%!Ö{ˆ\u0007À-´.*üA¿èOú\u0005ßP›è\u0003Æ\u0018ÂîM69¡¿é×¼&ª¨ç%ÉU\nÁ~÷CxŞê \bu8ı@}şØ­Áşşó<£T†]&Ë~:{÷û“Êš˜/\u0014àm\u0014ï\u0010$ŞÎeÕ\u000b¿÷a“˜3´^Ÿ\u0014x¢Ëo‹%§o³şWô™dùó}PüHµø[\n·5\t]’`¬Nå-Z*á?Y=›_ƒ\u001fø—Qº\u00152Íz…Ÿÿo¥\u0015¡÷tz%F?}½^­$µÀæš¿û¦ˆV­øçÿ[‰Fè}M¢I\"\u0004y•UFùUÉÓÔùªªÛ\u001b\u0019OäUÔÕíÕÀ¤š]÷é¨\u001f+ê³¢¡ŒĞõ£\t­Î¼%œ¥§÷Ğ5€h¥®×\u0017!Ÿ—\u0016ê\rëLÿùZ\u001b½¯^õîïO@ü\u000f€\u0004ÁfàGô\u0013|‚ç¶©`§¨\r<óˆm _‚‡\f…\u0001ÊËïW9¼öGé¤*gºPÊQÄ#„\u0014‡©‰ÀïQ\u0004~H€Æö¤jÛjác3ÁÒu<U{¥Ëõb\u0002V?ÉbÅ\fÔ\u000f\u0003›Î\"\b,»‰ôÂ¯>\u0014Ç)ñD^3X\"üX\u0013‹H6åç\u00143„\u0011váğµüòsH\u0007…ó*‹D*\u0012Dù\bâˆ~N‘|jVŠÃ‰¥èK¿ˆ`G\u001fuE6üË<$Úf\b\u0013êô‚R\u0015ËÙ6­úV¤#H3ì?yHiÿø»x<\u0012xãMEÈhm’³íæSÊ& íÏ°iéÖ\t6ÆÃfæÃõ%‚7OÕ\u0014rüv`i|â/P›µH^\u001d\b3ş¼ŒjÖ\u001bów\u0004RV\u001cıEI2“£İÇw'ÎÂÑH¢\u000fMSwæüçÿ«Ä-'åïÏ„ıÙ¢¯ÍdP®f*™\u000bú…’\u0016\u0014$şB„CŸ!\fòI×õ`\u0002J\u001dş,áI\u000bHŸŞK·vwïb\u0015„¼Ië\u0002\rOÌ×c\t£`ş_Î\u0014DA²Ad3Ãœø0Fÿ¿¦ÆlA¤€Ïf¹¯,¦oÉHĞÊd[ÑJ+ı \u0014³±˜¤ÁÉÍü±\u001fó\u0007ì±uJŠ;¯KBæğ#mY-¿¨ÖMş%ÑÚ\u0013\u0002c~w<]×MUöñª¢$w^LüßycİF_\bZÒZïômØ\f¤%°ëšB¨‰şY.ó«ïRÎü3\u0012™å¬º\u001aW«|¹õ1’í\\;Qã÷_­iUvz—>Ún!ÚwË»o¶_`)öÓ{Û\"ZJ<û]××_}±ıí7_lŸçíâãQú±z\u0013\u001f>f7ö³û;;#±¶ŸíÓ¯mU•“¬şì:oF\u0014\r0Å>[V£YA½Ğ´Ğ’6ş$f\u0002ƒr³´™ÖU‰·ôoJõ\u0017?€*?§Õêš†N/_Ó«\u001fß9Ô¡Ï«éºÙ¢¿ëœÔ\u0000qzV64'ÄiD6\n?à*ĞÛ ÕGÌ…\u001f\u001daÊ\u001fßÅ\u0017¤ ˆ!è_0\u001e½B<\u0018}ş+\u0018l˜‘Ë%2l–\u000b‚Kj™¼4í»±¼éüç«„¼ùò$”7ÕÉ¤CÿK\u0007–\u001dŒ\u0007Ä<\u0010ã\u0000ëÒ˜(!=/àùãödÃ‰F0RCü\u000fs\\è«n4‚Ç}B\rÀ:^\u001bùM¦Û$±¡\u0012è\u000fúŸ÷Ë¶\u0007Tÿİ¨;Cu“‡7Tç,¼.>|ğ\fz°4?Ï>ª¤èi\füül\u000e¤$gø\u001b\u001a‡€Òa\u0000E3\u00063Kô+Í›ùKşŞô\u0018‘ç\u00170¹·Ç“ó»ô\u000biÌü\u001d\u0011u0=gøİä\u0002Ùù\u001f^‡¸m\u001a†IøÒKô;©\u00130¯éI¢z?œ§0º“`ãşèM~(\u0004÷şÂ\u0003ıDR\bûì£\u0007v\f,³ª“DWù`ÌóøwİŞN_\u0017Ë)[È´™Wër–Nò”ü£·”«Íš”ÇO\u0010Y÷¦[“œœñ<Í—\u0018ÆL?½¢vÍúü¼˜\u0016ÔÕ\u001dR‚€!ä\u001aÑø©§ŞCV™à\u0014HÿÒ¿Íš Ìó%>NÉdÖô\u0019ıD \u0004‹˜NÖ”÷X¦ÛÛÁ H\u0015øj„şô©C´z/&1ŒL¿îşşÅEóû×ÕÕïOkáf¶±ÚeÈ\u000b\u00033œÂÑ¨[f÷Æœ[E`AF‡4˜à‘¼¡k\u0018¶ qƒ\f„!Ûc)|ñuğäObˆ¾Á\u0017áÇ?|ìÄõˆ¡'yÍğó\u001f\u0016~ä‰šèŒº£ƒGc’ğ‹\u001f\"j$\u0003¤–|\u0007™:&\u0014‚‡Ä&l\u00146ù!¡k\u00147å1dM³ğ›\u0000Gú\u0003\nƒ~£Çµs¿™‡T\tµ£_z7JH¢\u0000¢Îa\fWó¼§/Hš*PZğ\u0001é\u0017õÿ6(\u0016´ô\n²ış$®—Õ¤vî —\u0010£\u001ew÷\u000e\u001eî¸|\u0018¿ôÙGŸ¯‹Y\u000eW¯A\u0012&å—yY­ –3âf\u0012´‚\rAšo“\r gw‘-³\u000b’´¹¦\u000f\u0016”Ø’y\u001a§ûéÖÎ>²[ŸjvKĞÙä+Ò\u0004a¶è·ŞóÿVÂ\u0013áÙñ¾÷MÒğƒA|ÃT6\u0012ûsËàLg\u00048ÌH.OÈşÿrÄF¤\u0011İ\u0013;¼¥±“ki\u0018-ú0F‡Ô\u001ai¹ÿÿ$<š÷Ëx\u0012ÚGÀûéÎ>R\u001eÿI\nN(Â27>'¾' Ávô\u0006q`ïùÿ*÷³¼ïŞ†ç\t\u0016iCÏQ±|ç\u000fîç/÷ÿÿ!á÷óó)\u0014µ¾[Œ\u0005èİø|[OÄ¸Äï›Ş\u0003©i\u0016„ÖğÜ0¶±\u000f˜>îºĞá_xş?èfïZ›Ì4¾…›½ï^ÏÍ~^œçÛÓë))-Ïu#ıuvò&½¨ª\u0019…cÖ¾O«Ä{ğ£÷ÿíGï\n×;?úVDº±Í7L§ÿ7è\u0007¥ÔÏ#OØI\u001dì\u001eéª\u001fyÂ!\u0000M6û\u0002÷a\u001böw÷à\u000büÈ\u0013õÿfîgyÿ‘'ü\rpÿ<áŞóÿ~ÎOOØÍ·õ%~ä\tËó\rÎÍµÉLã[xÂŸ>ü´ç\t^ç´\nHòKZ¶UM’P‹\u001fGşq‚÷vÈ\u000bŞ\u0017|ÿÿ×^ğp¼ó‚o ĞÆ¯¿aêü¿A#(}~\u001eù¾NÎ`éH;ıÈ÷õT?hBÜO”\u001b²ş{;0\u0007÷ww`şäüÆ¿ú3û³ÀÿÈùı&ØÿGŞoïù?ë¿§÷ëM¸u\"~äşÊó\rNÎ=5Ë·w\u000f\u001eîöÜß³\u0005I=|5ô‚Öı³å4‡O“6‹¬,·Ól9K\u0017ù¬X/¶I˜òYJ­ózU\u0017MŞ¤ôN±¤Æ\u000by\u001fm§Õb±^\u0012Yø“6ŸÎ—4™\u0017×)a¾*¯ÓéœF˜ÎÖy:+ˆl9º#:LózY,/ğë9)©6]€\u000e$‡¾\u0013¾›níìÃ\tÿôÿ×Nø=\u0011<ç„ÿbšş?€ä7Ì)ÿoPÒÊ+?\u0002\u0012§ùà}½øQ@âYcĞä\u0006l\u0017\u0006šWj\u0014\f}õÿfögÿQ@òM°ÿ\u0002’Şóÿ~Öß€ÄM¸u¨~\u0014Èó\rNÎ¾5ËLã›\u0003’{»÷wz\u0001\tÍ\u0017‰=¼HøƒÍz:Í›†\u0006Ìâ…òí«¬iót‘-³\u000bnè\u0007\b\u000fL–şÿß\u0001Â¾\b‚\u000b\u0010xüL\rĞè–dû\u001a/}Ã”üƒRQZş<r ¤ÂZ’~û‘\u0003íY\u000fĞä\u0006\u000fâ\u0001\u001b\u0014d¸~ä@\u000f}õÿfögÿ‘\u0003ıM°ÿ\u001cèŞóÿ~Ö_\u0007ÚM¸u8~ä@Ëó\rNÎ}k–™Æ·r û\u0019ı“¢®K\u0012yš…eµ¸¦œ*ı<š[¤U\u000fÓY~^,\u000bş˜”^¶ZÕU6‹¤QZuÕ6\f`‘·u1¥œ¯ó¼\u000f~~xŞ÷E‚œçıÃ¥÷\u000f³·oxîşß ÿtö~\u001eùúN©À°“*ş‘¯ï\u0019:Ğä\u0006gçÀÚ¾\u001fùúC_ı¿™ıYàÿìëcBHìÿ#_¿÷ü¿Ÿõß××w\u0013n]œ\u001fùúò|ƒ“ó©5ËLã[ùú÷{¾>Í\u0017‰=ò²pcà\u0013n7«|ZœÓ°0'âÎa~–\u0017é´.ˆ'‹Œ›.ª\tÍeºšWKJõâEmE.áE-\u001699›Ö¹¿·÷óÃ¹ÿTDÆ9÷<şŸ=\u0002ÿ¬‚ÿ†gçÿ\r*Mççç‘ûîô\u0004l5i×\u001f¹ïí\u0002M6û/÷ö¬9û‘û>ôÕÿ›ÙŸ\u0005şGîû7Áş?rß{ÏÿûYÿ=İwoÂ­\u0013ó#÷]opr\u001eX³Ì4¾•ûşiÏ}?nš¼iØı#µ•SÏ\u0017×Dü%™ï\u0015æ\u0004ŸŞ6¹Kj°¾,¦ğ*Û~ïç‡Ûş@DÅ¹í?K„ıY\u0001û\rÏÆÿ\u001bT—ÎÇÏ#7İé\u0003ØdÒ¢?rÓ=\u001b\u0005šÜà§Ü³fëGnúĞWÿof\u0016ø\u001f¹éß\u0004ûÿÈMï=ÿïgı÷uÓİ„[§åGnº<ßàä\u001cX³Ì4¾ÙMß¿¿ÿ ç¦Ÿ½ùjûMú|¼»ÿ`'İNÓ/ÉÙ£\u0001Ñ<‘L§SˆNúŠfˆ’®Ë\u0019Ï’ämIèèïzFÒ…\u000fÓ‹u1Ë1u¾‹ş0İÚyH.úŞÎÿ¯]ô\u0003\u0011\u0013ç¢ÿ,\u0010õ\u001b\u0007ù\rÏÂÿ\u001bÔ•ÎÃÏ#×Üé\u0000ØašÖÿŸ¹æl\u0005~6}“‡dªövv\u001eÂ7ù‘k\u001eÿêÿÍìÏ\u0002ÿ#×ü›`ÿ\u001f¹æ½çÿı¬ÿ¾®¹›pë¬üÈ5—ç\u001bœœ‡Ö,3oáš?øt·çš¿ÊÑšä‰\u001cº¶IÉuÓœl~~^L‹|9½N\u0017yÖ¬¥Eº¨È¯\u0013Ÿ\u000fêdµ]FT@{r\u0015‰\u001fò’ˆA¯æÜnR\\¤ä+fË¾¿K.û}¸ì»ÿ¿vÙ\u001fŠø8—ı‡Hì\u001fZWßä¬Ñüü¿Aíé¼ı<rñ.='\rü#\u0017ß³o Éf\u001fg\u0017&owç>|œ\u001f¹øñ¯şßÌş,ğ?rñ¿\töÿ‘‹ß{şßÏúïéâ{\u0013n›\u001f¹øò|s“³»cÍ2Óø6.şıO{.şç&\u001bË tX¾¼,êj\t×\\;Ï'$µ¶È¦sjK£Ïêe±¼HWu5Í›†Ş&uA˜­Êët:§\u0011PÓevÁ\u000e¤ïÜïı¼pîinXpœsÿC!ó\u000f¡“ox¦ş_ äÌ\\ıüqèiÄFsÀz\u0013ÃüÈ¡÷¬\u0019hrƒG³g\rÜ\u001cú¡¯şßÌş,ğ?rè¿\töÿ‘Cß{şßÏúïëĞ»\t·\u000eÍ\u001czy¾ÁÉÙµf™i|\u001b‡şÓ½CÿšŒOK\u001fgt›ì\u0012\u001dé¯ûŸ§“¬!+N²E3Ó<JßÔ\u0019üA8;ù4kZ4Dî¶iiòrz¹ZµÅ‚„\rí\u0015Ä\u0015IjI>\"IY{UÕoM?4jr\u000f¨=µD738 „Ç`‚¸\"åZ§äRÖ\u0017è·Í§ó%1È\u0005©\u0000?\\¸÷s\u001e.üfÅÒ…\u000bÿ?˜ÄÿÏ\u000fáë¨&<\u0003úåÿ\rê_ùìçQ¨ãt*ü\u001a²D?\nu<;\u000fšÜàëİ³¦ÿG¡ÎĞWÿof\u0016ø\u001f…:ß\u0004ûÿ(Ôé=ÿïgı÷\ruÜ„[gìG¡<ßàäìY³Ì4¾U¨s¯\u0017ê„ùîIŞ´”ÃÎ¦4*ú\u0004Ş—şNÏIæ–3Ji¯*R#$p}\u0012'y,.sr\réï\u0005Ï%¿;­\u0016‹õ’\bÄŸXÇğ:å«²ºf˜‹¼W3rv]Ä²ÿó#bÙ\u0013ér\u0011Ëÿ{æâÿ-˜|Ãsşÿ\u0006ª³şó(~pŠ\nÎ\u0002qÕâ\u0007Ïx‚&78PûÖş(~\u0018úêÿÍìÏ\u0002ÿ£øá›`ÿ\u001fÅ\u000f½çÿı¬ÿ¾ñƒ›pë\u001aı(~ç\u001bœœ{Ö,3o\u0011?\u001c\u001cì÷â‡§ùy±,@}q\fé\rÂ'mkr\t\u001brıÒiQO×%é„)µBRÛùùŸ¦[»{ÿÿ÷óï‰\u00148?ÿıiö¾o|Ã4Dg?×ºD©øóÈov\u0002\n#IjíG~³g4@“\u001b\u001c‡OÙìîÁqø‘ß\u001cÿêÿÍìÏ\u0002ÿ#¿ù›`ÿŸS¿ùG¬ÿõXÿ}ıf7áÎÕø‘ßÌÏ789ûÖ,3oö›ïïDüæÓwÙ‚äò«çÄûMµ&W&m²ËbyAÂOj‚2£¤Øn;mØ*ùŞõ\u0003Ê¢?€w½÷ÿkïz_dÅy×?[”ıÙû\rÏÇÿ\u001b´—ÎÈÏ#Oİ©\u0004˜eR¤?òÔ=3\u0005šÜàª<€åÚÛy\u0000WåGzü«ÿ7³?\u000bü<õo‚ıä©÷ÿ÷³şûzênÂ­Ûò#O]oprî[³Ì4¾•§şiÏS‡š¹,ò«”Ü·l–­H–h&h )i\nrôòt:§Wr89·÷ş–y{UÕo)·ë<ö‡??<öû\"3ÎcÿÙ¦ğÏ.üox~şß Õt†~\u001eyğNUÀ\\“‚ı‘\u0007ï™/Ğä\u0006\u0017æ¡µh?òà‡¾ú3û³ÀÿÈƒÿ&ØÿG\u001e|ïù?ë¿¯\u0007ï&Üº1?òàåù\u0006'çSk–™Æ·ğàw?=èyğ'Õbµ&FKWu5Í›†2¶£t–µYºÈ–ÙE¾ ìØ×Ë\t)òìVyİ¬HüŠKêÏºç÷÷Ò­İÿÿ»çŸŠ@8÷üƒÈ÷\u0001/Ã”ıƒ²QÚş<r¬\u0004ÃŠ’Şû‘cíY\u0015Ğd³gq\rÍî\u000e<‹ÿ:ÖDºŸ¯Ş…\nü\u001cëo‚ıäX÷ÿ÷³ş{:ÖŞ„[\u0007äGµ<ßàä<°f™i|+ÇúaÏ±ş|]Ìr¼Aj\u0015:Œ –ìÓñœ@™åËË¢®–üY™æççÅ´È—ÓëtZ\u0017Ä£E\u0006\u000f(Íˆ\u0014ø†š\u0010Sä%Q„\u001aåì\u0019V\u0004¸N\tj}AŞ£KÁ’\bûîù½Ÿ\u001fîù\u0003\u0011+çÿ¿`\u0012~ÎQø†gùÿ\rêSçùçQ¨àt\u0012ü\u0002b§\u001f…\n\u0004Mnğ•î\u0019ÓùòG¡ÂĞWÿof\u0016x\n\u0015¶ÿÿ;º÷õ\u0006\u001dK[{÷#oPopr\u000e¬æe\u001aßÂ\u001bÜÛ½\u001fõ\u00063\u0018k²SiÖ4’íc%}Qçùr\u000eİ™^d\rÙğ‚¾«–\rÍÍ²ÉÑ\u001a6|‡sn|^,\t\f\\\u0000ò\u0012Hù4)ù\u00009Ík>K'×ä\u0017\u0010ü[,Ğû¾áşÏ\u000fßğ@„,ô\r‰–DÓÿ—LÉÿË\u0010ú†9àÿ\rŠVyàç‘ßè´\u0017|$Òù?ò\u001b=‹\nšÜà7î\u001b#K9¶\u001fùñ¯şßÌş,ğä7ŞÌô\u0004ëG)æMìÿÿó\u0014óÿ?Yÿ}ƒ\n7áÖQúQP!Ï789\u000f­Yf\u001aß*¨ø´\u0017Tœ\u000e¥\ráÖ\u0011ğ\f¾\u001fùt_-)‹8K_ğD5äø“Á!\u001f\u0011êîi~™—Õ\n ÒÏ+²\u0019P€³¬Í˜‡Éø0¬iY­éßj±Z·ä’úÑÃıŸ\u001fÑÃC‘&\u0017=üÜÑşçªçoxNÑÓÏµÔYı¹Œ\u0007~è#6Š\u0007ÆŸÔõâ\u0001Ï\u0018‚&78D÷­}üQ<0ôÕÿë\u0005şGñÀ7Áş?Š\u0007zÏÿûYÿ}ã\u00017áÖõùQ< Ï779{;Ö,3o\u0013\u000fÜÛéÅ\u0003H ç yƒ´&‘}¹$á\"×-\u0016-I˜xu’îå¿¯ŠvÎºn£sè»ûŸş¼p÷i>XXœ»ÿ³FÚŸ%ÀßğŒü¿@™9ùùã¬ÓˆV€e&&ù‘³îY*Ğä\u0006oåSc¼^şÈY\u001fúêÿÍìÏ\u0002OÎúöÿG÷¾ş˜cik›şßêÉoÔ\u0004\u0012@­„Qé§ü ïÒÇÅ’’Ki{½\"ŒçÅl\u0006of™-è/¢ÑÎÎïæ\u0013øw\u000b\bü»\u0011X\u0010ówó\bü»µïÚß¿˜ÑŸ\u001f}ıIò`\\fD¢Ï>Ú½÷ààÓÒ»?‹H—äÊ} Î\u0002BQ\u0006J?[ø\u0016ÍïŸ/V-Y˜¯¯\u0003¡øî\bº†E\u0004ñMQü\u00028êöÈT«]’lB\u0006&÷ÙGû\u001fQ¦3kšÏ>Ê~:{÷ûs\u0013\u0012„¼´¢4+šU™]?ZV$=—ESLŠ²h¯\u001f\t-I„\u0014™\u001f»\u0019m<\u0018\u001e0>¢ßé\u000fú‡ô\u0014dÄô7©j’ÕGiS•Å,İ]½K|gçŞ½O?=dKõhwgçwç^éM~ú\u0011§ø`$¶¯Ø°‘ÌWåì0eİ :Ï¨B±|Ò{÷Wï\u000e©\u00190ØTm[-|D&e6%/ä\r4\u000fIvW'ü,w{¼ZÕÕ%%µ«å\u000f¿s£f;=ÓŸ>ñİoæ¡É1hM\bĞE]‘*ŞV\u001düã9?şdú7$\u000fÿ\r\u0001Ò\u0010 <ïi¼HLŒÌâWØ®ŠüË\u001aNW\u0003\u0013F àŸòŸlŠ4š¡ÙaG”\u001cC¤ÏÎŞ|µı&}¾İäğ™ÒWd’\u0016\u0014¨Ğr\u0003™¥†\\2Ã:\u0005y°ÕŠÇCS5/‰>\u0017hO>~Z­Û\u0006€I\n—í×±Sx\u0006hi˜áÿMÔÌ˜Ï³ò÷¿Î³ú£#XüŸ\u0007£†C¿®Ë\u001b\u001c\"jJ\u000eÑ›¯Şl?gWhûóç¯Hƒÿz®P›Õ\u00179…&¿?‰0‚'ê™´ÖÏ‚«cÍ²>ãgˆ¼\u00033õÿ\u0012YßuóÄ´ş‘¬CÔìËúÎÏƒQ-Yßùÿ¬“Q§gˆ¼\u00033õÿ\u0012YßsóÄ´&\u000fR\nœH¤WUİBì¿T\t>/(\u0007ƒì\u0006\\XÉW6×M›/~˜IÈŸ+úô¤w÷şûšğÓçÿC£~_éıö—_œ’\u0000ïŞßşòÙÉk’UpÕÿÛ%˜L5=C$\u001e˜­ÿ—Hğ=7WLë^fuK\u0000°°\u0000+KÑÍšmò£ôìäM“RÊõ5eCÛô»d ëô‹l™]äd¹ÿk=\nõexÿçÁ¨ßW†‰M ÂûÛ;È€©şß.Àdé\u0019¢ïÀTı¿D€÷İD1­?:zEk\teA@ÓUÖÎ¯²k\u0012]z'ÍfÙŠ– H–á€ã\u0013š)Z\fÂ\u001a\u0005áM¹­bA2Nç”\u001f¤é\u0000¦\u0003#!šÇ¦\u0002Ï\u0000µş_ÃØ\u001e½~\u001e‰³7ê¯/Î{$¸`±ÿ·‹3\u0019cz†è;0Uÿ/\u0011çûn¢˜Ö\u0014=×y¾„5¦‰HiagU^§'s\u0002Ú¤ÿÉ\u001fô§Ò'õe~\r7›ú:§•Ó6ı\u0002\u001dÒÂ`útM\u000bş¤\u000b.òå”¤}Y´\u0005Éÿeşÿ[Û£^_¸ÿ›\u0019óFı5…{o{—–­˜áşß.Üd¨é\u0019¢ïÀTı¿D¸?u\u0013Å´†­¾,ò+Øã/*Z+ÊÓoSTÜämz:­¶_‘°’Ü¿ÎÉÁşÿ­ÌzDùy$³Ş¨¿¾Ì\u001et‚şß.³dé\u0019¢ïÀTı¿Df\u001f¸‰bZtô¤ª\u001a\u0016ÌS\u0002sqŸ\u0017Sò·§×äTÓÀ/æ\u001a!^\u0017³ÿßŠ­G—ŸGbëúk‹íŞ\u000e\t(XéÿíbKv–!ú\u000eLÕÿKÄöÀM\u0014Óú££Ÿ¿Yh\u0016=Qİyøó`Ôï#ªß~údûË¯ŞŒwwHPw\u001enÿÜæ°è\u000b°©~÷\u001b'ïÎŠKúë±ü ÏÒÇÅrµnÓözE8Î‹Ù,_~”.³\u0005ı\u00052ìün>%·€’¿\u001b\u0001\u0007ù~7GÉß­}×şşÅŒşúèkO†\u0007‚XmMˆìŞ{p@\u0001ÆİŸ\u001d”‹æ÷Ï\u0017«öúëcì (Â¤¢¬!7á¼ñù“\u001fÃcšÓ¯şïæWjØ{h‚Á\u0010hÄ,€Ÿ:ã?æŞp˜à?úàÆç›jEè\u0000?úmğ¡&Àœ~‹>ôµ\u000eˆşè=\u0018ÏãfZ\u0017+Ã\u000fP&w:»ÌäSèŒ»w\u001fÿ®ß;yzüæø{¿qr™ÕigóåÚÌfCzm:ß•yç/fm–~–.)ÌúròÓ”íÜºsø\u001b'ï\u000ba<+\u001aRôİñ9é7\u0002xgçëÀ™Wuñ\u0003j•_Ÿ#Òû,ıZpŒ~µPv\u0001æ7NH\t>«êÅ¸*g¯×“E¯Ìg\r@ÍÂ\u000f¨Åwó\t>øı_g—ùëi]•åËª¡tQµ\u0014 ô{‹@©ŸÓ«öÓ¥@£¦İ¨Õp\u0007\u0006\u0014½÷úº\u0019\u001fS‚‹Æ…oÆÙlöû\u0017”µÚ:_/§ødëNú‹…~·iS²z\u000b¯œ¾kóå,Ÿ¿:\u001b\u001f¯Ûê¤Z¬Ê¼ÍŸäóì²¨êQú‹?šÊg\u0004ãŒH\\“˜ôhggä}ñ¼hÚ“¦9)³¦ùèÑG\u0019AÒ/sš\u0018şE[–\u0014/ÛºoŸ‘\u00171\u0004¡Ôïƒ—^çí\t¹\\íGî\u0013*³œ2ğ\u0005aGé½:›Ò/€r8zDïÌ‹‹9\u0019Òy›Ï\u0000e¨\u0017¯™Aˆ^.fÔÎ§Ìé;útA¤]¬\u0017/É \u0016ïçË‹vşÑ£İÑG\r‘§˜æ_äí¼Â‹Ÿ\u0003I~0\u0006TzWÛ¼¤\u0005\u0006jáƒ\u001egÍ\u0002Ğ›yuõå²¼>Y×5Ñê»U=;[j#…ÃØ=jëuşKFér]–æßß\fëVW‘ƒó;\"\u0001CCt\u0007\u0012ıKğ\u000fØá\u00039ˆŒÅËl™\u0013\u001a¿ø£yÍòš>ùè‘àôû³õè`\u0006Á¤6\u001d\u0013“Ï˜½?º3úˆ\u001c‡¼>{J”ºéM\"ÜUÖ<'/#'\u0019›æ\u001f=:§D.Ó‡)ó‹\u0005Öm \u0011M\u0005ç›Z†Ø‚Šÿo#e³^ı„ŒŒ)¨÷ÿ6\u0012’—óÿ\u0011\u00122¦ Ş7HBÛ\u0005ğ&ÍJk ôé\u0019µx÷Ñ#Ò¼´ôI\u0018½¦ÕÑüY‘—¤õn‰ğ‰{‘É»|š/(¢Tb‘\u0016dS÷$ƒ&ß\u001f}Ôf“×-y5/Ël*&\u0004½¯›ü'Õšw¿e0D?¡¹ü{;Ô<\u001aŞ½ûıï“\u0017E\t{Tüë9\u0019ã#¡›ÿ\u00187“~\rÇ¿ëööİ1zcèÛÛÔ&ÒŠ^¦eä¬i>û¨®®Òs\u001a{u\u0005\u000f¾ì=~kJ9 9Ğ\u0012ßº©¦\u0005\u0019ğ\r­ñ<^—æ…iI\u0016ƒ¬ÜM¯ày\\\u0016ˆ\u00135´½*fíüQz°³zw˜Â5İ.ˆk–í£”?ñ²&´x~‘?J—Õ2?üHÃÌ»ùòîKú¸¹+(o/HÏfd\"WïRŠFóÅÑ3&Qº¦ä\u0003ı%ñ#!pk4u€íUÑ’¿`û5\u001f½‘_¾6àsbÅIU½µí\u0007GÏô·¯\rûºZ·ë\t…Ò\nÚü}ôûTë7ôË×\u0006ŒeĞ·\u0018úçÑ3şù\u001ePon\u0011ö[\u0016Ë·4Á\u0014ÌJÏ~–Á|GB´¸Kÿ§\u001cÁõ]J;äõ’5\u001b1G›—9}³X/I\u0015à³múlrZçåg\u001fQz‚|HÊ2|tô\\a½ÇPBDiñ¸Í.êl\u0011ÃÔ~É¨Rv¤â\u0004wVŞıèèÌ|÷ş]‡\u001d5™iY­g¦\u0017JLÍÖ¤š«%Å“$VÍG\u0006[×ö££×ö÷\u000fÅ`UÍ¦YÓ6c\nëÊœ±˜ÎÍ§·›™mBûn1Ûİ¸»³³»ÿ`ß¢Ì0\u0015VóÑÑKıíCq®VùrÜ¬ª¶8¿fŒóUÑT³üîşéõåÅüËÕ«wÏğ{İ{wöÓ×¯Û—¿GS|6?~ùƒÙOWË7ÏO~ò‹½ßë\u0017mñú§~âÊ\"ªÀˆ°òË×Å’^d}ß\u0012w:Èæƒn¦ìµ~óuû2Ô¸\\ŒÛâm[½eR|gön¾>Ù¿k\u0011ïúİ¿)Ş¾¹µÖz|w]nh2d/Í#vS•?Œ&}Ö{6\u0001\u0011\u0000b\u001e‡\u0001ĞûfÔÜtÈĞİ²«ıhWC/Ë‹dğù­È÷ôšAZ¥ôÿm\u0018Îí¶¢ÿ­\u0006qõ^\u0003V÷öÈ¡¨H,‡^ÀÓ}i÷Ó\u0014?Î‹šâÖ\rïáy¼:ú…Óju}˜½ùÊOHÓg5‚jÍš“#E_\u001d\u001d—eú\n\u001f7é«\u001c\u0001qN:iµ¡!ú™\u0007t\u0004²»Ÿ2!é“è30Dúàæ\u0011~=—(6©İ'Ğ»ój‘“•#wq\n]J~öxŞ.Èec\u0007uÚ²Ãs+\u0001Ä\u0013Â&Ÿ*›« Õª..³éõö’ô×\u0014é‡\u0015é¥|HŞ\u0018>|Ÿ®h\u000eî¦\u0014eä³tr¾Ê~:[\u0016´˜±ÊÒj™îŞK¿È®SZÆ{¸qŠÌÓC\\PÎ¦Ó¼iŠIQ\u0016íµb|ìö>\bS+êBİUb\u0004,İÕùì„eÙn_åàĞGé¤*g[JÙbÚ(Bó¼¤\u0010ki¨÷ŠL\u0017­_/Š†¦\u0010FÙÃg3Fß€º¤!\u0010K3y77L§ólyAóDéFájvÇi¥‰ş·Jß|™~\u000eıBÿ[\u0011-ê”òôÕUU¿ÅTîì¦ßY—<—{fšòôå1/\bRÔU¥‹jVœ\u0017\nÿäõë4e¤¨÷èÃ(ÑL\b‰Üš!àD8ĞÿHÓ=¡?€\u0005ı\u0001šŞ\u0000Ñ\u0002{óåK\u000bï\u0002 è}h X\u001cÚ&º\u0003oQû÷ö¢è\f½,/’2OÇ¢—ùí°]ì]yïª&\u001f)ş„©\u0003Ë\u0001iSOÅ\u0005 \u000f y€„\u0000qrC\u0003XÜıéæî½»úÑïO±\u001b\u0019şñO7?N¾3)ròÖjJ™\u0012'\u000b,ê™º³\u000fğbÍOiÉUI\u0011}J)„&œ\"3\u001eù¤ó\u0017ıÁöâ÷ÏÚ¦™\u0013¦\"“—…\u0011ëG©,v\u001d¦s\u0015Ë]\u0004‘„'bLş}¥YñGi6iªrİæ\u0014vV«GéöCzĞâ\u0007\u001c¾£ö;x‚EÕÇÅ9ùæ¹‡Åı\u0007\u0007ä\u0001É\u0002æñlö†è’®[Æ&å¶„æ0AÉÙ'ıy·™ïïîºğ`:}gû³\u0007SZ\u001a½·3;Ÿ°Zÿñš„æ³ñÃû\u0007\u000fïï|zŸşÿpogoï\u0017f‹ÕaQ´Ÿ‘oüpo÷áÁşîîî=ş´]ÔŸa1õw¿÷Ô~¹s°óğwßûtZÕ¹ÿñîÎî\u0001}Œ\u0014GğñîÎ\u0003ú˜F\u001c~ªİN'ŸíÈ/³¥ş¶ \u001cù—·WŸñÏlòÙ6ÿ2›Æ‘¬\u0004ËGµ´™­?\u0003m~÷{Ç¿ûŞ3úŸ×şÊ—ô\u000fñÌö\u001búÙ´ëÙ5²\u0001«†ş\"År–w?¥ßwîÓ?ÍÅıú\"#t÷±Ö¥Ÿ³ü<[—-«]îåı‡Øß¬ıL¡í¼şœ^Úy•_\u0010÷e%ıú9 ÓOÒôïñyM±\u000fı²¥\r?ß>~öê@™\\(e§Ùê³vJ\u0013²CS“Mğ\u000b˜ò³]şõ§›RCÄ÷\u0019…s´ş°ÌgüQ¹¼ø,_ò¯ÕEûY6£E\nBü„„\"ÿı—Ä®üÕjú\u0019¥Çä×õDåšÿl\b¸ôØ\fÜ?Ø›ìfÄU\u000fóıìştÑÔ+ƒ@SŸ\u0013×î˜?ŞéÇ´´ö\u0019é\u0011şıİô­\u0002|×Öú[uñ™Å‡FH\u0004¤ÁO~÷½û÷\u0015ã{O¹å”\u0002°p€u~ùÙåƒñƒñŞöÕŠ?™\u001aÂ¼+gæ7ú…äRÔÇû«\nÎLuÕ\u0004y\u00005eõÛ2?'ø\u0015êdˆ†¢z¤£Ô\u0018\u000bV(pqÉ™Ú.È)h¶wğ\"Im©aD}’ö¨É9~”RÜu±&\u0016LÏ^Ìr\naI\u0005¶N¯>&\u0006[¤ä\u0014ÒXh¸Äü¤ˆ<¶¿»ÌÉ‡l×ºì£î$Xø£\u0014S\u0000Ìğ\u0005À„Êp¹Z\u001b3\"Š×¼0¥Wi\tWúÉş?øô`ïşşÃû»÷ööî\u001d|úé½GË_ôƒÅşı\u001f\u001cìú‹>JïŞ\u0012hun¡>ûòÕÙÓG\u000foınAzX_ıêÍ³mÒÙ·|ÑCÏ&uõO1rúV×ŒR3jÃO°ºNóCkÊ'\u0014öp|óû\u0010yyÑœ>ççîİôYñ*øFÀd<£hè˜æ°½Ìï´hšu>v/˜d}ú²®àæ-8oŸş\u0012×„`î=\u0018?\u001c“\u0006»ç>ıİ¶>Ê>º3®óEu™óŠçÖGÄ\nÛËìRVC>\nñâD7ıFÄÒŸúü}\u000br|+=;İİµ#|ı’PÚI¿u×5)ÎÓ-À©èçW$\u0016Ç\u0017ÄĞgËóêNú»~–~l%şãô\u0017şÂôw½\"†­®`WO/©\u001dV>sÊ¡Óø\u001dD<\u0001¤qÓÖOÈ·¢Ïhõ|×\u001b¤ÒÌ\u001bàã»“jvÍ¿À\u001aÓ/¿qòÿ\u0000Ôt}º.ü\u0001\u0000"
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:56 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "http://www.itu.int/dms_pubrec/itu-t/rec/l/T-REC-L.163-201811-I!!SUM-HTM-E.htm",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Cookie": [
+            "GSCookie_CookieId=EHs6fiEAfF07sll1Dq87W9HwDxFFlnELZchAABRN9LVELuOgca36GN47dGlhyFJO5oHULp3Zbimgug1BGIhNEw%3D%3D; GSCookie_QueryId=6338849; TS010592a8=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; TS0110b275=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98"
+          ],
+          "Host": [
+            "www.itu.int"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 302,
+          "message": "Moved Temporarily"
+        },
+        "headers": {
+          "Location": [
+            "https://www.itu.int/dms_pubrec/itu-t/rec/l/T-REC-L.163-201811-I!!SUM-HTM-E.htm"
+          ],
+          "Server": [
+            "BigIP"
+          ],
+          "Connection": [
+            "Keep-Alive"
+          ],
+          "Content-Length": [
+            "0"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": ""
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:56 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://www.itu.int/dms_pubrec/itu-t/rec/l/T-REC-L.163-201811-I!!SUM-HTM-E.htm",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "Accept-Encoding": [
+            "gzip,deflate,identity"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "User-Agent": [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+          ],
+          "Accept-Charset": [
+            "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+          ],
+          "Accept-Language": [
+            "en-us,en;q=0.5"
+          ],
+          "Cookie": [
+            "BIGipServerV19edYz/rGMxUCJeS7ZH3w=!9Z8KTMloBhqRON3/dsa4jizK8gtM0PNfV53M8iEMuDzPsuzma2e6WDvSEUjnNM2/2MpTRU/9fThULjk=; GSCookie_CookieId=EHs6fiEAfF07sll1Dq87W9HwDxFFlnELZchAABRN9LVELuOgca36GN47dGlhyFJO5oHULp3Zbimgug1BGIhNEw%3D%3D; GSCookie_QueryId=6338849; TS010592a8=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; TS0110b275=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98"
+          ],
+          "Host": [
+            "www.itu.int"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Keep-Alive": [
+            "300"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Content-Type": [
+            "text/html"
+          ],
+          "Content-Encoding": [
+            "gzip"
+          ],
+          "Last-Modified": [
+            "Thu, 07 Mar 2019 09:06:07 GMT"
+          ],
+          "Accept-Ranges": [
+            "bytes"
+          ],
+          "Etag": [
+            "\"94eb280c5d4d41:0\""
+          ],
+          "Vary": [
+            "Accept-Encoding"
+          ],
+          "Date": [
+            "Sun, 09 Apr 2023 15:11:56 GMT"
+          ],
+          "Content-Length": [
+            "1667"
+          ],
+          "Set-Cookie": [
+            "BIGipServer4+IEUJs6ObMe1m0DiLXCRg=!MMGPNbbme7mKLgf/dsa4jizK8gtM0PYpKqLVl1Yvsm919VCFnV5RqiXsDvOtPNhRcHY4HZUnqlqXtwE=; path=/; Httponly; Secure",
+            "TS010592a8=018bf709fc21b1185deb60cbb05b3f3cf5dea5ba604e0aebf363d3cd48232025373d0cd9480f27bf888345b67795e6ba2ea5f75e98; Path=/"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "\u001f‹\b\u0000\u0000\u0000\u0000\u0000\u0004\u0000í½\u0007`\u001cI–%&/mÊ{JõJ×àt¡\b€`\u0013$Ø@\u0010ìÁˆÍæ’ì\u001diG#)«*ÊeVe]f\u0016@Ìí¼÷Ş{ï½÷Ş{ï½÷º;N'÷ßÿ?\\fd\u0001löÎJÚÉ!€ªÈ\u001f?~|\u001f?\"\u001eÏÛEyô\u001b'¿qòxg3úíñ\"o³tŞ¶«íü\u0017­‹ËÏNªe›/Ûí7×«<Ê\u001fŸ}ÔæïÚ»xù0Î³ºÉÛÏ®Šå¬ºj¶w÷îï}d!-³EşÙçù2¯³¶ª\u001d€/Ši]5Õy›~·ªgéîıtë¼(Û¼Îgwøí¶hËüèõz±Èêët;={óÕö›ôU>\u001d§ÏÇ»ŸŞK·vwïîíì\u001eÜIOê‚^,²ôœz¨Vm1ÍÊô¼˜Ô„p6)óß8)–M›•eÖ\u0016Õ2½*Úyº(–Å‚šåïŠ¦-–\u0017i±<¯³¦­×ÓvM/>¾+\b\u0010&M{-¿ü®ÛÛ¿q’ŞıVúŒF‘>ÍÏ\t\u0006 6é·îÒ\u0017¿ç9}¼}M©Ã\u001fûÅúÇ¢(¯\u001f}t’-&@ğ‹¬tH_¯²eÕäÛ»öÒıô~zş¿Ÿ~J?éïÃ_BÀ¨—×è·ßÍjüES½¨jÂ~”–…ÿ×¬¸tR/¿˜hwQ,·ÛjõèÓñÎªE×úY]\\ÌÛG;Ó…÷Ù¤jÛjÑù°ÌÏ\u0007Úwvvv\u0005(øa;+‹‹å£Ÿ^\u0013AÏ¯ñéj½$j2Õ·¯êlõ¨)\u0016«2ÇWòÂº­š\u0015\u0011ìÑ²ZòÇLµ¦øAşhwÏ ÌŸ\u0019J¾)\u0016y“¾È¯ÒWÕ\"[~4jhæÏA²ù.µıÅ‹¦Úæ\tÛ.‹åÛG\u001f}›Ø\u001aÓ»›\u0010Ÿ2íu\u0010 ŠëD?ü¡P%»È·‰9³·ÛÙ91î£ì²*füÍ‡ĞËN0fèuBİ\u0013ë¥Ï10¢V¶l¶…dÔrZ•UıèÇ÷N\u001fì?¹\u000føÕ«\u001cm©\u000bp\u0011Sö\u001e}5HÙ{QÊ\u001e\u0018lô³÷#ì½‡ã\u0007ÁëÚ´K[R9¤M\u001em»ö?KÄµ|ÂŸ\u0019â\u000e3#\u000b)(”×FHÍ_*¤ò'AŒ\u00126¯»Tíi€ 4ÛÄlS\"J^ãÃ\u000f\u0019ôÃ÷\u001c3ÁY<qÅ=`O¯zƒƒ%ÁÑ÷\u0001×Ø&nüÜ„¿½Mç¦™rî¤*g\u0001ByÎ¨U\u0014€Öö{ÆE¾Æ\u0017\fÿ\u00064¨ËÕøYU\u0011íâ%O»û\u0003³nş\"p]Dä«ßÿ'^¢/™â\u001b'üCævw÷}&×4\u001b¢/ÍÖ.HHíº\u0003c\nÓ÷\u0002¶M˜È®\tË=\u0019„ŞC}\u0011B«“ùŠLf¶.[jÑµÂ\f,\u0000£o½Ìü·B’[UFØæÛs¡ÁîÎƒß\u001d/ÿP8ìÃ¼Î§˜\n¶BLã=¢ñt‘\u001eì[å!p\u001fİß\u001fïß_µéÀO€\u0005»t¢§Gş‡h¸½\rÏä.““~ÃïêÉÑ¯“jv–Ùòâ³Ó\u0017ÛŸ?‘\u000f\tt:-³¦ùÌ‡%ßµp—ô[¢Š8\u0012oøÃ\t5ÎëÏvÒi^–4óSš1ık•Í0ô×U1kçŸ}´»³ó»D®\ncõÙÇòê6MW™­šü‘ùåcê4}ÜÖøA?gÁëé%ÍÖÅò32&\u0006\u000eM”ß\u0019ïüî‡Ú)¤$½?Ş'òÙß\u0018núx~Ï¼(t\u0017ÓB­\u000eY<ÔvĞß\u001f\u001f=VGõ£ßÿÛåÛû»û\u0007\u0007{ŸŞÿô££Çw3ú\u000eĞøë¢Y/ò£Ç4ú¥%ëW¯“J³@_È;wç÷\u0004‰U—š\u0006'\u001f‡í1DºÌ®«u»}Q\u0017³íE5#:‘À||D.oµXäË\u0019K:€Š+,^ğ,o¦u1!©¥\u001f¤BÈÉ„\u0017ÜÎsòh=§·:yÆ\rÀÍàaæ3j\u000f÷ÚëËu´»ƒoë|AZ*ÍÈº64WäE—Ùô-@¯›5\u001cÎ”Z\u0005^4P\tĞ(–Óryc\fWu5ÍgÔ°\u0001\u0010Æh»&\u001a\u0003¦+¢ğ’Zä‹´ÉKáUı€ˆç\u0001n¦ó|Ño”R´ÑĞŸ\u0000˜-gôçb…P„úD,Ò\u0014Ä˜\u0002€¿%œæô\u000b\t:u;!:\u0000ÅV ¢\u0005ÀÔÅe^ß-³·\u0004¡¬\u001aj\näñªöX]äôW-\u0014Z\u0015eÕR·MÛ\u0000@ÚÖ\u0019¹óô\u000e‘\u0006ĞüAŒ\u001fß]½/×||ôf^4İ‰ËÊ¦\u0002 Ç\u001dóêŠ0£°§-.2šDÂĞ\u0011\u0000h×Eó–Q¼‹9kš5½D/\\Í‹é\u001c­\u0001.ÂAé\"»&JQ\u001cµ¢€†Dxc–}. ¨ÔÚ\u0004\\4İ4|@ó‡>\"8\u00059-Ël9%\u000e#BU<Oô\u0015¦@¹Ä\u0011èn\u000b\u0015‡ŸĞ\u001eô\u0003¸Ğoô{vG¿p9iV‡òîm\u001aÜ%\u0015©¿Aƒê¯ˆv~ãäÿ\u0001BŒş~3\u000f\u0000\u0000"
+        }
+      },
+      "recorded_at": "Sun, 09 Apr 2023 15:11:56 GMT"
+    }
+  ],
+  "recorded_with": "VCR 6.1.0"
+}

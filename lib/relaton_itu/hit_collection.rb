@@ -35,9 +35,9 @@ module RelatonItu
     private
 
     def request_search
-      url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/Search"
+      url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/RunSearch"
       data = { json: params.to_json }
-      resp = agent.post url, data.to_json, "Content-Type" => "application/json"
+      resp = agent.post url, data
       @array = hits JSON.parse(resp.body)
     end
 
@@ -55,6 +55,7 @@ module RelatonItu
 
       hash = YAML.safe_load resp.body
       item_hash = HashConverter.hash_to_bib(hash)
+      item_hash[:fetched] = Date.today.to_s
       item = ItuBibliographicItem.new(**item_hash)
       hit = Hit.new({ url: uri.to_s }, self)
       hit.fetch = item
@@ -88,7 +89,7 @@ module RelatonItu
               "Selected" => false,
               "Value" => "",
               "Label" => "Name",
-              "Target" => "\\/name_s",
+              "Target" => "/name_s",
               "TypeName" => "CHECKBOX",
               "GetCriteriaType" => 0,
             },
@@ -96,7 +97,7 @@ module RelatonItu
               "Selected" => false,
               "Value" => "",
               "Label" => "Short description",
-              "Target" => "\\/short_description_s",
+              "Target" => "/short_description_s",
               "TypeName" => "CHECKBOX",
               "GetCriteriaType" => 0,
             },
@@ -104,7 +105,7 @@ module RelatonItu
               "Selected" => false,
               "Value" => "",
               "Label" => "File content",
-              "Target" => "\\/file",
+              "Target" => "/file",
               "TypeName" => "CHECKBOX",
               "GetCriteriaType" => 0,
             },
@@ -125,7 +126,7 @@ module RelatonItu
       data["results"].map do |h|
         code  = h["Media"]["Name"]
         title = h["Title"]
-        url   = h["Redirection"]
+        url   = "#{DOMAIN}#{h['Redirection']}"
         type  = h["Collection"]["Group"].downcase[0...-1]
         Hit.new({ code: code, title: title, url: url, type: type }, self)
       end
