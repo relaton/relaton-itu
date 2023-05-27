@@ -58,6 +58,7 @@ module RelatonItu
       fetch_resolution
       workers.end
       workers.result
+      index.save
     end
 
     def fetch_recommendation
@@ -123,7 +124,7 @@ module RelatonItu
     end
 
     # @param bib [RelatonItu::ItuBibliographicItem]
-    def write_file(bib)
+    def write_file(bib) # rubocop:disable Metrics/AbcSize
       id = bib.docidentifier[0].id.gsub(/[\s.]/, "_")
       file = "#{@output}/#{id}.#{@ext}"
       if files.include? file
@@ -131,6 +132,7 @@ module RelatonItu
       else
         files << file
       end
+      index.add_or_update bib.docidentifier[0].id, file
       File.write file, content(bib), encoding: "UTF-8"
     end
 

@@ -46,6 +46,7 @@ describe RelatonItu::DataFetcher do
       expect(subject).to receive(:fetch_resolution)
       expect(subject.workers).to receive(:end)
       expect(subject.workers).to receive(:result)
+      expect(subject.index).to receive(:save)
       subject.fetch
     end
 
