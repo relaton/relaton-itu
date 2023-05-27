@@ -7,6 +7,7 @@ module RelatonItu
       @prefix = "ITU"
       @defaultprefix = %r{^ITU\s}
       @idtype = "ITU"
+      @datasets = %w[itu-r]
     end
 
     # @param code [String]
@@ -15,6 +16,18 @@ module RelatonItu
     # @return [RelatonItu::ItuBibliographicItem]
     def get(code, date, opts)
       ::RelatonItu::ItuBibliography.get(code, date, opts)
+    end
+
+    #
+    # Fetch all the documents from https://extranet.itu.int/brdocsearch/
+    #
+    # @param [String] source source name (itu-r)
+    # @param [Hash] opts
+    # @option opts [String] :output directory to output documents, default is data
+    # @option opts [String] :format output format, default is yaml
+    #
+    def fetch_data(_source, opts)
+      DataFetcher.fetch(**opts)
     end
 
     # @param xml [String]

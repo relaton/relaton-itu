@@ -1,7 +1,10 @@
 require "mechanize"
+require "digest/md5"
+require "relaton/index"
 require "relaton_itu/version"
 require "relaton_itu/itu_bibliography"
-require "digest/md5"
+require "relaton_itu/data_fetcher"
+require "relaton_itu/data_parser_r"
 
 module RelatonItu
   class Error < StandardError; end
