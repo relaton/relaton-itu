@@ -27,7 +27,7 @@ module RelatonItu
       # Parse page.
       # @param hit [RelatonItu::Hit]
       # @return [Hash]
-      def parse_page(hit, imp = false) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def parse_page(hit, imp: false) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         doc = get_page hit
         return unless doc.code == "200"
 

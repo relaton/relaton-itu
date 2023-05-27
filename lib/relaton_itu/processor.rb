@@ -47,5 +47,12 @@ module RelatonItu
     def grammar_hash
       @grammar_hash ||= ::RelatonItu.grammar_hash
     end
+
+    #
+    # Remove index file
+    #
+    def remove_index_file
+      Relaton::Index.find_or_create(:itu, url: true, file: HitCollection::INDEX_FILE).remove_file
+    end
   end
 end

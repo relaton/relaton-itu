@@ -8,6 +8,8 @@ module RelatonItu
   # Page of hit collection.
   class HitCollection < RelatonBib::HitCollection
     DOMAIN = "https://www.itu.int"
+    GH_ITU_R = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/"
+    INDEX_FILE = "index-v1.yaml"
 
     # @return [TrueClass, FalseClass]
     attr_reader :gi_imp
@@ -23,6 +25,7 @@ module RelatonItu
       @agent = Mechanize.new
       agent.user_agent_alias = "Mac Safari"
       @gi_imp = /\.Imp\d/.match?(ref)
+      @array = []
 
       case ref
       when /^(ITU-T|ITU-R\sRR)/
@@ -42,16 +45,14 @@ module RelatonItu
     end
 
     # @param ref [String] a document ref
-    def request_document(ref) # rubocop:todo Metrics/MethodLength
-      uri = URI::HTTPS.build(
-        host: "raw.githubusercontent.com",
-        path: "/relaton/relaton-data-itu-r/master/data/#{ref.gsub(/[\s.]/, '_')}.yaml",
-      )
+    def request_document(ref) # rubocop:todo Metrics/MethodLength, Metrics/AbcSize
+      index = Relaton::Index.find_or_create :itu, url: "#{GH_ITU_R}index-v1.zip", file: INDEX_FILE
+      row = index.search(ref).min_by { |i| i[:id] }
+      return unless row
+
+      uri = URI("#{GH_ITU_R}#{row[:file]}")
       resp = Net::HTTP.get_response(uri)
-      if resp.code == "404"
-        @array = []
-        return
-      end
+      return if resp.code == "404"
 
       hash = YAML.safe_load resp.body
       item_hash = HashConverter.hash_to_bib(hash)
