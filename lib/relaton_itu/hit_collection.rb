@@ -17,21 +17,22 @@ module RelatonItu
     # @return [Mechanize]
     attr_reader :agent
 
-    # @param ref [String]
-    # @param year [String]
-    def initialize(ref, year = nil) # rubocop:todo Metrics/MethodLength
-      text = ref.sub(/(?<=\.)Imp\s?(?=\d)/, "")
-      super text, year
+    #
+    # @param refid [RelatonItu::Pubid] reference
+    #
+    def initialize(refid) # rubocop:todo Metrics/MethodLength
+      text = refid.to_ref.sub(/(?<=\.)Imp\s?(?=\d)/, "")
+      super text, refid.year
       @agent = Mechanize.new
       agent.user_agent_alias = "Mac Safari"
-      @gi_imp = /\.Imp\d/.match?(ref)
+      @gi_imp = /\.Imp\d/.match?(refid.to_s)
       @array = []
 
-      case ref
+      case refid.to_ref
       when /^(ITU-T|ITU-R\sRR)/
         request_search
       when /^ITU-R\s/
-        request_document(ref)
+        request_document(refid)
       end
     end
 
@@ -44,10 +45,12 @@ module RelatonItu
       @array = hits JSON.parse(resp.body)
     end
 
-    # @param ref [String] a document ref
-    def request_document(ref) # rubocop:todo Metrics/MethodLength, Metrics/AbcSize
+    #
+    # @param refid [RelatonItu::Pubid] a document reference
+    #
+    def request_document(refid) # rubocop:todo Metrics/MethodLength, Metrics/AbcSize
       index = Relaton::Index.find_or_create :itu, url: "#{GH_ITU_R}index-v1.zip", file: INDEX_FILE
-      row = index.search(ref).min_by { |i| i[:id] }
+      row = index.search(refid.to_ref).min_by { |i| i[:id] }
       return unless row
 
       uri = URI("#{GH_ITU_R}#{row[:file]}")

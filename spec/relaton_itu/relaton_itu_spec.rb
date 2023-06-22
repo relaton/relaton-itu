@@ -123,7 +123,7 @@ RSpec.describe RelatonItu do
 
   it "fetch implementers guide" do
     VCR.use_cassette "itu_g_imp_712" do
-      result = RelatonItu::ItuBibliography.get "ITU-T G.Imp712"
+      result = RelatonItu::ItuBibliography.get "ITU-T G.Imp712 (2000)"
       xml = result.to_xml
       file = "spec/examples/itu_g_imp_712.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
@@ -134,7 +134,7 @@ RSpec.describe RelatonItu do
 
   it "return nil if ITU-R not found" do
     VCR.use_cassette "itu_r_1234" do
-      result = RelatonItu::ItuBibliography.get "ITU-R 1234"
+      result = RelatonItu::ItuBibliography.get "ITU-R NO.1234"
       expect(result).to be_nil
     end
   end
@@ -142,7 +142,7 @@ RSpec.describe RelatonItu do
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
       expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }
-        .to output(%r{WARNING: no match found online for ITU-T L.163:1018.})
+        .to output(%r{WARNING:\sno\smatch\sfound\sonline\sfor\sITU-T\sL\.163\s\(1018\)\.})
         .to_stderr
     end
   end

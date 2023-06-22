@@ -33,7 +33,7 @@
             "keep-alive"
           ],
           "Content-Length": [
-            "770"
+            "774"
           ],
           "Cache-Control": [
             "max-age=300"
@@ -45,7 +45,7 @@
             "text/plain; charset=utf-8"
           ],
           "Etag": [
-            "W/\"dc16cbb7da63f695f33f9f559e54bddd4792b355518d9058f1192c7f3cc86374\""
+            "W/\"00d3147a2e2b5ce50f2ff87cc751be91f6ac261f4800b783ddfe502e8b3028dc\""
           ],
           "Strict-Transport-Security": [
             "max-age=31536000"
@@ -60,19 +60,19 @@
             "1; mode=block"
           ],
           "X-Github-Request-Id": [
-            "243E:1677:5EC5CC:6F4504:646EE480"
+            "879C:2890:3C0667:47C118:64947401"
           ],
           "Accept-Ranges": [
             "bytes"
           ],
           "Date": [
-            "Thu, 25 May 2023 04:30:56 GMT"
+            "Thu, 22 Jun 2023 16:17:06 GMT"
           ],
           "Via": [
             "1.1 varnish"
           ],
           "X-Served-By": [
-            "cache-atl18494-ATL"
+            "cache-atl18423-ATL"
           ],
           "X-Cache": [
             "MISS"
@@ -81,7 +81,7 @@
             "0"
           ],
           "X-Timer": [
-            "S1684989056.357930,VS0,VE91"
+            "S1687450626.895538,VS0,VE124"
           ],
           "Vary": [
             "Authorization,Accept-Encoding,Origin"
@@ -89,11 +89,14 @@
           "Access-Control-Allow-Origin": [
             "*"
           ],
+          "Cross-Origin-Resource-Policy": [
+            "cross-origin"
+          ],
           "X-Fastly-Request-Id": [
-            "60b929d9011ad3b648e24a41ad5309ee7bd14903"
+            "99b1dee86971b724e312e8186ac68be332b94657"
           ],
           "Expires": [
-            "Thu, 25 May 2023 04:35:56 GMT"
+            "Thu, 22 Jun 2023 16:22:06 GMT"
           ],
           "Source-Age": [
             "0"
@@ -101,10 +104,10 @@
         },
         "body": {
           "encoding": "ASCII-8BIT",
-          "string": "---\nschema-version: v1.2.3\nid: ITU-RBO.600-1\ntitle:\n- content: Standardized set of test conditions and measurement procedures for the\n    subjective and objective determination of protection ratios for television in\n    the terrestrial broadcasting and the broadcasting-satellite services\n  language:\n  - en\n  script:\n  - Latn\n  format: text/plain\n  type: main\nlink:\n- content: https://extranet.itu.int/brdocsearch/_layouts/15/DocSetHome.aspx?id=/brdocsearch/R-REC/R-REC-BO/R-REC-BO.600/R-REC-BO.600-1-198607-I\n  type: src\ntype: standard\ndocid:\n- id: ITU-R BO.600-1\n  type: ITU\n  primary: true\ndate:\n- type: confirmed\n  value: '1986'\n- type: published\n  value: 1986-07\nrevdate: 1986-07\nlanguage:\n- en\nscript:\n- Latn\ndoctype: recommendation\next:\n  schema-version: v1.0.0\n"
+          "string": "---\nschema-version: v1.2.3\nid: ITU-RBO.600-1\ntitle:\n- content: Standardized set of test conditions and measurement procedures for the\n    subjective and objective determination of protection ratios for television in\n    the terrestrial broadcasting and the broadcasting-satellite services\n  language:\n  - en\n  script:\n  - Latn\n  format: text/plain\n  type: main\nlink:\n- content: https://extranet.itu.int/brdocsearch/_layouts/15/DocSetHome.aspx?id=/brdocsearch/R-REC/R-REC-BO/R-REC-BO.600/R-REC-BO.600-1-198607-I\n  type: src\ntype: standard\ndocid:\n- id: ITU-R BO.600-1\n  type: ITU\n  primary: true\ndate:\n- type: confirmed\n  value: '1986-07-01'\n- type: published\n  value: '1986'\nrevdate: '1986'\nlanguage:\n- en\nscript:\n- Latn\ndoctype: recommendation\next:\n  schema-version: v1.0.0\n"
         }
       },
-      "recorded_at": "Thu, 25 May 2023 04:30:56 GMT"
+      "recorded_at": "Thu, 22 Jun 2023 16:17:05 GMT"
     }
   ],
   "recorded_with": "VCR 6.1.0"
