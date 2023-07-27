@@ -103,6 +103,11 @@ RSpec.describe RelatonItu do
     end
   end
 
+  it "ITU-T Z.100", vcr: { cassette_name: "itu_t_z_100" } do
+    result = RelatonItu::ItuBibliography.get "ITU-T Z.100"
+    expect(result.docidentifier[0].id).to eq "ITU-T Z.100"
+  end
+
   context "fetch supplements" do
     it do
       VCR.use_cassette "itu_t_a_suppl_2" do
