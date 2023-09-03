@@ -1,3 +1,3 @@
 module RelatonItu
-  VERSION = "1.14.3".freeze
+  VERSION = "1.16.0".freeze
 end

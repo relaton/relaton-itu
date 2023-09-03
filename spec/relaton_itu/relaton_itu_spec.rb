@@ -14,7 +14,7 @@ RSpec.describe RelatonItu do
   it "gets a code" do
     VCR.use_cassette "code" do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
-      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.3">)
+      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.4">)
       expect(results).to include %(<on>2018-11-29</on>)
       expect(results.gsub(/<relation.*<\/relation>/m, ""))
         .not_to include %(<on>2018-11-29</on>)
