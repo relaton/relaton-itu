@@ -1,6 +1,8 @@
 require "jing"
 
 RSpec.describe RelatonItu do
+  before { RelatonItu.instance_variable_set :@configuration, nil  }
+
   it "has a version number" do
     expect(RelatonItu::VERSION).not_to be nil
   end
@@ -147,7 +149,7 @@ RSpec.describe RelatonItu do
   it "warns when year is wrong" do
     VCR.use_cassette "wrong_year" do
       expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }
-        .to output(%r{WARNING:\sno\smatch\sfound\sonline\sfor\sITU-T\sL\.163\s\(1018\)\.})
+        .to output(%r{WARNING:\sno\smatch\sfound\sonline\sfor\s`ITU-T\sL\.163\s\(1018\)`\.})
         .to_stderr
     end
   end
