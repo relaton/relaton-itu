@@ -17,7 +17,8 @@ module RelatonItu
     # @param workgroup [Hash, RelatonItu::ItuGroup, NilClass]
     def initialize(bureau:, group:, subgroup: nil, workgroup: nil)
       unless BUREAUS.include? bureau
-        warn "[relaton-itu] WARNING: invalid bureau: #{bureau}"
+        Util.warn "WARNING: invalid bureau: `#{bureau}`"
+        Util.warn "WARNING: valid bureaus are: `#{BUREAUS.join('`, `')}`"
       end
       @bureau = bureau
       @group = group.is_a?(Hash) ? ItuGroup.new(**group) : group

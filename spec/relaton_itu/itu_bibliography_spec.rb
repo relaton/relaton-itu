@@ -1,11 +1,13 @@
 describe RelatonItu::ItuBibliography do
+  before { RelatonItu.instance_variable_set :@configuration, nil }
+
   context ".fetch_ref_err" do
     it "warn missed years" do
       refid = RelatonItu::Pubid.parse "ITU-T X.1 (01/2019)"
       missed_years = [2018, 2017]
       expect do
         described_class.send :fetch_ref_err, refid, missed_years
-      end.to output(/matches found for 2018, 2017/).to_stderr
+      end.to output(/matches found for `2018`, `2017`/).to_stderr
     end
   end
 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "relaton_bib"
 require "relaton_itu/itu_bibliographic_item"
 require "relaton_itu/editorial_group"
 require "relaton_itu/structured_identifier"
@@ -23,9 +22,9 @@ module RelatonItu
     def search(refid)
       refid = RelatonItu::Pubid.parse refid if refid.is_a? String
       if refid.to_ref =~ /(ITU[\s-]T\s\w)\.(Suppl\.|Annex)\s?(\w?\d+)/
-        correct_ref = "#{$~[1]} #{$~[2]} #{$~[3]}"
-        warn "[relaton-itu] WARNING: Incorrect reference #{refid}"
-        warn "[relaton-itu] the reference should be #{correct_ref}"
+        correct_ref = "`#{$~[1]}` `#{$~[2]}` `#{$~[3]}`"
+        Util.warn "WARNING: Incorrect reference `#{refid}`"
+        Util.warn "the reference should be #{correct_ref}"
       end
       HitCollection.new refid
     rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse,
@@ -64,20 +63,21 @@ module RelatonItu
     private
 
     def fetch_ref_err(refid, missed_years) # rubocop:disable Metrics/MethodLength
-      warn "[relaton-itu] WARNING: no match found online for #{refid}. " \
-           "The code must be exactly like it is on the standards website."
+      Util.warn "WARNING: no match found online for `#{refid}`. " \
+                "The code must be exactly like it is on the standards website."
       unless missed_years.empty?
-        warn "[relaton-itu] (There was no match for #{refid.year}, though there " \
-             "were matches found for #{missed_years.join(', ')}.)"
+        Util.warn "(There was no match for `#{refid.year}`, though there " \
+                  "were matches found for `#{missed_years.join('`, `')}`.)"
       end
       # if /\d-\d/.match? refid.code
       #   warn "[relaton-itu] The provided document part may not exist, or " \
       #        "the document may no longer be published in parts."
       # else
-      warn "[relaton-itu] If you wanted to cite all document parts for the reference, " \
-           "use \"#{refid} (all parts)\".\nIf the document is not a standard, " \
-           "use its document type abbreviation (TS, TR, PAS, Guide)."
+      Util.warn "If you wanted to cite all document parts for the reference, " \
+                "use `#{refid} (all parts)`.\nIf the document is not a standard, " \
+                "use its document type abbreviation `S`, `TR`, `PAS`, `Guide`)."
       # end
+      nil
     end
 
     def search_filter(refid) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
@@ -90,7 +90,7 @@ module RelatonItu
       #   (?:\s\((?:(?<cormonth1>\d{2})/)?(?<coryear1>\d{4})\))?
       # }x =~ code
       # year ||= year1
-      warn "[relaton-itu] (\"#{refid}\") fetching..."
+      Util.warn "(#{refid}) fetching..."
       result = search(refid)
       # refid.code.sub!(/(?<=\.)Imp(?=\d)/, "") if result.gi_imp
       # if corr1
@@ -143,7 +143,7 @@ module RelatonItu
       result = search_filter(refid) || return
       ret = isobib_results_filter(result, refid)
       if ret[:ret]
-        warn "[relaton-itu] (\"#{refid}\") found #{ret[:ret].docidentifier.first&.id}"
+        Util.warn "(#{refid}) found `#{ret[:ret].docidentifier.first&.id}`"
         ret[:ret]
       else
         fetch_ref_err(refid, ret[:years])

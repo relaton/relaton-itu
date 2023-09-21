@@ -1,4 +1,6 @@
 RSpec.describe RelatonItu::ItuBibliographicItem do
+  before { RelatonItu.instance_variable_set :@configuration, nil }
+
   it "raises argument error" do
     expect do
       RelatonItu::ItuBibliographicItem.new doctype: "doc"
