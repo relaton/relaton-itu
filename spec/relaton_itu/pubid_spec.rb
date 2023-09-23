@@ -29,7 +29,7 @@ describe RelatonItu::Pubid do
     it "raise error" do
       expect do
         expect { described_class.parse("ITU- T.4") }.to raise_error Parslet::ParseFailed
-      end.to output(/\[relaton-itu\] WARNING: ITU- T\.4 is invalid ITU publication identifier/).to_stderr
+      end.to output(/\[relaton-itu\] WARNING: `ITU- T\.4` is invalid ITU publication identifier/).to_stderr
     end
   end
 
