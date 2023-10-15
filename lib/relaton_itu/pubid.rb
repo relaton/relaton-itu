@@ -65,8 +65,8 @@ module RelatonItu
       id_parts = Parser.new.parse(id).to_h.transform_values(&:to_s)
       new(**id_parts)
     rescue Parslet::ParseFailed => e
-      Util.warn "WARNING: `#{id}` is invalid ITU publication identifier"
-      Util.warn e.parse_failure_cause.ascii_tree
+      Util.warn "WARNING: `#{id}` is invalid ITU publication identifier \n" \
+                "#{e.parse_failure_cause.ascii_tree}"
       raise e
     end
 
@@ -96,11 +96,12 @@ module RelatonItu
       s
     end
 
-    def ===(other)
+    def ===(other, ignore_args = [])
       hash = to_h with_type: false
       other_hash = other.to_h with_type: false
       hash.delete(:month)
       other_hash.delete(:month)
+      hash.delete(:year) if ignore_args.include?(:year)
       other_hash.delete(:year) unless hash[:year]
       hash == other_hash
     end

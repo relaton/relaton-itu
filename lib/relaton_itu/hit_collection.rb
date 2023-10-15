@@ -21,6 +21,7 @@ module RelatonItu
     # @param refid [RelatonItu::Pubid] reference
     #
     def initialize(refid) # rubocop:todo Metrics/MethodLength
+      @refid = refid
       text = refid.to_ref.sub(/(?<=\.)Imp\s?(?=\d)/, "")
       super text, refid.year
       @agent = Mechanize.new
@@ -32,25 +33,24 @@ module RelatonItu
       when /^(ITU-T|ITU-R\sRR)/
         request_search
       when /^ITU-R\s/
-        request_document(refid)
+        request_document
       end
     end
 
     private
 
     def request_search
+      Util.warn "(#{@refid}) Fetching from www.itu.int ..."
       url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/RunSearch"
       data = { json: params.to_json }
       resp = agent.post url, data
       @array = hits JSON.parse(resp.body)
     end
 
-    #
-    # @param refid [RelatonItu::Pubid] a document reference
-    #
-    def request_document(refid) # rubocop:todo Metrics/MethodLength, Metrics/AbcSize
+    def request_document # rubocop:todo Metrics/MethodLength, Metrics/AbcSize
+      Util.warn "(#{@refid}) Fetching from Relaton repository ..."
       index = Relaton::Index.find_or_create :itu, url: "#{GH_ITU_R}index-v1.zip", file: INDEX_FILE
-      row = index.search(refid.to_ref).min_by { |i| i[:id] }
+      row = index.search(@refid.to_ref).min_by { |i| i[:id] }
       return unless row
 
       uri = URI("#{GH_ITU_R}#{row[:file]}")
@@ -77,8 +77,10 @@ module RelatonItu
 
     # @return [Hash]
     def params # rubocop:disable Metrics/MethodLength
+      input = @refid.dup
+      input.year = nil
       {
-        "Input" => text,
+        "Input" => input.to_s,
         "Start" => 0,
         "Rows" => 10,
         "SortBy" => "RELEVANCE",

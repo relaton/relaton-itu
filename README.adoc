@@ -84,8 +84,8 @@ item.to_xml bibdata: true
 [source,ruby]
 ----
 RelatonItu::ItuBibliography.get("ITU-T L.163", "2018", {})
-[relaton-itu] (ITU-T L.163) fetching...
-[relaton-itu] (ITU-T L.163) found `ITU-T L.163`
+[relaton-itu] (ITU-T L.163) Fetching from www.itu.int ...
+[relaton-itu] (ITU-T L.163) Found: `ITU-T L.163`
 => #<RelatonItu::ItuBibliographicItem:0x007fbf5f94b9b8
 ...
 ----
@@ -94,8 +94,8 @@ RelatonItu::ItuBibliography.get("ITU-T L.163", "2018", {})
 [source,ruby]
 ----
 RelatonItu::ItuBibliography.get "ITU-T G.989.2/Amd 1"
-[relaton-itu] (ITU-T G.989.2/Amd 1) fetching...
-[relaton-itu] (ITU-T G.989.2/Amd 1) found `ITU-T G.989.2/Amd 1`
+[relaton-itu] (ITU-T G.989.2/Amd 1) Fetching from www.itu.int ...
+[relaton-itu] (ITU-T G.989.2/Amd 1) Found: `ITU-T G.989.2/Amd 1`
 => #<RelatonItu::ItuBibliographicItem:0x007fe5409e5840
 ...
 ----
@@ -105,8 +105,8 @@ RelatonItu::ItuBibliography.get "ITU-T G.989.2/Amd 1"
 [source,ruby]
 ----
 RelatonItu::ItuBibliography.get "ITU-R BO.600-1"
-[relaton-itu] (ITU-R BO.600-1) fetching...
-[relaton-itu] (ITU-R BO.600-1) found `ITU-R BO.600-1`
+[relaton-itu] (ITU-R BO.600-1) Fetching from www.itu.int ...
+[relaton-itu] (ITU-R BO.600-1) Found: `ITU-R BO.600-1`
 => #<RelatonItu::ItuBibliographicItem:0x00007fb0cf8a1308
 ...
 ----
@@ -116,9 +116,9 @@ RelatonItu::ItuBibliography.get "ITU-R BO.600-1"
 [source,ruby]
 ----
 RelatonItu::ItuBibliography.get 'ITU-R RR (2020)'
-[relaton-itu] (ITU-R RR) fetching...
-[relaton-itu] WARNING: invalid doctype: `publication`
-[relaton-itu] (ITU-R RR) found ITU-R RR
+[relaton-itu] (ITU-R RR) Fetching from www.itu.int ...
+[relaton-itu] WARNING: Invalid doctype: `publication`
+[relaton-itu] (ITU-R RR) Found: ITU-R RR
 => #<RelatonItu::ItuBibliographicItem:0x007fb4b55eb660
 ...
 ----

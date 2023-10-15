@@ -10,7 +10,7 @@ module RelatonItu
     # @params structuredidentifier [RelatonItu::StructuredIdentifier]
     def initialize(**args)
       if args[:doctype] && !TYPES.include?(args[:doctype])
-        Util.warn "WARNING: invalid doctype: `#{args[:doctype]}`"
+        Util.warn "WARNING: Invalid doctype: `#{args[:doctype]}`"
       end
       super
     end

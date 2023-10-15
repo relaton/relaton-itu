@@ -4,7 +4,7 @@ RSpec.describe RelatonItu::ItuBibliographicItem do
   it "raises argument error" do
     expect do
       RelatonItu::ItuBibliographicItem.new doctype: "doc"
-    end.to output(/invalid doctype/).to_stderr
+    end.to output(/\[relaton-itu\] WARNING: Invalid doctype: `doc`/).to_stderr
   end
 
   it "returns hash" do
