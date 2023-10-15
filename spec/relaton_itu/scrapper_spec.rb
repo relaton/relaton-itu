@@ -1,4 +1,6 @@
 RSpec.describe RelatonItu::Scrapper do
+  before { RelatonItu.instance_variable_set :@configuration, nil }
+
   it "returns TSAG workgroup" do
     group = RelatonItu::Scrapper.send(
       :itugroup, "Telecommunication Standardization Advisory Group"
@@ -46,7 +48,9 @@ RSpec.describe RelatonItu::Scrapper do
       hit = double "Hit", hit_collection: hit_collection
       expect do
         RelatonItu::Scrapper.send :fetch_abstract, doc, hit
-      end.to output(/^HTTP Service Unavailable: .*$/).to_stderr
+      end.to output(
+        /\[relaton-itu\] HTTP Service Unavailable:  =>  for  -- Mechanize::ResponseCodeError/,
+      ).to_stderr
     end
   end
 end

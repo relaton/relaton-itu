@@ -75,7 +75,7 @@ module RelatonItu
                     url = abstract_url[:onclick].match(/https?[^']+/).to_s
                     rsp = hit.hit_collection.agent.get url
                     d = Nokogiri::HTML rsp.body.encode(undef: :replace, replace: "")
-                    d.css("p.MsoNormal").text.gsub(/\r\n/, "").squeeze(" ").gsub(/\u00a0/, "")
+                    d.css("p.MsoNormal").text.gsub("\r\n", "").squeeze(" ").gsub("\u00a0", "")
                   elsif a = doc.at('//table/tr/td/span[contains(@class, "observation")]/text()')
                     a.text.strip
                   end
@@ -87,7 +87,7 @@ module RelatonItu
           script: "Latn",
         }]
       rescue Mechanize::ResponseCodeError => e
-        warn "HTTP Service Unavailable: #{e.message}"
+        Util.warn "HTTP Service Unavailable: #{e.message}"
         []
       end
 
