@@ -6,6 +6,7 @@ describe RelatonItu::DataParserR do
     expect(described_class).to receive(:fetch_date).with(:doc).and_return :date
     expect(described_class).to receive(:fetch_link).with(:url).and_return :link
     expect(described_class).to receive(:fetch_status).with(:doc).and_return :status
+    expect(described_class).to receive(:fetch_doctype).with(:type).and_return :type
     expect(RelatonItu::ItuBibliographicItem).to receive(:new).with(
       docid: :docid, title: :title, abstract: :abstract, date: :date, language: ["en"],
       link: :link, script: ["Latn"], docstatus: :status, type: "standard", doctype: :type
@@ -155,5 +156,11 @@ describe RelatonItu::DataParserR do
       expect(status).to be_instance_of RelatonBib::DocumentStatus
       expect(status.stage.value).to eq "In force"
     end
+  end
+
+  it "fetch_doctype" do
+    doctype = described_class.fetch_doctype "technical-report"
+    expect(doctype).to be_instance_of RelatonItu::DocumentType
+    expect(doctype.type).to eq "technical-report"
   end
 end

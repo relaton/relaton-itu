@@ -16,7 +16,7 @@ module RelatonItu
         docid: fetch_docid(doc), title: fetch_title(doc),
         abstract: fetch_abstract(doc), date: fetch_date(doc), language: ["en"],
         link: fetch_link(url), script: ["Latn"], docstatus: fetch_status(doc),
-        type: "standard", doctype: type
+        type: "standard", doctype: fetch_doctype(type)
       )
     end
 
@@ -89,6 +89,10 @@ module RelatonItu
       return unless s
 
       RelatonBib::DocumentStatus.new stage: s.text
+    end
+
+    def fetch_doctype(type)
+      DocumentType.new(type: type)
     end
   end
 end

@@ -49,7 +49,7 @@ module RelatonItu
           language: ["en"],
           script: ["Latn"],
           title: fetch_titles(doc),
-          doctype: hit.hit[:type],
+          doctype: DocumentType.new(type: hit.hit[:type]),
           docstatus: fetch_status(doc),
           ics: [], # fetch_ics(doc),
           date: fetch_dates(doc),

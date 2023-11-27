@@ -1,12 +1,6 @@
 RSpec.describe RelatonItu::ItuBibliographicItem do
   before { RelatonItu.instance_variable_set :@configuration, nil }
 
-  it "raises argument error" do
-    expect do
-      RelatonItu::ItuBibliographicItem.new doctype: "doc"
-    end.to output(/\[relaton-itu\] WARNING: Invalid doctype: `doc`/).to_stderr
-  end
-
   it "returns hash" do
     hash = YAML.load_file "spec/examples/itu_bib_item.yml"
     item = RelatonItu::ItuBibliographicItem.from_hash hash
