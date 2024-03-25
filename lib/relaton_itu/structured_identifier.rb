@@ -11,7 +11,7 @@ module RelatonItu
     # @param annexid [String, NilClass]
     def initialize(bureau:, docnumber:, annexid: nil)
       unless EditorialGroup::BUREAUS.include? bureau
-        Util.warn "WARNING: Invalid bureau: `#{bureau}`"
+        Util.warn "Invalid bureau: `#{bureau}`"
       end
       @bureau = bureau
       @docnumber = docnumber

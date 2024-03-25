@@ -65,8 +65,8 @@ module RelatonItu
       id_parts = Parser.new.parse(id).to_h.transform_values(&:to_s)
       new(**id_parts)
     rescue Parslet::ParseFailed => e
-      Util.warn "WARNING: `#{id}` is invalid ITU publication identifier \n" \
-                "#{e.parse_failure_cause.ascii_tree}"
+      Util.error  "`#{id}` is invalid ITU publication identifier\n" \
+                  "#{e.parse_failure_cause.ascii_tree}"
       raise e
     end
 

@@ -40,7 +40,7 @@ module RelatonItu
     private
 
     def request_search
-      Util.warn "(#{@refid}) Fetching from www.itu.int ..."
+      Util.info "Fetching from www.itu.int ...", key: @refid.to_s
       url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/RunSearch"
       data = { json: params.to_json }
       resp = agent.post url, data
@@ -48,7 +48,7 @@ module RelatonItu
     end
 
     def request_document # rubocop:todo Metrics/MethodLength, Metrics/AbcSize
-      Util.warn "(#{@refid}) Fetching from Relaton repository ..."
+      Util.info "Fetching from Relaton repository ...", key: @refid.to_s
       index = Relaton::Index.find_or_create :itu, url: "#{GH_ITU_R}index-v1.zip", file: INDEX_FILE
       row = index.search(@refid.to_ref).min_by { |i| i[:id] }
       return unless row

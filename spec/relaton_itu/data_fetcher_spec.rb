@@ -34,7 +34,7 @@ describe RelatonItu::DataFetcher do
         expect(subject.agent).to receive(:get).with(:url).and_raise "error"
         expect do
           subject.parse_page :url, :type
-        end.to output(/error/).to_stderr
+        end.to output(/error/).to_stderr_from_any_process
       end
     end
 
@@ -140,7 +140,7 @@ describe RelatonItu::DataFetcher do
         subject.instance_variable_set :@files, ["data/ITU_123_4.yaml"]
         expect do
           subject.write_file bib
-        end.to output(/File data\/ITU_123_4.yaml exists./).to_stderr
+        end.to output(/File data\/ITU_123_4.yaml exists./).to_stderr_from_any_process
       end
     end
 

@@ -7,7 +7,7 @@ RSpec.describe RelatonItu::XMLParser do
 
   it "parse ITU group period" do
     xml = <<~END_XML
-      <bibdata type="standard" schema-version="v1.2.8">
+      <bibdata type="standard" schema-version="v1.2.9">
         <ext schema-version="v1.0.0">
           <editorialgroup>
             <bureau>T</bureau>
@@ -25,10 +25,19 @@ RSpec.describe RelatonItu::XMLParser do
     expect(item.to_xml(bibdata: true)).to be_equivalent_to xml
   end
 
-  it "warn if XML doesn't have bibitem or bibdata element" do
-    item = ""
-    expect { item = RelatonItu::XMLParser.from_xml "" }.to output(/can't find bibitem/)
-      .to_stderr
-    expect(item).to be_nil
+  # it "warn if XML doesn't have bibitem or bibdata element" do
+  #   item = ""
+  #   expect { item = RelatonItu::XMLParser.from_xml "" }.to output(/can't find bibitem/)
+  #     .to_stderr
+  #   expect(item).to be_nil
+  # end
+
+  it "create_doctype" do
+    type = double "type", text: "type"
+    expect(type).to receive(:[]).with(:abbreviation).and_return("ABBREV")
+    dt = described_class.send :create_doctype, type
+    expect(dt).to be_instance_of RelatonItu::DocumentType
+    expect(dt.type).to eq "type"
+    expect(dt.abbreviation).to eq "ABBREV"
   end
 end

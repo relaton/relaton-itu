@@ -1,8 +1,6 @@
 require "jing"
 
 RSpec.describe RelatonItu do
-  before { RelatonItu.instance_variable_set :@configuration, nil }
-
   it "has a version number" do
     expect(RelatonItu::VERSION).not_to be nil
   end
@@ -16,7 +14,7 @@ RSpec.describe RelatonItu do
   it "gets a code" do
     VCR.use_cassette "code" do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
-      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.8">)
+      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.9">)
       expect(results).to include %(<on>2018-11-29</on>)
       expect(results.gsub(/<relation.*<\/relation>/m, ""))
         .not_to include %(<on>2018-11-29</on>)
@@ -122,7 +120,7 @@ RSpec.describe RelatonItu do
       VCR.use_cassette "itu_t_g_suppl_47" do
         expect do
           RelatonItu::ItuBibliography.get "ITU-T G.Suppl.47"
-        end.to output(/Incorrect reference/).to_stderr
+        end.to output(/Incorrect reference/).to_stderr_from_any_process
         # expect(result.docidentifier[0].id).to eq "ITU-T G Suppl. 47"
       end
     end
@@ -150,7 +148,7 @@ RSpec.describe RelatonItu do
     VCR.use_cassette "wrong_year" do
       expect { RelatonItu::ItuBibliography.get("ITU-T L.163", "1018", {}) }
         .to output(/There was no match for `1018` year, though there were matches found for `2018` year\./)
-        .to_stderr
+        .to_stderr_from_any_process
     end
   end
 
@@ -220,7 +218,7 @@ RSpec.describe RelatonItu do
     it "not existed radio regulation", vcr: "itu_r_rr_2014" do
       expect do
         expect(RelatonItu::ItuBibliography.get("ITU-R RR (2014)")).to be_nil
-      end.to output(/Not found\./).to_stderr
+      end.to output(/Not found\./).to_stderr_from_any_process
     end
   end
 
