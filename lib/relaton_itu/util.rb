@@ -1,9 +1,6 @@
 module RelatonItu
   module Util
     extend RelatonBib::Util
-
-    def self.logger
-      RelatonItu.configuration.logger
-    end
+    PROGNAME = "relaton-itu".freeze
   end
 end

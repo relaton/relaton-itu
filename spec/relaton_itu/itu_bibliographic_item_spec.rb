@@ -1,6 +1,4 @@
 RSpec.describe RelatonItu::ItuBibliographicItem do
-  before { RelatonItu.instance_variable_set :@configuration, nil }
-
   it "returns hash" do
     hash = YAML.load_file "spec/examples/itu_bib_item.yml"
     item = RelatonItu::ItuBibliographicItem.from_hash hash

@@ -8,7 +8,7 @@ module RelatonItu
       # @param item_hash [Hash]
       # @return [RelatonItu::ItuBibliographicItem]
       def bib_item(item_hash)
-        ItuBibliographicItem.new **item_hash
+        ItuBibliographicItem.new(**item_hash)
       end
 
       # @param ext [Nokogiri::XML::Element]
@@ -58,6 +58,10 @@ module RelatonItu
         dn = sid.at("docnumber").text
         an = sid.at("annexid")&.text
         StructuredIdentifier.new(bureau: br, docnumber: dn, annexid: an)
+      end
+
+      def create_doctype(type)
+        DocumentType.new type: type.text, abbreviation: type[:abbreviation]
       end
     end
   end
