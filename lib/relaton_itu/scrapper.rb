@@ -81,11 +81,7 @@ module RelatonItu
                   end
         return [] unless content
 
-        [{
-          content: content,
-          language: "en",
-          script: "Latn",
-        }]
+        [RelatonBib::Abstract.new(content: content, language: "en", script: "Latn",)]
       rescue Mechanize::ResponseCodeError => e
         Util.warn "HTTP Service Unavailable: #{e.message}"
         []
@@ -185,8 +181,7 @@ module RelatonItu
         doc.xpath('//div[contains(@id, "tab_sup")]//table/tr[position()>2]')
           .map do |r|
           ref = r.at('./td/span[contains(@id, "title_e")]/nobr/a')
-          fref = RelatonBib::FormattedRef.new(content: ref.text, language: "en",
-                                              script: "Latn")
+          fref = RelatonBib::FormattedRef.new(ref.text)
           did = RelatonBib::DocumentIdentifier.new(id: ref.text, type: "ITU")
           bibitem = ItuBibliographicItem.new(formattedref: fref, docid: [did],
                                              type: "standard")
@@ -201,7 +196,7 @@ module RelatonItu
         t = doc.at("//td[@class='title']|//div/table[1]/tr[4]/td/strong")
         return [] unless t
 
-        RelatonBib::TypedTitleString.from_string t.text, "en", "Latn"
+        RelatonBib::TypedTitleString.from_string t.text, lang: "en", script: "Latn"
       end
 
       # Fetch dates
@@ -295,8 +290,8 @@ module RelatonItu
         end
         fdate = doc.at("//table/tr/td/span[contains(@id, 'Label5')]")
         from = fdate&.text || ob_date(doc)
-        [{ owner: [{ name: name, abbreviation: abbreviation, url: url }],
-           from: from }]
+        org = RelatonBib::Organization.new name: name, abbreviation: abbreviation, url: url
+        [RelatonBib::CopyrightAssociation.new(owner: [org], from: from)]
       end
     end
   end

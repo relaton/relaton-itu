@@ -138,7 +138,7 @@ module RelatonItu
 
     def content(bib)
       case @format
-      when "yaml" then bib.to_hash.to_yaml
+      when "yaml" then bib.to_h.to_yaml
       when "xml" then bib.to_xml bibdata: true
       when "bibxml" then bib.to_bibxml
       end

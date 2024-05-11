@@ -4,7 +4,7 @@ RSpec.describe RelatonItu::ItuBibliographicItem do
   it "returns hash" do
     hash = YAML.load_file "spec/examples/itu_bib_item.yml"
     item = RelatonItu::ItuBibliographicItem.from_hash hash
-    item_hash = item.to_hash
+    item_hash = item.to_h
     expect(item_hash["editorialgroup"]).to eq hash["editorialgroup"]
   end
 

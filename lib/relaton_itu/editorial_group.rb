@@ -42,11 +42,11 @@ module RelatonItu
     end
 
     # @return [Hash]
-    def to_hash
+    def to_h
       hash = { "bureau" => bureau }
-      hash["group"] = group.to_hash if group
-      hash["subgroup"] = subgroup.to_hash if subgroup
-      hash["workgroup"] = workgroup.to_hash if workgroup
+      hash["group"] = group.to_h if group
+      hash["subgroup"] = subgroup.to_h if subgroup
+      hash["workgroup"] = workgroup.to_h if workgroup
       hash
     end
 

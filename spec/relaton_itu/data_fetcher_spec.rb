@@ -149,7 +149,7 @@ describe RelatonItu::DataFetcher do
 
       it "yaml" do
         hash = double "hash"
-        expect(bib).to receive(:to_hash).and_return hash
+        expect(bib).to receive(:to_h).and_return hash
         expect(hash).to receive(:to_yaml).and_return :yaml
         expect(subject.content(bib)).to eq :yaml
       end

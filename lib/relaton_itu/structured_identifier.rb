@@ -28,7 +28,7 @@ module RelatonItu
     end
 
     # @return [Hash]
-    def to_hash
+    def to_h
       hash = { bureau: bureau, docnumber: docnumber }
       hash[:annexid] = annexid if annexid
       hash
