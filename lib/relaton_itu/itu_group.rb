@@ -23,7 +23,7 @@ module RelatonItu
       end
 
       # @return [Hash]
-      def to_hash
+      def to_h
         hash = { "start" => start }
         hash["finish"] = finish if finish
         hash
@@ -75,11 +75,11 @@ module RelatonItu
     end
 
     # @return [Hash]
-    def to_hash
+    def to_h
       hash = { "name" => name }
       hash["type"] = type if type
       hash["acronym"] = acronym if acronym
-      hash["period"] = period.to_hash if period
+      hash["period"] = period.to_h if period
       hash
     end
 

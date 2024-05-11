@@ -52,9 +52,9 @@ describe RelatonItu::DataParserR do
     expect(title.size).to eq 1
     expect(title.first).to be_instance_of RelatonBib::TypedTitleString
     expect(title.first.type).to eq "main"
-    expect(title.first.title.content).to eq "title"
-    expect(title.first.title.language).to eq ["en"]
-    expect(title.first.title.script).to eq ["Latn"]
+    expect(title.first.to_s).to eq "title"
+    expect(title.first.language).to eq ["en"]
+    expect(title.first.script).to eq ["Latn"]
   end
 
   it "fetch_abstract" do

@@ -1,64 +1,62 @@
 require "nokogiri"
 
 module RelatonItu
-  class XMLParser < RelatonBib::XMLParser
-    class << self
-      private
+  module XMLParser
+    include RelatonBib::Parser::XML
+    extend self
+    # @param item_hash [Hash]
+    # @return [RelatonItu::ItuBibliographicItem]
+    def bib_item(item_hash)
+      ItuBibliographicItem.new **item_hash
+    end
 
-      # @param item_hash [Hash]
-      # @return [RelatonItu::ItuBibliographicItem]
-      def bib_item(item_hash)
-        ItuBibliographicItem.new **item_hash
-      end
+    # @param ext [Nokogiri::XML::Element]
+    # @return [RelatonItu::EditorialGroup]
+    def fetch_editorialgroup(ext)
+      eg = ext.at("./editorialgroup")
+      return unless eg
 
-      # @param ext [Nokogiri::XML::Element]
-      # @return [RelatonItu::EditorialGroup]
-      def fetch_editorialgroup(ext)
-        eg = ext.at("./editorialgroup")
-        return unless eg
+      EditorialGroup.new(
+        bureau: eg.at("bureau")&.text,
+        group: itugroup(eg.at("group")),
+        subgroup: itugroup(eg.at("subgroup")),
+        workgroup: itugroup(eg.at("workgroup")),
+      )
+    end
 
-        EditorialGroup.new(
-          bureau: eg.at("bureau")&.text,
-          group: itugroup(eg.at("group")),
-          subgroup: itugroup(eg.at("subgroup")),
-          workgroup: itugroup(eg.at("workgroup")),
-        )
-      end
+    # @param com [Nokogiri::XML::Element]
+    # @return [RelatonItu::ItuGroup]
+    def itugroup(group)
+      return unless group
 
-      # @param com [Nokogiri::XML::Element]
-      # @return [RelatonItu::ItuGroup]
-      def itugroup(group)
-        return unless group
+      ItuGroup.new(
+        type: group[:type],
+        name: group.at("name").text,
+        acronym: group.at("acronym")&.text,
+        period: itugroupperiod(group.at("period")),
+      )
+    end
 
-        ItuGroup.new(
-          type: group[:type],
-          name: group.at("name").text,
-          acronym: group.at("acronym")&.text,
-          period: itugroupperiod(group.at("period")),
-        )
-      end
+    # @param com [Nokogiri::XML::Element]
+    # @return [RelatonItu::ItuGroup::Period]
+    def itugroupperiod(period)
+      return until period
 
-      # @param com [Nokogiri::XML::Element]
-      # @return [RelatonItu::ItuGroup::Period]
-      def itugroupperiod(period)
-        return until period
+      ItuGroup::Period.new(
+        start: period.at("start").text, finish: period.at("end")&.text,
+      )
+    end
 
-        ItuGroup::Period.new(
-          start: period.at("start").text, finish: period.at("end")&.text,
-        )
-      end
+    # @param ext [Nokogiri::XML::Element]
+    # @return [RelatonItu::StructuredIdentifier]
+    def fetch_structuredidentifier(ext)
+      sid = ext.at "./structuredidentifier"
+      return unless sid
 
-      # @param ext [Nokogiri::XML::Element]
-      # @return [RelatonItu::StructuredIdentifier]
-      def fetch_structuredidentifier(ext)
-        sid = ext.at "./structuredidentifier"
-        return unless sid
-
-        br = sid.at("bureau").text
-        dn = sid.at("docnumber").text
-        an = sid.at("annexid")&.text
-        StructuredIdentifier.new(bureau: br, docnumber: dn, annexid: an)
-      end
+      br = sid.at("bureau").text
+      dn = sid.at("docnumber").text
+      an = sid.at("annexid")&.text
+      StructuredIdentifier.new(bureau: br, docnumber: dn, annexid: an)
     end
   end
 end
