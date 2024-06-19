@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
-  spec.add_dependency "mechanize", "~> 2.8.0"
+  spec.add_dependency "mechanize", "~> 2.10"
   spec.add_dependency "parslet", "~> 2.0.0"
   spec.add_dependency "relaton-bib", "~> 1.18.0"
   spec.add_dependency "relaton-index", "~> 0.2.0"
