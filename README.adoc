@@ -29,24 +29,13 @@ Or install it yourself as:
 
 == Usage
 
-=== Configuration
-
-Configuration is optional. The available option is `logger` which is a `Logger` instance. By default, the logger is `Logger.new($stderr)` with `Logger::WARN` level. To change the logger level, use `RelatonItu.configure` block.
+=== Search for a standard using keywords
 
 [source,ruby]
 ----
 require 'relaton_itu'
 => true
 
-RelatonItu.configure do |config|
-  config.logger.level = Logger::DEBUG
-end
-----
-
-=== Search for a standard using keywords
-
-[source,ruby]
-----
 hit_collection = RelatonItu::ItuBibliography.search("ITU-T L.163")
 => <RelatonItu::HitCollection:0x007fbf5fb4ab60 @ref=ITU-T L.163 @fetched=false>
 
@@ -164,6 +153,10 @@ Stopped at: 2023-05-27 09:27:45 -0400
 Done in: 390 sec.
 => nil
 ----
+
+=== Logging
+
+RelatonItu uses the relaton-logger gem for logging. By default, it logs to STDOUT. To change the log levels and add other loggers, read the https://github.com/relaton/relaton-logger#usage[relaton-logger] documentation.
 
 == Development
 

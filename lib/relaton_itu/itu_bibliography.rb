@@ -23,8 +23,7 @@ module RelatonItu
       refid = RelatonItu::Pubid.parse refid if refid.is_a? String
       if refid.to_ref =~ /(ITU[\s-]T\s\w)\.(Suppl\.|Annex)\s?(\w?\d+)/
         correct_ref = "#{$~[1]} #{$~[2]} #{$~[3]}"
-        Util.warn "WARNING: Incorrect reference: `#{refid}`"
-        Util.warn "the reference should be: `#{correct_ref}`"
+        Util.info "Incorrect reference: `#{refid}`, the reference should be: `#{correct_ref}`"
       end
       HitCollection.new refid
     rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse,
@@ -63,13 +62,13 @@ module RelatonItu
     private
 
     def fetch_ref_err(refid, missed_years) # rubocop:disable Metrics/MethodLength
-      # Util.warn "WARNING: no match found online for `#{refid}`. " \
+      # Util.warn "no match found online for `#{refid}`. " \
       #           "The code must be exactly like it is on the standards website."
-      Util.warn "(#{refid}) Not found."
+      Util.info "Not found.", key: refid.to_s
       if missed_years.any?
         plural = missed_years.size > 1 ? "s" : ""
-        Util.warn "(#{refid}) There was no match for `#{refid.year}` year, though " \
-                  "there were matches found for `#{missed_years.join('`, `')}` year#{plural}."
+        Util.info "There was no match for `#{refid.year}` year, though there were matches " \
+                  "found for `#{missed_years.join('`, `')}` year#{plural}.", key: refid.to_s
       end
       # if /\d-\d/.match? refid.code
       #   warn "[relaton-itu] The provided document part may not exist, or " \
@@ -144,7 +143,7 @@ module RelatonItu
       result = search_filter(refid) || return
       ret = isobib_results_filter(result, refid)
       if ret[:ret]
-        Util.warn "(#{refid}) Found: `#{ret[:ret].docidentifier.first&.id}`"
+        Util.info "Found: `#{ret[:ret].docidentifier.first&.id}`", key: refid.to_s
         ret[:ret]
       else
         fetch_ref_err(refid, ret[:years])

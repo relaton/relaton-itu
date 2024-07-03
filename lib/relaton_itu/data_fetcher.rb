@@ -36,8 +36,7 @@ module RelatonItu
       bib = DataParserR.parse doc, url, type
       write_file bib
     rescue => e # rubocop:disable Style/RescueStandardError
-      warn e.message
-      warn e.backtrace
+      Util.error "#{e.message}\n#{e.backtrace}"
     end
 
     def self.fetch(output: "data", format: "yaml")
@@ -128,7 +127,7 @@ module RelatonItu
       id = bib.docidentifier[0].id.gsub(/[\s.]/, "_")
       file = "#{@output}/#{id}.#{@ext}"
       if files.include? file
-        warn "File #{file} exists."
+        Util.warn "File #{file} exists."
       else
         files << file
       end
