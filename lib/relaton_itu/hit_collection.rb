@@ -8,7 +8,7 @@ module RelatonItu
   # Page of hit collection.
   class HitCollection < RelatonBib::HitCollection
     DOMAIN = "https://www.itu.int"
-    GH_ITU_R = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/"
+    GH_ITU_R = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/main/"
     INDEX_FILE = "index-v1.yaml"
 
     # @return [TrueClass, FalseClass]

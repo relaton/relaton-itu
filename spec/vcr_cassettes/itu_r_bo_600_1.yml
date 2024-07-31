@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/ITU-R_BO_600-1.yaml
+    uri: https://raw.githubusercontent.com/relaton/relaton-data-itu-r/main/data/ITU-R_BO_600-1.yaml
     body:
       encoding: US-ASCII
       base64_string: ''
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"50fa22551a8dff74fff85e56a0fdfcc17e7038c58e5ceb8423e81d17070b682f"
+      - W/"09725990cb9d811089e2b156f4e1265919fa4fd4d370c87dcd3a16870a2a8166"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -41,21 +41,21 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - 2CFC:195DC9:16D6277:1970D18:66831587
+      - F137:1D861:6AC8DB:7521F4:66AABD48
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 01 Jul 2024 20:50:08 GMT
+      - Wed, 31 Jul 2024 22:40:09 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-iad-kjyo7100034-IAD
+      - cache-iad-kjyo7100066-IAD
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1719867009.712521,VS0,VE1
+      - S1722465609.302943,VS0,VE100
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
@@ -63,15 +63,15 @@ http_interactions:
       Cross-Origin-Resource-Policy:
       - cross-origin
       X-Fastly-Request-Id:
-      - 16ce42ce51c328e3c799d71a96be188e85af853e
+      - a6b170476558e2d5dc439bc7392f8cd270b062a2
       Expires:
-      - Mon, 01 Jul 2024 20:55:08 GMT
+      - Wed, 31 Jul 2024 22:45:09 GMT
       Source-Age:
-      - '249'
+      - '0'
     body:
       encoding: ASCII-8BIT
       base64_string: |
-        LS0tCnNjaGVtYS12ZXJzaW9uOiB2MS4yLjgKaWQ6IElUVS1SQk8uNjAwLTEK
+        LS0tCnNjaGVtYS12ZXJzaW9uOiB2MS4yLjkKaWQ6IElUVS1SQk8uNjAwLTEK
         dGl0bGU6Ci0gY29udGVudDogU3RhbmRhcmRpemVkIHNldCBvZiB0ZXN0IGNv
         bmRpdGlvbnMgYW5kIG1lYXN1cmVtZW50IHByb2NlZHVyZXMgZm9yIHRoZQog
         ICAgc3ViamVjdGl2ZSBhbmQgb2JqZWN0aXZlIGRldGVybWluYXRpb24gb2Yg
@@ -89,5 +89,5 @@ http_interactions:
         ZXZkYXRlOiAnMTk4NicKbGFuZ3VhZ2U6Ci0gZW4Kc2NyaXB0OgotIExhdG4K
         ZG9jdHlwZToKICB0eXBlOiByZWNvbW1lbmRhdGlvbgpleHQ6CiAgc2NoZW1h
         LXZlcnNpb246IHYxLjAuMAo=
-  recorded_at: Mon, 01 Jul 2024 20:50:08 GMT
+  recorded_at: Wed, 31 Jul 2024 22:40:09 GMT
 recorded_with: VCR 6.2.0
