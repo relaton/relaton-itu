@@ -25,6 +25,8 @@ describe RelatonItu::Pubid do
     it_behaves_like "parse", "ITU-T Z.100 Annex F2 (06/2021)", "ITU-T Z.100 Annex F2 (06/2021)"
     it_behaves_like "parse", "ITU-T G.780/Y.1351", "ITU-T G.780/Y.1351"
     it_behaves_like "parse", "ITU-R 52 (2014)", "ITU-R 52 (2014)"
+    it_behaves_like "parse", "ITU-T H.264 (V14) (08/2021)", "ITU-T H.264 (V14) (08/2021)"
+    it_behaves_like "parse", "ITU-T G.994.1 (2018) Amd. 2 (02/2021)", "ITU-T G.994.1 (2018) Amd 2 (02/2021)"
 
     it "raise error" do
       expect do

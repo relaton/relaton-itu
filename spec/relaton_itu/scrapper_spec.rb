@@ -29,7 +29,7 @@ RSpec.describe RelatonItu::Scrapper do
             <table>
               <tr>
                 <td><span>In force</span></td>
-                <td>
+                <td style="color: white">
                   <span id="lbl_dms">
                     <div onclick="this.style.color='purple'; var newWin = window.open('http://www.itu.int/abs.htm'); return false;"></div>
                   </span>

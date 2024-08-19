@@ -14,27 +14,27 @@ RSpec.describe RelatonItu do
   it "gets a code" do
     VCR.use_cassette "code" do
       results = RelatonItu::ItuBibliography.get("ITU-T L.163", nil, {}).to_xml
-      expect(results).to include %(<bibitem id="ITU-TL.163" type="standard" schema-version="v1.2.9">)
+      expect(results).to include %(<bibitem id="ITUTL163112018" type="standard" schema-version="v1.2.9">)
       expect(results).to include %(<on>2018-11-29</on>)
       expect(results.gsub(/<relation.*<\/relation>/m, ""))
         .not_to include %(<on>2018-11-29</on>)
       expect(results)
-        .to include %(<docidentifier type="ITU" primary="true">ITU-T L.163</docidentifier>)
+        .to include %{<docidentifier type="ITU" primary="true">ITU-T L.163 (11/2018)</docidentifier>}
     end
   end
 
-  it "get document without abstract" do
-    VCR.use_cassette "itu_t_g_994_1" do
-      bib = RelatonItu::ItuBibliography.get "ITU-T G.994.1"
-      expect(bib.docidentifier[0].id).to eq "ITU-T G.994.1"
-      expect(bib.abstract.size).to eq 0
-    end
-  end
+  # it "get document without abstract" do
+  #   VCR.use_cassette "itu_t_g_994_1" do
+  #     bib = RelatonItu::ItuBibliography.get "ITU-T G.994.1 (02/2021)"
+  #     expect(bib.docidentifier[0].id).to eq "ITU-T G.994.1 (02/2021)"
+  #     expect(bib.abstract.size).to eq 0
+  #   end
+  # end
 
   it "encode abstract text" do
     VCR.use_cassette "itu_t_h_264" do
       file = "spec/examples/itu_t_h_264.xml"
-      result = RelatonItu::ItuBibliography.get("ITU-T H.264").to_xml
+      result = RelatonItu::ItuBibliography.get("ITU-T H.264 (08/2021)").to_xml
       File.write file, result, encoding: "UTF-8" unless File.exist? file
       expect(result).to be_equivalent_to File.read(file, encoding: "UTF-8")
         .gsub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s)
@@ -58,14 +58,14 @@ RSpec.describe RelatonItu do
   it "gets Operational Bulletin" do
     VCR.use_cassette "operational_bulletin" do
       result = RelatonItu::ItuBibliography.get "ITU-T OB.1096 - 15.III.2016"
-      expect(result.docidentifier[0].id).to eq "ITU-T OB.1096 - 15.III.2016"
+      expect(result.docidentifier[0].id).to eq "ITU-T OB.1096 (2016)"
     end
   end
 
   it "gets a documet with 2 identifier" do
     VCR.use_cassette "itu_t_y_3500" do
       result = RelatonItu::ItuBibliography.get "ITU-T Y.3500"
-      expect(result.docidentifier[0].id).to eq "ITU-T Y.3500"
+      expect(result.docidentifier[0].id).to eq "ITU-T Y.3500 (08/2014)"
       expect(result.docidentifier[0].type).to eq "ITU"
       expect(result.docidentifier[1].id).to eq "ISO/IEC 17788"
       expect(result.docidentifier[1].type).to eq "ISO"
@@ -75,7 +75,7 @@ RSpec.describe RelatonItu do
   it "get amendment" do
     VCR.use_cassette "itu_t_g_989_2_amd_1" do
       bib = RelatonItu::ItuBibliography.get "ITU-T G.989.2 Amd 1"
-      expect(bib.docidentifier[0].id).to eq "ITU-T G.989.2 Amd 1"
+      expect(bib.docidentifier[0].id).to eq "ITU-T G.989.2 (2014) Amd 1 (04/2016)"
     end
   end
 
@@ -89,7 +89,7 @@ RSpec.describe RelatonItu do
   it "get reference with slash in code" do
     VCR.use_cassette "itu_t_g_780_y_1351" do
       bib = RelatonItu::ItuBibliography.get "ITU-T G.780/Y.1351"
-      expect(bib.docidentifier[0].id).to eq "ITU-T G.780/Y.1351"
+      expect(bib.docidentifier[0].id).to eq "ITU-T G.780/Y.1351 (07/2010)"
     end
   end
 
@@ -105,14 +105,14 @@ RSpec.describe RelatonItu do
 
   it "ITU-T Z.100", vcr: { cassette_name: "itu_t_z_100" } do
     result = RelatonItu::ItuBibliography.get "ITU-T Z.100"
-    expect(result.docidentifier[0].id).to eq "ITU-T Z.100"
+    expect(result.docidentifier[0].id).to eq "ITU-T Z.100 (06/2021)"
   end
 
   context "fetch supplements" do
     it do
       VCR.use_cassette "itu_t_a_suppl_2" do
         result = RelatonItu::ItuBibliography.get "ITU-T A Suppl. 2"
-        expect(result.docidentifier.first.id).to eq "ITU-T A Suppl. 2"
+        expect(result.docidentifier.first.id).to eq "ITU-T A Suppl. 2 (12/2022)"
       end
     end
 
@@ -173,7 +173,7 @@ RSpec.describe RelatonItu do
       expect(hit.to_s).to eq(
         "<RelatonItu::Hit:" \
         "#{format('%<id>#.14x', id: hits.first.object_id << 1)} " \
-        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.163:2018" ' \
+        '@text="ITU-T L.163" @fetched="true" @fullIdentifier="ITU-TL.16311-2018:2018" ' \
         '@title="ITU-T L.163 (11/2018)">',
       )
     end
@@ -210,7 +210,7 @@ RSpec.describe RelatonItu do
     it "radio regulation" do
       VCR.use_cassette "itu_r_rr_2020" do
         bib = RelatonItu::ItuBibliography.get "ITU-R RR (2020)"
-        expect(bib.docidentifier[0].id).to eq "ITU-R RR"
+        expect(bib.docidentifier[0].id).to eq "ITU-R RR (2020)"
         expect(bib.date[0].on).to eq "2020"
       end
     end

@@ -38,8 +38,6 @@ http_interactions:
       User-Agent:
       - Mozilla/5.0 (Macintosh; Intel Mac OS X 14_2_1) AppleWebKit/605.1.15 (KHTML,
         like Gecko) Version/17.2 Safari/605.1.15
-      Accept-Charset:
-      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
       Accept-Language:
       - en-us,en;q=0.5
       Host:
@@ -60,22 +58,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - BIGipServerV19edYz/rGMxUCJeS7ZH3w=!X3j2F/92U+hTA52pH4KjOFmY2dpomf9RdPBNaRil1Pd+PH7Iqntra6Wi3tN6fSFccefmpSrME9nfi9s=;
+      - BIGipServerV19edYz/rGMxUCJeS7ZH3w=!ueg6HVcko7SnUWCpH4KjOFmY2dpomZzGHaUwZrGs+1R1tPfS9EFKTwcCXghATaOxWcNBjhKOdnCYXic=;
         path=/; Httponly; Secure
-      - GSCookie_CookieId=uIiACFwIoVlrJT9JB7QCM%2FfpaGQM046swcISld2yo6%2BHh7IrspYOBh5uUwnwDkESAGeMk%2FPsFDvVOIgBW4oLoQ%3D%3D;
-        expires=Fri, 31 Jul 2026 22:40:08 GMT; domain=www.itu.int; path=/
-      - GSCookie_CookieId=uoKNrAVTO5%2BKJpmpbxwp9MAIJ44lijnaB0j%2BE4B%2B3JLIJEx8eBJIpff0QiRI6%2B2edEAImIzc3okzXufYelhziA%3D%3D;
-        expires=Fri, 31 Jul 2026 22:40:08 GMT; domain=www.itu.int; path=/
-      - GSCookie_QueryId=7935279; expires=Fri, 31 Jul 2026 22:40:08 GMT; domain=www.itu.int;
+      - GSCookie_CookieId=2f4y%2F%2B0zsPJrFReCvgMyKaOck5M6DoP2akpxWF4K%2BHpsBGScLcoRviM4BLj98JikxtmwdVrxr%2FBNx0NYE8mA2g%3D%3D;
+        expires=Mon, 17 Aug 2026 22:25:30 GMT; domain=www.itu.int; path=/
+      - GSCookie_CookieId=pE7jPoOE4fV4j7FF5VkKNz4nneUMNrtFL9lI%2FjKRh8y16w3JoIxmPX%2Bpl%2FB6nWPflUgdxNBV7hazyfM9EzBHFQ%3D%3D;
+        expires=Mon, 17 Aug 2026 22:25:29 GMT; domain=www.itu.int; path=/
+      - GSCookie_QueryId=7950374; expires=Mon, 17 Aug 2026 22:25:30 GMT; domain=www.itu.int;
         path=/
-      - GSCookie_QueryId=; expires=Fri, 31 Jul 2026 22:40:08 GMT; domain=www.itu.int;
+      - GSCookie_QueryId=; expires=Mon, 17 Aug 2026 22:25:29 GMT; domain=www.itu.int;
         path=/
-      - TS010592a8=018bf709fc2b798f15a4fba7f03b40e515b728b6a130318ee6d0a047dec4df38834769b39814bf8d071400557d9cce019c4c492044;
+      - TS010592a8=018bf709fc9bf923d28ea438c4b9e3462bd62d68b74769ee1d4126e36ee8ccddcc0de25d334e60e32bbf28c3ef37b16b20dcc00c7c;
         Path=/;
-      - TS0110b275=018bf709fc2b798f15a4fba7f03b40e515b728b6a130318ee6d0a047dec4df38834769b39814bf8d071400557d9cce019c4c492044;
+      - TS0110b275=018bf709fc9bf923d28ea438c4b9e3462bd62d68b74769ee1d4126e36ee8ccddcc0de25d334e60e32bbf28c3ef37b16b20dcc00c7c;
         path=/; domain=www.itu.int
       Date:
-      - Wed, 31 Jul 2024 22:40:08 GMT
+      - Sat, 17 Aug 2024 22:25:30 GMT
       Transfer-Encoding:
       - chunked
     body:
@@ -474,5 +472,5 @@ http_interactions:
         NDciLCJ0b3RhbEFtb3VudCI6MTUsImNvbGxhdGlvblF1ZXJ5IjoiIiwiYXR0
         ZW1wdCI6MCwibGFuZ3VhZ2VVcGRhdGVkIjpmYWxzZSwiYWxsb3dlZCI6dHJ1
         ZX0=
-  recorded_at: Wed, 31 Jul 2024 22:40:09 GMT
+  recorded_at: Sat, 17 Aug 2024 22:25:30 GMT
 recorded_with: VCR 6.2.0

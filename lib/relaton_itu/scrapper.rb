@@ -39,12 +39,14 @@ module RelatonItu
         end
 
         # Fetch edition.
-        edition = doc.at("//table/tr/td/span[contains(@id, 'Label8')]/b")&.text
+        edition = doc.at("//table/tr/td[contains(@style,'color: white')]/span[contains(@id, 'Label8')]/b")&.text
+        docid = fetch_docid(doc, hit)
 
         ItuBibliographicItem.new(
+          id: fetch_id(docid),
           fetched: Date.today.to_s,
           type: "standard",
-          docid: fetch_docid(doc, hit.hit[:title]),
+          docid: docid,
           edition: edition,
           language: ["en"],
           script: ["Latn"],
@@ -65,20 +67,24 @@ module RelatonItu
 
       private
 
+      def fetch_id(docid)
+        docid.find(&:primary).id.gsub(/[.\s()\/-]/, "")
+      end
+
       # Fetch abstracts.
       # @param doc [Mechanize::Page]
       # @param hit [RelatonItu::Hit]
       # @return [Array<Hash>]
       def fetch_abstract(doc, hit) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-        abstract_url = doc.at '//table/tr[td/span[.="In force"]]/td/span[contains(@id, "lbl_dms")]/div'
-        content = if abstract_url
-                    url = abstract_url[:onclick].match(/https?[^']+/).to_s
-                    rsp = hit.hit_collection.agent.get url
-                    d = Nokogiri::HTML rsp.body.encode(undef: :replace, replace: "")
-                    d.css("p.MsoNormal").text.gsub("\r\n", "").squeeze(" ").gsub("\u00a0", "")
-                  elsif a = doc.at('//table/tr/td/span[contains(@class, "observation")]/text()')
-                    a.text.strip
-                  end
+        abstract_url = doc.at '//table/tr/td[contains(@style,"color: white")]/span[contains(@id, "lbl_dms")]/div'
+        if abstract_url
+          url = abstract_url[:onclick].match(/https?[^']+/).to_s
+          rsp = hit.hit_collection.agent.get url
+          d = Nokogiri::HTML rsp.body.encode(undef: :replace, replace: "")
+          d.css("p.MsoNormal").text.gsub("\r\n", "").squeeze(" ").gsub("\u00a0", "")
+        elsif a = doc.at('//table/tr/td/span[contains(@class, "observation")]/text()')
+          a.text.strip
+        end => content
         return [] unless content
 
         [{
@@ -106,33 +112,48 @@ module RelatonItu
 
       # Fetch docid.
       # @param doc [Mechanize::Page]
-      # @param title [String]
+      # @param hit [RelatonItu::Hit]
       # @return [Hash]
-      def fetch_docid(doc, title)
-        docids = doc.xpath(
+      def fetch_docid(doc, hit)
+        docids = hit.hit[:code].to_s.split(" | ").map { |c| createdocid(c) }
+        docids += parse_id(doc).map { |c| createdocid c.text } if docids.empty?
+        docids << createdocid(title) unless docids.any?
+        docids
+      end
+
+      def parse_id(doc)
+        doc.xpath(
           "//span[@id='ctl00_content_main_uc_rec_main_info1_rpt_main_ctl00_lbl_rec']",
           "//td[.='Identical standard:']/following-sibling::td",
           "//div/table[1]/tr[4]/td/strong",
-        ).map { |c| createdocid c.text }
-        docids << createdocid(title) unless docids.any?
-        docids
+        )
       end
 
       # @param text [String]
       # @return [RelatonBib::DocumentIdentifier]
       def createdocid(text) # rubocop:disable Metrics/MethodLength
-        %r{
-          ^(?<code>(?:(?:ITU-\w|ISO/IEC)\s)?[^(:]+)
-          (?:\((?:(?<_month>\d{2})/)?(?<_year>\d{4})\))?
-          (?::[^(]+\((?<buldate>\d{2}\.\w{1,4}\.\d{4})\))?
-          (?:\s(?<corr>(?:Amd|Cor)\.\s?\d+))?
-          # (\s\(((?<_cormonth>\d{2})\/)?(?<_coryear>\d{4})\))?
-        }x =~ text.squeeze(" ")
-        corr&.sub!(/\.\s?/, " ")
-        id = [code.sub(/[[:space:]]$/, ""), corr].compact.join " "
-        id += " - #{buldate}" if buldate
-        type = id.match(%r{^\w+}).to_s
-        type = "ITU" if type == "G"
+        # %r{
+        #   ^(?<code>(?:(?:ITU-\w|ISO/IEC)\s)?[^(:]*)
+        #   (?:\s\(V(?<version>\d+)\))?
+        #   (?:\s\((?:(?<_month>\d{2})/)?(?<_year>\d{4})\))?
+        #   (?::[^(]+\((?<buldate>\d{2}\.\w{1,4}\.\d{4})\))?
+        #   (?:\s(?<corr>(?:Amd|Cor)\.\s?\d+))?
+        #   # (\s\(((?<_cormonth>\d{2})\/)?(?<_coryear>\d{4})\))?
+        # }x =~ text.squeeze(" ")
+        # corr&.sub!(/\.\s?/, " ")
+        # id = [code.sub(/[[:space:]]$/, ""), corr].compact.join " "
+        # id += " (V#{version})" if version
+        # id += " - #{buldate}" if buldate
+        # type = id.match(%r{^\w+}).to_s
+        # type = "ITU" if type == "G"
+        if text.match?(/^(?:ISO|ETSI)/)
+          type = "ISO"
+          text.match(/[^(]+/).to_s.strip.squeeze(" ")
+        else
+          pubid = Pubid.parse(text)
+          type = pubid.prefix # == "G" ? "ITU" : pubid.prefix
+          pubid.to_s
+        end => id
         RelatonBib::DocumentIdentifier.new(type: type, id: id, primary: true)
       end
 

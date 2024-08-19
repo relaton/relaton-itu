@@ -82,7 +82,7 @@ module RelatonItu
       {
         "Input" => input.to_s,
         "Start" => 0,
-        "Rows" => 10,
+        "Rows" => 20,
         "SortBy" => "RELEVANCE",
         "ExactPhrase" => false,
         "CollectionName" => "General",
