@@ -38,7 +38,9 @@ module RelatonItu
       rule(:ver) { space >> str("(V") >> num.repeat(1, 2).as(:version) >> str(")") }
       rule(:ver?) { ver.maybe }
 
-      rule(:itu_pubid) { prefix >> sector >> type? >> code >> sup? >> annex? >> ver? >> date? >> amd? >> any.repeat }
+      rule(:itu_pubid_sector) { prefix >> sector >> type? >> code >> sup? >> annex? >> ver? >> date? >> amd? >> any.repeat }
+      rule(:itu_pubid_no_sector) { prefix >> type? >> code >> sup? >> annex? >> ver? >> date? >> amd? >> any.repeat }
+      rule(:itu_pubid) { itu_pubid_sector | itu_pubid_no_sector }
       root(:itu_pubid)
     end
 
@@ -59,9 +61,9 @@ module RelatonItu
     # @param [String, nil] amd amendment number
     # @param [String, nil] amd_date amendment
     #
-    def initialize(prefix:, sector:, code:, **args)
+    def initialize(prefix:, code:, **args)
       @prefix = prefix
-      @sector = sector
+      @sector = args[:sector]
       @type = args[:type]
       @day = args[:day]
       @code, year, month = date_from_code code
@@ -84,7 +86,8 @@ module RelatonItu
     end
 
     def to_h(with_type: true) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-      hash = { prefix: prefix, sector: sector, code: code }
+      hash = { prefix: prefix, code: code }
+      hash[:sector] = sector if sector
       hash[:type] = type if type && with_type
       hash[:suppl] = suppl if suppl
       hash[:annex] = annex if annex
@@ -102,7 +105,8 @@ module RelatonItu
     end
 
     def to_s(ref: false) # rubocop:disable Metrics/AbcSize
-      s = "#{prefix}-#{sector}"
+      s = prefix.dup
+      s << "-#{sector}" if sector
       s << " #{type}" if type && !ref
       s << " #{code}"
       s << " Suppl. #{suppl}" if suppl

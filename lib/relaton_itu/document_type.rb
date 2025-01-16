@@ -1,10 +1,9 @@
 module RelatonItu
   class DocumentType < RelatonBib::DocumentType
     TYPES = %w[
-      recommendation recommendation-supplement recommendation-amendment
-      recommendation-corrigendum recommendation-errata recommendation-annex
-      focus-group implementers-guide technical-paper technical-report
-      joint-itu-iso-iec resolution service-publication handbook question
+      recommendation recommendation-supplement recommendation-amendment recommendation-corrigendum
+      recommendation-errata recommendation-annex focus-group implementers-guide technical-paper
+      technical-report joint-itu-iso-iec resolution service-publication handbook question contribution
     ].freeze
 
     def initialize(type:, abbreviation: nil)
