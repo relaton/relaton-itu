@@ -1,0 +1,137 @@
+schema_version: 1.3.2
+
+id: ITUTL163112018
+type: standard
+
+title:
+  - content: "ITU-T L.163 (11/2018): Criteria for optical cable installation with minimal existing infrastructure"
+    language: en
+    script: Latn
+
+docidentifier:
+  content: L.163
+  type: ITU-T
+  primary: true
+
+edition:
+  content: "1"
+
+language: en
+
+script: Latn
+
+fetched: '2022-06-22'
+
+status:
+  stage:
+    content: Published
+
+date:
+  type: published
+  at: "2018"
+
+abstract:
+  content: Recommendation ITU-T L.163 describescriteria for the installation of optical fibre cables defined in [ITU-TL.110] in remote areas withlack of usual infrastructure for installation including the procedures ofcable-route planning, cable selection, cable-installation scheme selection,cable tension and temperature consideration, and the handling, bend protectionand river/lake closing of the cable together with pilot tests and training forinstallation.ThisRecommendation also describes how to mitigate the considerable risks and/orissues to which the optical fibre cable may be exposed when infrastructures areminimal during installation, maintenance and operation procedures.
+  language: en
+  script: Latn
+
+contributor:
+- organization:
+    name:
+    - content: International Telecommunication Union
+    uri:
+    - content: www.itu.int
+    abbreviation:
+      content: ITU
+  role:
+  - type: publisher
+
+copyright:
+- owner:
+  - organization:
+      name:
+      - content: International Telecommunication Union
+      abbreviation:
+        content: ITU
+      uri:
+      - content: www.itu.int
+  from: "2018"
+
+source:
+  - type: "src"
+    content: https://www.itu.int/net4/ITU-T/search/api/redirection?dest=http%3A%2F%2Fhandle.itu.int%2F11.1002%2F1000%2F13786-en&amp;position=10&amp;page=1
+  - type: obp
+    content: https://www.itu.int/rec/T-REC-L.163-201811-P
+
+relation:
+  - type: complementOf
+    bibitem:
+      type: standard
+      formattedref: L Suppl. 4 (04/2016)
+  - type: complementOf
+    bibitem:
+      type: standard
+      formattedref: L Suppl. 5 (12/2014)
+
+ext:
+  schema_version: 1.0.2
+  doctype:
+    abbreviation: L
+    content: recommendation
+  subdoctype: annex
+  flavor: itu
+
+  editorialgroup:
+  - bureau: T
+    group:
+      type: study-group
+      name: ITU-T Study Group 15
+      acronym: SG
+      period:
+        start: "2011"
+        end: "2012"
+  - sector: T
+    group:
+      type: tsag
+      name: ITU-T Telecommunication Standardization Advisory Group
+      acronym: TSAG
+      period:
+        start: "2013"
+        end: "2016"
+
+  question:
+  - identifier: q.11
+    name: "Q.11/15"
+
+  ics:
+  - code: 33.180.01
+    text: Optical fibre cables and cable systems
+
+  recommendationstatus:
+    from: "2018"
+    to: "2021"
+    approvalstage:
+      process: tap
+      content: in-force
+
+  ip_notice_received: true
+
+  meeting:
+    acronym: SG15
+    content: SG15 meeting
+
+  meeting_place: Geneva
+
+  meeting_date:
+    from: "2018-11-12"
+    to: "2018-11-21"
+
+  intended_type: R
+  source: ITU-T
+
+  structuredidentifier:
+    bureau: T
+    docnumber: T.10
+    annexid: "11"
+    amendment: 1
+    corrigendum: 2

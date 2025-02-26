@@ -2,12 +2,13 @@ require "bundler/setup"
 require "webmock/rspec"
 require "simplecov"
 require "equivalent-xml"
+require "jing"
 
 SimpleCov.start do
   add_filter "/spec/"
 end
 
-require "relaton_itu"
+require "relaton/itu"
 
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
