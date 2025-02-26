@@ -1,16 +1,16 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "relaton_itu/version"
+require "relaton/itu/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "relaton-itu"
-  spec.version       = RelatonItu::VERSION
+  spec.version       = Relaton::Itu::VERSION
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 
-  spec.summary       = "RelatonItu: retrieve ITU Standards for bibliographic " \
+  spec.summary       = "Relaton::Itu: retrieve ITU Standards for bibliographic " \
                        "use using the BibliographicItem model"
-  spec.description   = "RelatonItu: retrieve ITU Standards for bibliographic " \
+  spec.description   = "Relaton::Itu: retrieve ITU Standards for bibliographic " \
                        "use using the BibliographicItem model"
   spec.homepage      = "https://github.com/metanorma/relaton-itu"
   spec.license       = "MIT"
@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "mechanize", "~> 2.10"
   spec.add_dependency "parslet", "~> 2.0.0"
-  spec.add_dependency "relaton-bib", "~> 1.20.0"
+  spec.add_dependency "relaton-bib", "~> 2.0.0-alpha.1"
   spec.add_dependency "relaton-index", "~> 0.2.0"
 end
