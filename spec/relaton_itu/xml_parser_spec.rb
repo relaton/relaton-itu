@@ -83,6 +83,27 @@ RSpec.describe RelatonItu::XMLParser do
       group = described_class.send(:fetch_editorialgroup, ext)
       expect(group).to be_nil
     end
+
+    it "returns nil when ext is nil" do
+      group = described_class.send(:fetch_editorialgroup, nil)
+      expect(group).to be_nil
+    end
+
+    it "returns nil when ext is empty" do
+      xml = "<ext></ext>"
+      doc = Nokogiri::XML(xml)
+      ext = doc.at("ext")
+      group = described_class.send(:fetch_editorialgroup, ext)
+      expect(group).to be_nil
+    end
+
+    it "returns nil when ext has no editorialgroup element" do
+      xml = "<ext><other>content</other></ext>"
+      doc = Nokogiri::XML(xml)
+      ext = doc.at("ext")
+      group = described_class.send(:fetch_editorialgroup, ext)
+      expect(group).to be_nil
+    end
   end
 
   describe ".itugroup" do

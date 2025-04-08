@@ -14,8 +14,7 @@ module RelatonItu
       # @param ext [Nokogiri::XML::Element]
       # @return [RelatonItu::EditorialGroup]
       def fetch_editorialgroup(ext)
-        eg = ext.at("./editorialgroup")
-        return unless eg
+        return unless ext && (eg = ext.at "editorialgroup")
 
         EditorialGroup.new(
           bureau: eg.at("bureau")&.text,
