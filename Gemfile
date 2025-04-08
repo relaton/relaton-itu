@@ -13,3 +13,7 @@ gem "ruby-jing"
 gem "simplecov"
 gem "vcr"
 gem "webmock"
+
+group :development do
+  gem 'pry'
+end
