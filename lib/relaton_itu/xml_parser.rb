@@ -14,8 +14,7 @@ module RelatonItu
       # @param ext [Nokogiri::XML::Element]
       # @return [RelatonItu::EditorialGroup]
       def fetch_editorialgroup(ext)
-        eg = ext.at("./editorialgroup")
-        return unless eg
+        return unless ext && (eg = ext.at "editorialgroup")
 
         EditorialGroup.new(
           bureau: eg.at("bureau")&.text,
@@ -51,8 +50,7 @@ module RelatonItu
       # @param ext [Nokogiri::XML::Element]
       # @return [RelatonItu::StructuredIdentifier]
       def fetch_structuredidentifier(ext)
-        sid = ext.at "./structuredidentifier"
-        return unless sid
+        return unless ext && (sid = ext.at "./structuredidentifier")
 
         br = sid.at("bureau").text
         dn = sid.at("docnumber").text
