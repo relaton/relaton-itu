@@ -183,5 +183,26 @@ RSpec.describe RelatonItu::XMLParser do
       sid = described_class.send(:fetch_structuredidentifier, ext)
       expect(sid).to be_nil
     end
+
+    it "returns nil when ext is nil" do
+      group = described_class.send(:fetch_structuredidentifier, nil)
+      expect(group).to be_nil
+    end
+
+    it "returns nil when ext is empty" do
+      xml = "<ext></ext>"
+      doc = Nokogiri::XML(xml)
+      ext = doc.at("ext")
+      group = described_class.send(:fetch_structuredidentifier, ext)
+      expect(group).to be_nil
+    end
+
+    it "returns nil when ext has no structuredidentifier element" do
+      xml = "<ext><other>content</other></ext>"
+      doc = Nokogiri::XML(xml)
+      ext = doc.at("ext")
+      group = described_class.send(:fetch_structuredidentifier, ext)
+      expect(group).to be_nil
+    end
   end
 end
