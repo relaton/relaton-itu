@@ -45,6 +45,9 @@ module RelatonItu
       data = { json: params.to_json }
       resp = agent.post url, data
       @array = hits JSON.parse(resp.body)
+    rescue Mechanize::ResponseCodeError, SocketError, Timeout::Error, Errno::ECONNRESET,
+            EOFError, Net::ProtocolError, OpenSSL::SSL::SSLError => e
+      raise RelatonBib::RequestError, "Could not access #{url}: #{e.message}"
     end
 
     def request_document # rubocop:todo Metrics/MethodLength, Metrics/AbcSize

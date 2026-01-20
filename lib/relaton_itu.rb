@@ -1,6 +1,7 @@
 require "mechanize"
 require "parslet"
 require "digest/md5"
+require "relaton/core"
 require "relaton/index"
 require "relaton_bib"
 require "relaton_itu/version"
