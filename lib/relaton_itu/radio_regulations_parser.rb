@@ -12,7 +12,7 @@ module RelatonItu
       @doc ||= hit.hit_collection.agent.get doc_url
     rescue Mechanize::ResponseCodeError, SocketError, Timeout::Error, Errno::ECONNRESET,
             EOFError, Net::ProtocolError, OpenSSL::SSL::SSLError => e
-      raise RelatonBib::RequestError, "Could not access #{url}: #{e.message}"
+      raise RelatonBib::RequestError, "Could not access #{doc_url}: #{e.message}"
     end
 
     def doc_url
