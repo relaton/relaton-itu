@@ -58,7 +58,7 @@ module RelatonItu
         copyright: fetch_copyright,
         link: parser.fetch_link,
         relation: parser.fetch_relations,
-        place: ["Geneva"],
+        place: [RelatonBib::Place.new(city: "Geneva")],
       )
     end
 
