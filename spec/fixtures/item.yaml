@@ -9,16 +9,18 @@ title:
     script: Latn
 
 docidentifier:
-  content: L.163
+- content: L.163
   type: ITU-T
   primary: true
 
 edition:
   content: "1"
 
-language: en
+language:
+- en
 
-script: Latn
+script:
+- Latn
 
 fetched: '2022-06-22'
 
@@ -27,11 +29,11 @@ status:
     content: Published
 
 date:
-  type: published
+- type: published
   at: "2018"
 
 abstract:
-  content: Recommendation ITU-T L.163 describescriteria for the installation of optical fibre cables defined in [ITU-TL.110] in remote areas withlack of usual infrastructure for installation including the procedures ofcable-route planning, cable selection, cable-installation scheme selection,cable tension and temperature consideration, and the handling, bend protectionand river/lake closing of the cable together with pilot tests and training forinstallation.ThisRecommendation also describes how to mitigate the considerable risks and/orissues to which the optical fibre cable may be exposed when infrastructures areminimal during installation, maintenance and operation procedures.
+- content: Recommendation ITU-T L.163 describescriteria for the installation of optical fibre cables defined in [ITU-TL.110] in remote areas withlack of usual infrastructure for installation including the procedures ofcable-route planning, cable selection, cable-installation scheme selection,cable tension and temperature consideration, and the handling, bend protectionand river/lake closing of the cable together with pilot tests and training forinstallation.ThisRecommendation also describes how to mitigate the considerable risks and/orissues to which the optical fibre cable may be exposed when infrastructures areminimal during installation, maintenance and operation procedures.
   language: en
   script: Latn
 
@@ -67,11 +69,13 @@ relation:
   - type: complementOf
     bibitem:
       type: standard
-      formattedref: L Suppl. 4 (04/2016)
+      formattedref:
+        content: L Suppl. 4 (04/2016)
   - type: complementOf
     bibitem:
       type: standard
-      formattedref: L Suppl. 5 (12/2014)
+      formattedref:
+        content: L Suppl. 5 (12/2014)
 
 ext:
   schema_version: v1.1.3

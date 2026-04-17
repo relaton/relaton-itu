@@ -127,10 +127,8 @@ RSpec.describe Relaton::Itu do
   end
 
   it "return nil if ITU-R not found" do
-    VCR.use_cassette "itu_r_1234" do
-      result = Relaton::Itu::Bibliography.get "ITU-R NO.1234"
-      expect(result).to be_nil
-    end
+    result = Relaton::Itu::Bibliography.get "ITU-R NO.1234"
+    expect(result).to be_nil
   end
 
   it "warns when year is wrong" do

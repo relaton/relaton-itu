@@ -8,7 +8,6 @@ require_relative "structured_identifier"
 module Relaton
   module Itu
     class Ext < Bib::Ext
-      attribute :schema_version, method: :get_schema_version
       attribute :doctype, Doctype
       attribute :structuredidentifier, StructuredIdentifier
       attribute :question, Question, collection: true
@@ -31,9 +30,18 @@ module Relaton
         map_element "source", to: :source
       end
 
-      def get_schema_version
-        Relaton.schema_versions["relaton-model-itu"]
+      key_value do
+        map_element "question", to: :question
+        map_element "recommendationstatus", to: :recommendationstatus
+        map_element "ip_notice_received", to: :ip_notice_received
+        map_element "meeting", to: :meeting
+        map_element "meeting_place", to: :meeting_place
+        map_element "meeting_date", to: :meeting_date
+        map_element "intended_type", to: :intended_type
+        map_element "source", to: :source
       end
+
+      def get_schema_version = Relaton.schema_versions["relaton-model-itu"]
     end
   end
 end
