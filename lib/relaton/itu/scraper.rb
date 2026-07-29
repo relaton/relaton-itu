@@ -91,8 +91,22 @@ module Relaton
         @docid ||= begin
           docids = hit.hit[:code].to_s.split(" | ").map { |c| createdocid(c) }
           docids << createdocid(doc["rec_name"]) if docids.empty?
+          iso = iso_docid
+          docids << iso if iso
           docids
         end
+      end
+
+      # The equivalent ISO/IEC identifier used to come from the search result's
+      # media name; it is now re-sourced from the recommendation header's
+      # `iso_number` field (e.g. "Equivalent standard: ISO/IEC 17788:2014 (Common)").
+      # @return [Relaton::Bib::Docidentifier, nil]
+      def iso_docid
+        return unless idrec # only recommendations carry an idrec / iso_number
+
+        num = parser.doc && parser.doc["iso_number"]
+        id = num && num[%r{ISO(?:/IEC)?(?:/IEEE)?\s+\d[\d-]*}]
+        createdocid(id) if id
       end
 
       # @param text [String]

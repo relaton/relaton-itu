@@ -45,6 +45,28 @@ All model classes use `Lutaml::Model::Serializable` for XML/YAML serialization:
 - **`DataParserR`** — module that parses ITU-R JSON search API results into `ItemData` instances (sets `flavor: "itu"` on all parsed documents)
 - Sources: recommendations (JSON index), questions, reports, handbooks, resolutions (HTML indices)
 
+### Runtime lookup (`HitCollection#search`)
+
+`Bibliography.get`/`search` routes by reference in `HitCollection#search`:
+
+- **ITU-T Recommendations** (`request_recommendation`) — discovery is a two-stage HTTP flow against
+  `www.itu.int`. The `RunSearch` Deep Search endpoint was removed/WAF-blocked (issue #88), so
+  discovery now GETs the public `ITU-T/recommendations/rec.aspx?rec={code}` page, extracts the
+  record handle (`11.1002/1000/{idrec}`), and calls the `mws/api/recommendations/getRecEditions`
+  API to build one `Hit` per edition (each `hit[:url]` is a `handle.itu.int/.../{idrec}-en` URL so
+  `Scraper#idrec` re-parses it). Year/edition filtering stays in `Bibliography#search_filter` /
+  `#isobib_results_filter`. Full metadata is fetched by `RecommendationParser` (the `mws/api/*`
+  endpoints), unchanged.
+- **ITU-R RR & Operational Bulletins** (`request_publication`) — resolved to their predictable
+  `/pub/{pubid}` landing page (`R-REG-RR-{year}`, `T-SP-OB.{num}-{year}`) and scraped by
+  `RadioRegulationsParser`. A redirect to `notfound.aspx` (or a 404) yields no hit.
+- **ITU-R (other)** (`request_document`) — reads the pre-built `relaton-data-itu-r` GitHub dataset
+  via `Relaton::Index`; does not hit `www.itu.int`.
+
+Note: `DataFetcher` (the offline ITU-R harvester) still POSTs to the removed `RunSearch` endpoint,
+so a dataset *refresh* is currently broken — a follow-up should migrate it (and, longer term, ITU-T)
+to a relaton-data dataset.
+
 ### Processor
 
 `Relaton::Itu::Processor` extends `Relaton::Core::Processor` and is the entry point for the Relaton plugin system. Provides `get`, `fetch_data`, `from_xml`, `hash_to_bib`, `grammar_hash`, and `remove_index_file`.

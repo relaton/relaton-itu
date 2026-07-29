@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "cgi"
+require "json"
 require_relative "hit"
 
 module Relaton
@@ -8,11 +10,16 @@ module Relaton
     class HitCollection < Relaton::Core::HitCollection
       DOMAIN = "https://www.itu.int"
       GH_ITU_R = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/refs/heads/v2/"
+      REC_URL = "#{DOMAIN}/ITU-T/recommendations/rec.aspx?rec=%<rec>s&lang=en".freeze
+      RECEDITIONS_URL = "#{DOMAIN}/mws/api/recommendations/getRecEditions?idrec=%<idrec>s&lang=en".freeze
+      HANDLE_URL = "http://handle.itu.int/11.1002/1000/%<idrec>s-en".freeze
 
       def search
         case ref.to_ref
-        when /^(ITU-T|ITU-R\sRR)/
-          request_search
+        when %r{^ITU-R\sRR}, %r{\bOB\.|Operational Bulletin}
+          request_publication
+        when /^ITU-T/
+          request_recommendation
         when /^ITU-R\s/
           request_document
         end
@@ -27,12 +34,87 @@ module Relaton
 
       private
 
-      def request_search
+      # Resolve an ITU-T Recommendation to its editions via the public rec.aspx
+      # page (which exposes the record's handle/idrec) and the getRecEditions API.
+      # One hit is built per edition, mirroring the multi-result shape the old
+      # RunSearch endpoint used to return, so year filtering keeps working.
+      def request_recommendation
         Util.info "Fetching from www.itu.int ...", key: ref.to_s
-        url = "#{DOMAIN}/net4/ITU-T/search/GlobalSearch/RunSearch"
-        data = { json: params.to_json }
-        resp = agent.post url, data
-        @array = hits JSON.parse(resp.body)
+        idrec = fetch_idrec
+        return @array = [] unless idrec
+
+        @array = editions(idrec).map { |ed| recommendation_hit(ed) }
+      end
+
+      # @return [String, nil] the record's idrec, or nil when the code is unknown
+      def fetch_idrec
+        url = format(REC_URL, rec: CGI.escape(rec_query))
+        agent.get(url).body[%r{11\.1002/1000/(\d+)}, 1]
+      rescue Mechanize::ResponseCodeError => e
+        raise unless e.response_code == "404" # unknown code => treat as not found
+
+        nil
+      end
+
+      # @return [String] the `rec=` value for the rec.aspx lookup
+      def rec_query
+        ref.suppl ? "#{ref.code} Suppl. #{ref.suppl}" : ref.code
+      end
+
+      # @param idrec [String]
+      # @return [Array<Hash>] editions of the recommendation
+      def editions(idrec)
+        JSON.parse agent.get(format(RECEDITIONS_URL, idrec: idrec)).body
+      rescue JSON::ParserError
+        []
+      end
+
+      # @param edition [Hash] a getRecEditions entry
+      # @return [Relaton::Itu::Hit]
+      def recommendation_hit(edition)
+        Hit.new({
+          code: "ITU-T #{edition['rec_name']}",
+          title: edition["title"],
+          url: format(HANDLE_URL, idrec: edition["idrec"]),
+          type: "recommendation",
+        }, self)
+      end
+
+      # Resolve an ITU-R Radio Regulation or Operational Bulletin to its stable
+      # /pub landing page, whose id is derivable from the reference.
+      def request_publication
+        Util.info "Fetching from www.itu.int ...", key: ref.to_s
+        return @array = [] unless ref.year
+
+        url = "#{DOMAIN}/pub/#{publication_id}"
+        page = fetch_publication_page url
+        return @array = [] if page.nil? || page.uri.to_s.match?(/notfound/i)
+
+        hit = Hit.new({ code: publication_code, title: nil, url: url, type: "publication" }, self)
+        @array = [hit]
+      end
+
+      # @return [Mechanize::Page, nil] nil when the publication does not exist
+      def fetch_publication_page(url)
+        agent.get url
+      rescue Mechanize::ResponseCodeError => e
+        raise unless e.response_code == "404" # unknown publication => not found
+
+        nil
+      end
+
+      # @return [String] the /pub identifier for RR or OB
+      def publication_id
+        if ref.code == "RR"
+          "R-REG-RR-#{ref.year}"
+        else # Operational Bulletin, e.g. OB.1096
+          "T-SP-OB.#{ref.code[/\d+/]}-#{ref.year}"
+        end
+      end
+
+      # @return [String] the docidentifier-friendly code (year only, no month)
+      def publication_code
+        "#{ref.prefix}-#{ref.sector} #{ref.code} (#{ref.year})"
       end
 
       def request_document # rubocop:todo Metrics/MethodLength, Metrics/AbcSize
@@ -49,78 +131,6 @@ module Relaton
         hit = Hit.new({ url: url, ref: ref }, self)
         hit.item = item
         @array = [hit]
-      end
-
-      # @return [String]
-      def group
-        @group ||= case ref.to_ref
-                   when %r{OB|Operational Bulletin}, %r{^ITU-R\sRR}
-                     "Publications"
-                   when %r{^ITU-T} then "Recommendations"
-                   end
-      end
-
-      # @return [Hash]
-      def params # rubocop:disable Metrics/MethodLength
-        input = ref.dup
-        input.year = nil
-        {
-          "Input" => input.to_s,
-          "Start" => 0,
-          "Rows" => 20,
-          "SortBy" => "RELEVANCE",
-          "ExactPhrase" => false,
-          "CollectionName" => "General",
-          "CollectionGroup" => group,
-          "Sector" => ref.to_ref.match(/(?<=^ITU-)\w/).to_s.downcase,
-          "Criterias" => [{
-            "Name" => "Search in",
-            "Criterias" => [
-              {
-                "Selected" => false,
-                "Value" => "",
-                "Label" => "Name",
-                "Target" => "/name_s",
-                "TypeName" => "CHECKBOX",
-                "GetCriteriaType" => 0,
-              },
-              {
-                "Selected" => false,
-                "Value" => "",
-                "Label" => "Short description",
-                "Target" => "/short_description_s",
-                "TypeName" => "CHECKBOX",
-                "GetCriteriaType" => 0,
-              },
-              {
-                "Selected" => false,
-                "Value" => "",
-                "Label" => "File content",
-                "Target" => "/file",
-                "TypeName" => "CHECKBOX",
-                "GetCriteriaType" => 0,
-              },
-            ],
-            "ShowCheckbox" => true,
-            "Selected" => false,
-          }],
-          "Topics" => "",
-          "ClientData" => {},
-          "Language" => "en",
-          "SearchType" => "All",
-        }
-      end
-
-      # @param data [Hash]
-      # @return [Array<Relaton::Itu::Hit>]
-      def hits(data)
-        data["results"].map do |h|
-          code  = h["Media"]["Name"]
-          title = h["Title"]
-          url   = "#{DOMAIN}#{h['Redirection']}"
-          type  = h["Collection"]["Group"].downcase[0...-1]
-          Hit.new({ code: code, title: title, url: url, type: type }, self)
-        end
       end
     end
   end

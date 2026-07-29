@@ -19,7 +19,8 @@ module Relaton
       end
 
       def doc_url
-        CGI.unescape(hit.hit[:url]).split("dest=").last
+        url = CGI.unescape(hit.hit[:url])
+        url.include?("dest=") ? url.split("dest=").last : url
       end
 
       def fetch_edition = nil

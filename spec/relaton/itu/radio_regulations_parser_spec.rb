@@ -7,6 +7,20 @@ RSpec.describe Relaton::Itu::RadioRegulationsParser do
   let(:hit) { double("Hit", hit_collection: hit_collection, hit: hit_hash) }
   subject(:parser) { described_class.new hit }
 
+  describe "#doc_url" do
+    it "unwraps a legacy redirection URL with a dest= parameter" do
+      allow(hit).to receive(:hit).and_return(
+        url: "https://example.com/redirect?dest=https%3A%2F%2Fexample.com%2Fdoc",
+      )
+      expect(parser.doc_url).to eq "https://example.com/doc"
+    end
+
+    it "returns a direct /pub URL unchanged" do
+      allow(hit).to receive(:hit).and_return(url: "https://www.itu.int/pub/R-REG-RR-2020")
+      expect(parser.doc_url).to eq "https://www.itu.int/pub/R-REG-RR-2020"
+    end
+  end
+
   describe "#doc" do
     it "fetches and returns the document page" do
       page = instance_double Mechanize::Page

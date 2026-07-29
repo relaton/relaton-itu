@@ -212,7 +212,7 @@ RSpec.describe Relaton::Itu do
 
   it "could not access site" do
     agent = double "Mechanize agent"
-    expect(agent).to receive(:post).and_raise SocketError
+    expect(agent).to receive(:get).and_raise SocketError
     expect(agent).to receive(:user_agent_alias=)
     expect(Mechanize).to receive(:new).and_return agent
     expect do
