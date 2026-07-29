@@ -22,26 +22,101 @@ RSpec.describe Relaton::Itu::HitCollection do
       end
     end
 
-    context "with ITU-T ref (request_search path)" do
-      let(:ref) { Relaton::Itu::Pubid.parse("ITU-T T.4") }
+    context "with ITU-T recommendation (rec.aspx + getRecEditions path)" do
+      let(:ref) { Relaton::Itu::Pubid.parse("ITU-T Z.100") }
       subject(:collection) { described_class.new ref }
 
-      let(:search_response_body) do
-        { "results" => [
-          { "Media" => { "Name" => "ITU-T T.4" },
-            "Title" => "Standardization of Group 3 facsimile terminals",
-            "Redirection" => "/rec/T-REC-T.4",
-            "Collection" => { "Group" => "Recommendations" } },
-        ] }.to_json
+      let(:rec_page) do
+        double("Page", body: %(<a href="http://handle.itu.int/11.1002/1000/14670-en">Z.100</a>))
+      end
+      let(:editions_resp) do
+        double("Response", body: [
+          { "idrec" => 14670, "rec_name" => "Z.100 (06/2021)", "title" => "SDL overview" },
+          { "idrec" => 14048, "rec_name" => "Z.100 (10/2019)", "title" => "SDL overview" },
+        ].to_json)
       end
 
-      it "posts to search API and populates hits" do
-        resp = double("Response", body: search_response_body)
-        allow_any_instance_of(Mechanize).to receive(:post).and_return(resp)
+      before do
+        allow_any_instance_of(Mechanize).to receive(:get)
+          .with(a_string_including("rec.aspx?rec=Z.100")).and_return(rec_page)
+        allow_any_instance_of(Mechanize).to receive(:get)
+          .with(a_string_including("getRecEditions?idrec=14670")).and_return(editions_resp)
+      end
 
+      it "resolves each edition to a hit" do
         expect { collection.search }.to output(/Fetching from www\.itu\.int/).to_stderr_from_any_process
+        expect(collection.size).to eq 2
+        expect(collection.first.hit[:code]).to eq "ITU-T Z.100 (06/2021)"
+        expect(collection.first.hit[:url]).to eq "http://handle.itu.int/11.1002/1000/14670-en"
+        expect(collection.first.hit[:type]).to eq "recommendation"
+      end
+    end
+
+    context "with an unknown ITU-T recommendation" do
+      let(:ref) { Relaton::Itu::Pubid.parse("ITU-T Z.9999") }
+      subject(:collection) { described_class.new ref }
+
+      it "returns empty when rec.aspx exposes no handle" do
+        allow_any_instance_of(Mechanize).to receive(:get)
+          .and_return(double("Page", body: "<html>no match</html>"))
+
+        expect { collection.search }.to output(/Fetching/).to_stderr_from_any_process
+        expect(collection).to be_empty
+      end
+
+      it "returns empty when rec.aspx responds 404" do
+        page = double("Page", code: "404", uri: URI("https://www.itu.int/x"))
+        allow_any_instance_of(Mechanize).to receive(:get)
+          .and_raise(Mechanize::ResponseCodeError.new(page))
+
+        expect { collection.search }.to output(/Fetching/).to_stderr_from_any_process
+        expect(collection).to be_empty
+      end
+    end
+
+    context "with ITU-R Radio Regulations (publication path)" do
+      it "builds a hit for the predictable /pub landing page" do
+        page = double("Page", uri: URI("https://www.itu.int/pub/R-REG-RR-2020"))
+        allow_any_instance_of(Mechanize).to receive(:get).and_return(page)
+
+        collection = described_class.new Relaton::Itu::Pubid.parse("ITU-R RR (2020)")
+        expect { collection.search }.to output(/Fetching/).to_stderr_from_any_process
         expect(collection.size).to eq 1
-        expect(collection.first.hit[:code]).to eq "ITU-T T.4"
+        expect(collection.first.hit[:url]).to eq "https://www.itu.int/pub/R-REG-RR-2020"
+        expect(collection.first.hit[:code]).to eq "ITU-R RR (2020)"
+        expect(collection.first.hit[:type]).to eq "publication"
+      end
+
+      it "returns empty when the /pub page redirects to notfound" do
+        page = double("Page", uri: URI("https://www.itu.int/en/publications/pages/notfound.aspx"))
+        allow_any_instance_of(Mechanize).to receive(:get).and_return(page)
+
+        collection = described_class.new Relaton::Itu::Pubid.parse("ITU-R RR (2014)")
+        expect { collection.search }.to output(/Fetching/).to_stderr_from_any_process
+        expect(collection).to be_empty
+      end
+
+      it "returns empty when the /pub page responds 404" do
+        page = double("Page", code: "404", uri: URI("https://www.itu.int/pub/x"))
+        allow_any_instance_of(Mechanize).to receive(:get)
+          .and_raise(Mechanize::ResponseCodeError.new(page))
+
+        collection = described_class.new Relaton::Itu::Pubid.parse("ITU-R RR (2014)")
+        expect { collection.search }.to output(/Fetching/).to_stderr_from_any_process
+        expect(collection).to be_empty
+      end
+    end
+
+    context "with Operational Bulletin (publication path)" do
+      it "builds a hit for the OB /pub landing page" do
+        page = double("Page", uri: URI("https://www.itu.int/pub/T-SP-OB.1096-2016"))
+        allow_any_instance_of(Mechanize).to receive(:get).and_return(page)
+
+        collection = described_class.new Relaton::Itu::Pubid.parse("ITU-T OB.1096 - 15.III.2016")
+        expect { collection.search }.to output(/Fetching/).to_stderr_from_any_process
+        expect(collection.first.hit[:url]).to eq "https://www.itu.int/pub/T-SP-OB.1096-2016"
+        expect(collection.first.hit[:code]).to eq "ITU-T OB.1096 (2016)"
+        expect(collection.first.hit[:type]).to eq "publication"
       end
     end
 
