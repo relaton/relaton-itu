@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
                        "use using the BibliographicItem model"
   spec.description   = "Relaton::Itu: retrieve ITU Standards for bibliographic " \
                        "use using the BibliographicItem model"
-  spec.homepage      = "https://github.com/metanorma/relaton-itu"
+  spec.homepage      = "https://github.com/relaton/relaton-itu"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
